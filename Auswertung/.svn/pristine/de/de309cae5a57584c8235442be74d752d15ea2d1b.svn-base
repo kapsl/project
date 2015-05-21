@@ -1,0 +1,6 @@
+#interval(sec)	%RLGeneral	%RLAODV	PayloadD2DRS	AODVAODV
+30	49.99	98.80	30	2481
+1	.11	7.95	1	77
+0.5	.05	4.14	1	77
+0.1	.01	1.55	1	141
+0.05	0	.43	1	78

@@ -1,0 +1,3 @@
+package networkstructures;
+
+@license(LGPL);

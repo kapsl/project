@@ -1,0 +1,6 @@
+#interval(sec)	sumRREQGeneral	sumRREPGeneral	sumRERRGeneral	sumLinkBreackD2DRS	sumRERRAODV	sumLinkBreakAODV
+30	947	947	0	0	0	1
+1	41	41	0	1	0	1
+0.5	34	34	0	2	0	1
+0.1	199948	195734	0	49848	0	137
+0.05	723052	709963	0	221905	0	1113

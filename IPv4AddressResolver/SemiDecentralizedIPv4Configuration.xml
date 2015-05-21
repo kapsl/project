@@ -1,0 +1,8 @@
+<config>
+<!--<interface hosts='host[0]' names='umtsIface' address='192.169.1.2' netmask='255.255.255.0'/>-->
+<interface hosts='host[*]' names='umtsIface' address='10.x.x.x' netmask='255.x.x.x'/>
+
+<interface hosts='RoutingService' names='umtsIface' address='10.x.x.x' netmask='255.x.x.x'/>
+<interface hosts='host[*]' names='wlan0' address='192.168.2.x' netmask='255.255.255.0'/>
+	
+</config>
