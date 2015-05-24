@@ -28,6 +28,9 @@ simple RoutingServerManagement //extends  AODVRouting
         
         // I think this indicates, how often a update over local topology is sent to the server
         double serverUpdateInterval @unit("s") = default(0.5s);
+        
+        int speedParameterStudy = default(1);
+        
         int maxRouteCacheSize = default(10);
         double helloInterval = default(1.0);
         int allowedHelloLoss = default(2);

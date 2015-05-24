@@ -75,6 +75,7 @@ protected:
     simtime_t serverRegRetryInterval;
     simtime_t myRouteTimeout;
     simtime_t serverUpdateInteval;
+    int speedParameterStudy;
     bool isOperational;
 
     cPar *periodicJitter;
@@ -141,7 +142,7 @@ private:
     virtual void handleRouteRequest(AODVRREQ* rreqq);
     virtual void handleRoutError(AODVRERR *rerr, IPv4Address &srcAddress);
 
-    virtual double adaptSendingInterval(double speed);
+    virtual double adaptSendingInterval(double speed, double minInterval, double maxInterval, double gradient);
 
     /*
      * LifeCycle

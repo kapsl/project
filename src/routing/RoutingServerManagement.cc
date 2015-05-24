@@ -48,6 +48,8 @@ void RoutingServerManagement::initialize(int stage) {
         myRouteTimeout = par("myRouteTimeout");
         rebootTime = SIMTIME_ZERO;
 
+        speedParameterStudy = par("speedParameterStudy");
+
         /*
          * Evaluation
          */
@@ -330,12 +332,25 @@ void RoutingServerManagement::handleTopologyUpdateTable() {
     //std::cout << "Speed : " << speed << "\n";
 
     // TODO find some good value to adapt the interval
-    //simtime_t adaptedServerUpdateInterval = this->adaptSendingInterval(speed);
-    simtime_t adaptedServerUpdateInterval = 1;
+    // Make parameter study
+    simtime_t adaptedServerUpdateInterval;
 
-    std::cout << "Adapted Interval : " << adaptedServerUpdateInterval << "\n";
+    if (speedParameterStudy == 1) {
+        adaptedServerUpdateInterval = 1;
+    } else if (speedParameterStudy == 2) {
+        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.2, 5, 0.95);
+    } else if (speedParameterStudy == 3) {
+        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.5, 10, 0.95);
+    } else if (speedParameterStudy == 4) {
+        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.1, 5, 0.95);
+    } else if (speedParameterStudy == 5) {
+        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.2, 7, 0.7);
+    }
 
-    scheduleAt(simTime() + adaptedServerUpdateInterval - delayTimeTopologyUpdate,
+    //std::cout << "Adapted Interval : " << adaptedServerUpdateInterval << "\n";
+
+    scheduleAt(
+            simTime() + adaptedServerUpdateInterval - delayTimeTopologyUpdate,
             networkTopologyUpdate);
 
     /*
@@ -358,11 +373,11 @@ void RoutingServerManagement::handleTopologyUpdateTable() {
  *
  * I used the function y = -0.95x + 4.95
  */
-double RoutingServerManagement::adaptSendingInterval(double speed) {
-   if (speed < 5.0) {
-        return -0.95 * speed + 4.95;
+double RoutingServerManagement::adaptSendingInterval(double speed, double minInterval, double maxInterval, double gradient) {
+    if (speed < 5.0) {
+        return -gradient * speed + maxInterval;
     } else {
-        return 0.2;
+        return minInterval;
     }
 }
 
