@@ -338,13 +338,17 @@ void RoutingServerManagement::handleTopologyUpdateTable() {
     if (speedParameterStudy == 1) {
         adaptedServerUpdateInterval = 1;
     } else if (speedParameterStudy == 2) {
-        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.2, 5, 0.95);
+        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.2, 5, 0.96);
     } else if (speedParameterStudy == 3) {
-        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.5, 10, 0.95);
+        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.5, 10, 1.9);
     } else if (speedParameterStudy == 4) {
-        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.1, 5, 0.95);
+        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.5, 20, 3.9);
     } else if (speedParameterStudy == 5) {
-        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.2, 7, 0.7);
+        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 0.2, 2, 0.36);
+    } else if (speedParameterStudy == 6) {
+        adaptedServerUpdateInterval = 0.5;
+    } else if (speedParameterStudy == 7) {
+        adaptedServerUpdateInterval = 5;
     }
 
     //std::cout << "Adapted Interval : " << adaptedServerUpdateInterval << "\n";
