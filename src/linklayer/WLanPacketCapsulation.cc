@@ -42,18 +42,28 @@ void WLanPacketCapsulation::initialize(int stage) {
     }
 
 }
-//std::set<IPRoute*> WLanPacketCapsulation::ipRouteQueue;
-//std::set<MACRoute*> WLanPacketCapsulation::macRouteQueue;
+/*
+ * routeQueue stores routes while the next hop towards the
+ * destination is inserted in the RoutingTable
+ */
 std::set<Route*> WLanPacketCapsulation::routeQueue;
+
+
+/*
+ * Method controls the incoming and outgoing traffic
+ */
 void WLanPacketCapsulation::handleMessage(cMessage *msg) {
     hasPayload = false;
     IPv4Datagram *datagram = NULL;
+/*
+ * if message is sent from upper layer
+ * if message is an arp request an arp-reply is sent to the upper layer
+ * if message is an aodv packet and has a route, route and data are sent to
+ * the next hop
+ */
     if (msg->getArrivalGate() == upperLayerIn) {
         if (dynamic_cast<ARPPacket *>(msg)) {
 
-//            Ieee802Ctrl *ctrl = check_and_cast<Ieee802Ctrl*>(
-//                    arp->removeControlInfo());
-//            delete ctrl;
             bool hasKnownDest = false;
             InterfaceEntry *ie = interfaceTable->getInterfaceByName("wlan0");
             Ieee802Ctrl *controlInfo = new Ieee802Ctrl();
@@ -117,25 +127,10 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
                             payloadData->setRoute(*route);
                             routeQueue.erase(route);
                             UDPPacket *tmpUDPPacket = new UDPPacket;
-//                            datagram->encapsulate(udpPacket);
-
                             payloadData->encapsulate(udpPacket);
-//                            IPv4Datagram * ipv4Datatagram = new IPv4Datagram(
-//                                    "PayLoadData");
-//                            ipv4Datatagram->setByteLength(IP_HEADER_BYTES);
-//                            ipv4Datatagram->setDestAddress(
-//                                    *payloadData->getRoute().begin());
-//                            ipv4Datatagram->setSrcAddress(
-//                                    arpCache->getIPv4AddressFor(
-//                                            ieeeCtrInfo->getSrc()));
-//                            ipv4Datatagram->setTransportProtocol(IP_PROT_MANET);
                             tmpUDPPacket->encapsulate(payloadData);
                             datagram->encapsulate(tmpUDPPacket);
                             datagram->setControlInfo(ieeeCtrInfo);
-//                            Ieee802Ctrl *controlInfo = new Ieee802Ctrl();
-//                            controlInfo->setDest(ieeeCtrInfo->getDest());
-//                            controlInfo->setEtherType(ETHERTYPE_IPv4);
-//                            datagram->setControlInfo(controlInfo);
 
                             send(datagram, "mgmntOut");
                         } else {
@@ -151,10 +146,14 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
                     }
                 }
             }
-//            delete payloadData;
 
         }
     } else {
+/*
+ * if message is sent from lower layer
+ * arp-packets are sent to the upper layer
+ * aodv-packets which contain a route are splited and treated different
+ */
         if (dynamic_cast<ARPPacket *>(msg)) {
             send(msg, "upperLayerOut");
         } else {
@@ -179,8 +178,6 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
                         if ((payloadData->getRoute().begin()->first)
                                 == routingTable->getRouterId()) {
 
-//                            IPv4Datagram *data =
-//                                    dynamic_cast<IPv4Datagram*>(payloadData->decapsulate());
                             UDPPacket *packet =
                                     dynamic_cast<UDPPacket*>(payloadData->decapsulate());
                             udpIpv4Datagram = datagram;
@@ -252,6 +249,7 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
     }
 }
 
+
 bool WLanPacketCapsulation::handleOperationStage(LifecycleOperation *operation,
         int stage, IDoneCallback *doneCallback) {
     Enter_Method_Silent
@@ -281,7 +279,11 @@ bool WLanPacketCapsulation::handleOperationStage(LifecycleOperation *operation,
 
     return true;
 }
-
+/*
+ * This method is invoked when a new route is inserted in the routingTable
+ * if the inserted destination and destination of the payload are the same
+ * the payload is sent to the upper layer
+ */
 void WLanPacketCapsulation::receiveChangeNotification(int category,
         const cObject *details) {
     Enter_Method
@@ -298,23 +300,14 @@ void WLanPacketCapsulation::receiveChangeNotification(int category,
                 if (routeData) {
 
                     Route *route = 0;
-//                    std::cout << routeQueue.size() << endl;
                     for (std::set<Route*>::iterator it = routeQueue.begin();
                             it != routeQueue.end(); it++) {
-//                        std::cout << "END QUEUE: " << *(*it)->rbegin() << endl;
-//                        std::cout << "Starte QUEUE: " << *(*it)->begin()
-//                                << endl;
-//                        std::cout << "OWN IP: " << routingTable->getRouterId()
-//                                << endl;
-//
-//                        std::cout << (*it)->size() << endl;
 
                         if ((*it)->rbegin()->first
                                 == udpIpv4Datagram->getDestAddress()) {
                             route = ((*it));
                         }
                     }
-//                    std::cout << ipv4Route->getDestination() << endl;
                     if (route
                             && ipv4Route->getDestination()
                                     == udpIpv4Datagram->getDestAddress()) {

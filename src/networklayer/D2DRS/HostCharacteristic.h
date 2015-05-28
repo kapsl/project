@@ -19,18 +19,23 @@
 #include "IPv4Address.h"
 #include "string.h"
 #include "Coord.h"
+#include "MACAddress.h"
 #include <omnetpp.h>
 
-class LinkedNeighbor {
+/**
+ * The class describes a UserEquipment in the D2DRS-Network
+ */
+class HostCharacteristic {
 
 private:
     simtime_t lifeTime;
-    IPv4Address srcAddress;
+    IPv4Address srcAddressIP;
     Coord position;
+    MACAddress macAddress;
 
 public:
-    LinkedNeighbor();
-    virtual ~LinkedNeighbor();
+    HostCharacteristic();
+    virtual ~HostCharacteristic();
 
     virtual std::string info() const;
 
@@ -43,11 +48,11 @@ public:
     }
 
     const IPv4Address& getOriginatorAddress() const {
-        return srcAddress;
+        return srcAddressIP;
     }
 
     void setOriginatorAddress(const IPv4Address& originatorAddress) {
-        this->srcAddress = originatorAddress;
+        this->srcAddressIP = originatorAddress;
     }
 
         const Coord& getPosition() const
@@ -59,6 +64,14 @@ public:
         {
             this->position = position;
         }
+
+    const MACAddress& getMacAddress() const {
+        return macAddress;
+    }
+
+    void setMacAddress(const MACAddress& macAddress) {
+        this->macAddress = macAddress;
+    }
 };
 
 #endif /* LINKEDNEIGBOR_H_ */

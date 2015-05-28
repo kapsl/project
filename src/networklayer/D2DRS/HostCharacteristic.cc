@@ -13,17 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package networkstructures.src.linklayer;
+#include <HostCharacteristic.h>
 
-//
-// TODO auto-generated module
-//
-simple UMTSPacketCapsulation
-{
-    gates:
-        input mgmntIn;
-        input upperLayerIn;
+HostCharacteristic::HostCharacteristic() {
+    // TODO Auto-generated constructor stub
 
-        output mgmntOut;
-        output upperLayerOut;
+}
+
+HostCharacteristic::~HostCharacteristic() {
+    // TODO Auto-generated destructor stub
+}
+
+std::string HostCharacteristic::info() const {
+    std::stringstream out;
+
+    out << "Originators:";
+    if (srcAddressIP.isUnspecified())
+        out << "*  ";
+    return out.str();
 }

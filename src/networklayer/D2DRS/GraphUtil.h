@@ -15,17 +15,17 @@
 
 #ifndef GRAPHUTIL_H_
 #define GRAPHUTIL_H_
-#include "NodeCharacteristic.h"
+#include "HostCharacteristic.h"
 #include "IPv4Address.h"
 
 class GraphUtil {
 private:
-    static std::map<IPv4Address, NodeCharacteristic> graphInformations;
+    static   std::map<IPv4Address, HostCharacteristic> graphInformations;
 public:
     GraphUtil();
     virtual ~GraphUtil();
-    static void insertElement(IPv4Address address, NodeCharacteristic characteristic);
-    static std::map<IPv4Address, NodeCharacteristic>::iterator getElement(IPv4Address address);
+    static void insertElement(IPv4Address address, HostCharacteristic characteristic);
+    static std::map<IPv4Address, HostCharacteristic>::iterator getElement(IPv4Address address);
     static void removeElement(IPv4Address address);
 };
 

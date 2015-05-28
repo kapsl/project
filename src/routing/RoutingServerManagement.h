@@ -40,9 +40,7 @@
 #include "MobilityAccess.h"
 #include "IMobility.h"
 
-/**
- * This should be the class, that handles a device
- */
+
 class RoutingServerManagement: public cSimpleModule, public ILifecycle {
 protected:
     // environment
@@ -75,7 +73,6 @@ protected:
     simtime_t serverRegRetryInterval;
     simtime_t myRouteTimeout;
     simtime_t serverUpdateInteval;
-    int speedParameterStudy;
     bool isOperational;
 
     cPar *periodicJitter;
@@ -132,8 +129,6 @@ private:
     virtual void sendLocalPacket(AODVControlPacket *packet,
             const IPv4Address& destAddr, unsigned int timeToLive, double delay,
             const IPv4Address& srcAddress);
-//    virtual void handleRouteResponse(RouteResponse *packet,
-//            IPv4Address& destAddr);
     virtual void createRoute(const IPv4Address& destAddr,
             const IPv4Address& nextHop, unsigned int hopCount,
             bool hasValidDestNum, unsigned int destSeqNum, bool isActive,
@@ -141,9 +136,6 @@ private:
     virtual void handleRouteResponse(RouteResponse *routeResponse);
     virtual void handleRouteRequest(AODVRREQ* rreqq);
     virtual void handleRoutError(AODVRERR *rerr, IPv4Address &srcAddress);
-
-    virtual double adaptSendingInterval(double speed, double minInterval, double maxInterval, double gradient);
-
     /*
      * LifeCycle
      */

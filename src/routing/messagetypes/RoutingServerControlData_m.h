@@ -32,7 +32,7 @@ typedef std::list< std::pair<IPv4Address,MACAddress> > Route;
 // }}
 
 /**
- * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:41</tt> by nedtool.
+ * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:47</tt> by nedtool.
  * <pre>
  * packet RoutingServerControlData
  * {
@@ -70,7 +70,7 @@ inline void doPacking(cCommBuffer *b, RoutingServerControlData& obj) {obj.parsim
 inline void doUnpacking(cCommBuffer *b, RoutingServerControlData& obj) {obj.parsimUnpack(b);}
 
 /**
- * Enum generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:45</tt> by nedtool.
+ * Enum generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:51</tt> by nedtool.
  * <pre>
  * enum RSMessageTypes
  * {
@@ -96,7 +96,7 @@ enum RSMessageTypes {
 };
 
 /**
- * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:55</tt> by nedtool.
+ * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:61</tt> by nedtool.
  * <pre>
  * class RegistrationConfirmation extends AODVControlPacket
  * {
@@ -143,7 +143,7 @@ inline void doPacking(cCommBuffer *b, RegistrationConfirmation& obj) {obj.parsim
 inline void doUnpacking(cCommBuffer *b, RegistrationConfirmation& obj) {obj.parsimUnpack(b);}
 
 /**
- * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:62</tt> by nedtool.
+ * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:68</tt> by nedtool.
  * <pre>
  * class NetworkTopologyUpdate extends AODVControlPacket
  * {
@@ -199,7 +199,7 @@ inline void doPacking(cCommBuffer *b, NetworkTopologyUpdate& obj) {obj.parsimPac
 inline void doUnpacking(cCommBuffer *b, NetworkTopologyUpdate& obj) {obj.parsimUnpack(b);}
 
 /**
- * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:70</tt> by nedtool.
+ * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:76</tt> by nedtool.
  * <pre>
  * class RegistrationRequest extends AODVControlPacket
  * {
@@ -245,7 +245,7 @@ inline void doPacking(cCommBuffer *b, RegistrationRequest& obj) {obj.parsimPack(
 inline void doUnpacking(cCommBuffer *b, RegistrationRequest& obj) {obj.parsimUnpack(b);}
 
 /**
- * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:76</tt> by nedtool.
+ * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:82</tt> by nedtool.
  * <pre>
  * class RouteResponse extends AODVControlPacket
  * {
@@ -304,7 +304,7 @@ inline void doPacking(cCommBuffer *b, RouteResponse& obj) {obj.parsimPack(b);}
 inline void doUnpacking(cCommBuffer *b, RouteResponse& obj) {obj.parsimUnpack(b);}
 
 /**
- * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:85</tt> by nedtool.
+ * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:91</tt> by nedtool.
  * <pre>
  * class PayLoadData extends AODVControlPacket
  * {
@@ -347,7 +347,7 @@ inline void doPacking(cCommBuffer *b, PayLoadData& obj) {obj.parsimPack(b);}
 inline void doUnpacking(cCommBuffer *b, PayLoadData& obj) {obj.parsimUnpack(b);}
 
 /**
- * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:90</tt> by nedtool.
+ * Class generated from <tt>src/routing/messagetypes/RoutingServerControlData.msg:96</tt> by nedtool.
  * <pre>
  * class NeighborUpdateMessage extends AODVControlPacket
  * {
