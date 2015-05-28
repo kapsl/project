@@ -18,7 +18,6 @@ package networkstructures.src.routing;
 //
 // TODO auto-generated module
 //
-//The SimpleModule describes the D2D-Routing-Algorithm
 simple D2DRA
 {
     parameters:

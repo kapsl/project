@@ -1040,6 +1040,9 @@ void AODVRoutingManipulated::receiveChangeNotification(int signalID, const cObje
         Ieee80211Frame *ieee80211Frame = dynamic_cast<Ieee80211Frame *>(const_cast<cObject *>(obj));
         IPv4Datagram *datagram = dynamic_cast<IPv4Datagram *>(
                 ieee80211Frame == NULL ? const_cast<cObject *>(obj) : ieee80211Frame->getEncapsulatedPacket());
+
+        // TODO hier tritt der Fehler mit dem linkbrake anscheinend auf - anscheinend ist datagram kein IPv4Datagram...
+
         if (datagram)
         {
             const IPv4Address& unreachableAddr = datagram->getDestAddress();

@@ -19,19 +19,25 @@ import inet.networklayer.routing.aodv.AODVRouting;
 //
 // TODO auto-generated module
 //
-// SimpleModule describes the client side D2DR-logic
 simple RoutingServerManagement //extends  AODVRouting
 {
     parameters:
         //        bool isRegistrated;	//Handles preregistration with the adaptiveServer
 
         int timeToLive = default(2);
-        double serverUpdateInterval @unit("s") = default(1s);//defines the update interval between D2DRS and UserEquipment
-        int maxRouteCacheSize = default(10); //NOT IMPLEMENTED YET. The routingTable should contain only a specific number of routes. 
-        double helloInterval = default(1.0); // NeighborhoodUpdateMSG interval
-        int allowedHelloLoss = default(2); 
+        
+        // I think this indicates, how often a update over local topology is sent to the server
+        double serverUpdateInterval @unit("s") = default(0.5s);
+        
+        int speedParameterStudy = default(1);
+        
+        int maxRouteCacheSize = default(10);
+        double helloInterval = default(1.0);
+        int allowedHelloLoss = default(2);
         bool useHelloMessages = default(true);
-        int serverRegRetryInterval @unit("s") = default(2s); //After 2sec, the ServerRegistrationMSG is sent again if no response
+        int serverRegRetryInterval @unit("s") = default(2s);
+        
+        // Somehow used by aodv to determine how often to send something
         double maxPeriodicJitter @unit("s") = default(serverUpdateInterval / 4); // it MUST NOT be negative; it MUST NOT be greater than MESSAGE_INTERVAL/2; it SHOULD NOT be greater than MESSAGE_INTERVAL/4.
         volatile double periodicJitter @unit("s") = default(uniform(0s, maxPeriodicJitter)); // jitter for externally triggered message generation and message forwarding
         double activeRouteTimeout @unit("s") = default(3s); // the timeout value for cached routes If Hello messages are used, then the

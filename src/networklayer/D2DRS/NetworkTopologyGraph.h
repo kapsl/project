@@ -76,10 +76,6 @@
 
 template<typename T>
 
-/*
- * The class constructs and maintains a generic networkGraph
- * The class provides methods to manipulate the networkGraph
- */
 class tNetworkTopologyGraph {
 
 public:
@@ -861,22 +857,22 @@ public:
         return s;
     }
 
-/**
- * Computes the Dijkstra Algorithm
- */ 
     void computeDijkstra(vertex srcNode) {
         if (G_.size() != 0) {
             paths.erase(paths.begin(), paths.end());
             paths.insert(std::pair<vertex, vertex>(srcNode, srcNode));
+
             dijkstra_values path;
             vertex_set neighbors;
+
             std::map<vertex, double> min_distance;
+
             for (typename adj_graph::iterator it = G_.begin(); it != G_.end();
                     it++) {
                 min_distance.insert(
                         std::pair<vertex, double>((*it).first, INFINITY));
-
             }
+
             adj_graph cG_ = G_;
             if (min_distance.find(srcNode)->first
                     != min_distance.end()->first) {
@@ -890,6 +886,7 @@ public:
 
                     vertex_queue.erase(vertex_queue.begin());
                     neighbors = out_neighbors(u);
+
                     for (const_vertex_iterator it = neighbors.begin();
                             it != neighbors.end(); it++) {
                         Coord coordChild =
@@ -897,20 +894,25 @@ public:
                         Coord coordParent =
                                 GraphUtil::getElement(u)->second.getPosition();
 
+                        // Weight is somehow adjusted to the coord position
                         double weight = sqrt(
                                 pow((coordParent.x - coordChild.x), 2)
                                         + pow((coordParent.y - coordChild.y),
                                                 2));
+
                         if (weight >= ACCEPTEDTRANSMITTIONRANGE) {
                             weight = weight * num_edges();
                             //            std::cout << edgeWeight << endl;
                         }
+
                         double newDistance = weight + dist;
+
                         if (newDistance < min_distance.find(*it)->second) {
                             vertex_queue.erase(
                                     std::make_pair((*it),
                                             min_distance.find(*it)->second));
                             min_distance.at((*it)) = newDistance;
+
                             paths.erase((*it));
                             paths.insert(std::pair<vertex, vertex>((*it), u));
                             vertex_queue.insert(
@@ -918,10 +920,10 @@ public:
                                             min_distance.find(*it)->second));
 
                         }
-
                     }
                 }
             }
+
             /*
              * If no srcNode has been found.
              *
@@ -929,22 +931,24 @@ public:
             if (paths.size() <= 1) {
                 paths.erase(paths.begin(), paths.end());
             }
-
         }
     }
+
     void showPrecursorList() {
         std::cout << "IP | PRE IP" << endl;
+
         for (typename PrecursorMap::iterator it = paths.begin();
                 it != paths.end(); it++) {
             std::cout << it->first << " | " << it->second << endl;
         }
     }
+
     std::list<vertex> &computeShortestPathTo(vertex dest, vertex src) {
-
         shortestPath.erase(shortestPath.begin(), shortestPath.end());
-        if (paths.find(dest)->first != paths.end()->first) {
 
+        if (paths.find(dest)->first != paths.end()->first) {
             shortestPath.push_front(dest);
+
             while (*shortestPath.begin() != src) {
                 for (typename PrecursorMap::iterator it = paths.begin();
                         it != paths.end(); it++) {
@@ -952,23 +956,22 @@ public:
                             && it->second != *shortestPath.begin()) {
                         shortestPath.push_front(it->second);
                     }
-
                 }
-
             }
         }
+
         return shortestPath;
     }
+
     void printShortestPath() {
         for (typename std::list<vertex>::iterator it = shortestPath.begin();
                 it != shortestPath.end(); it++) {
             std::cout << *it << endl;
         }
     }
+
     virtual ~tNetworkTopologyGraph() {
-
     }
-
 };
 
 //end tGraph<T>

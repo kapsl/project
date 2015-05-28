@@ -36,7 +36,7 @@
 #include "GraphUtil.h"
 
 /**
- * TODO - Generated class
+ * I think, this class handles the basis station
  */
 class D2DRA: public cSimpleModule {
 public:
@@ -45,7 +45,6 @@ public:
     typedef std::pair<IPv4Address, MACAddress> RouteData;
     typedef std::list<RouteData> Route;
     Route route;
-
 
 protected:
     bool isOperational;
@@ -71,8 +70,8 @@ protected:
     int rreqIterator;
 private:
 
-    typedef std::map<IPv4Address, HostCharacteristic> GraphInformations;
-    typedef std::pair<IPv4Address, HostCharacteristic> GraphInformationPair;
+    typedef std::map<IPv4Address, NodeCharacteristic> GraphInformations;
+    typedef std::pair<IPv4Address, NodeCharacteristic> GraphInformationPair;
 protected:
     virtual void initialize(int stage);
     virtual void handleMessage(cMessage *msg);

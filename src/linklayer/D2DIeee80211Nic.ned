@@ -22,9 +22,6 @@ import inet.linklayer.ieee80211.mgmt.IIeee80211Mgmt;
 import inet.linklayer.ieee80211.mgmt.Ieee80211AgentSTA;
 import inet.linklayer.ieee80211.radio.Ieee80211Radio;
 
-//
-// Modified interface with the WLanPacketCapsulation SimpleModule
-//
 module D2DIeee80211Nic like IWirelessNic
 {
     parameters:
