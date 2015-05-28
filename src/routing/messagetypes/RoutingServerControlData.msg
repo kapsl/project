@@ -13,6 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
+
+
+
+
+
+//
+// This MSG-Class contains of all Message-Types generated for the D2DRS Algorithm
+//
 cplusplus {{
 #include "IPv4Address.h"
 #include "simtime_t.h"
@@ -87,6 +95,7 @@ class PayLoadData extends AODVControlPacket {
       Route route;
  }
 
+// Local HelloMessage between the UserEquipments
 class NeighborUpdateMessage extends AODVControlPacket {
     unsigned int packetType= NEIGHBORUPDATEMESSAGE;
     Coord position;

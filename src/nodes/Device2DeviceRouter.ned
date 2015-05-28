@@ -18,7 +18,9 @@ package networkstructures.src.nodes;
 import inet.nodes.inet.WirelessHost;
 import inet.networklayer.routing.aodv.AODVRouting;
 import networkstructures.src.routing.RoutingServerManagement;
-import networkstructures.src.routing.AODVRoutingManipulated;
+//import networkstructures.src.routing.AODVRoutingManipulated;
+import networkstructures.src.routing.AODVRouting;
+//import inet.src.networklayer.routing.aodv.
 
 module Device2DeviceRouter extends Device2DeviceStandardHost
 {

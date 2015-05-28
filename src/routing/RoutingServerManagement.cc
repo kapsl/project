@@ -78,6 +78,10 @@ void RoutingServerManagement::initialize(int stage) {
     }
 }
 
+/*
+ * Method is invoked when a message is sent to the module
+ * The looks after the type of message and invokes the corresponding method
+ */
 void RoutingServerManagement::handleMessage(cMessage *msg) {
 
     if (msg->getKind() == IP_C_REGISTER_PROTOCOL) {
@@ -120,8 +124,6 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
 
                 }
                 delete udpPacket;
-//                udpPacket->encapsulate(aodvControlData);
-//                send(udpPacket, "rsMgmntAODVOut");
             }
             if (msg->getArrivalGate() == AODVRoutingIn) {
                 udpPacket->encapsulate(aodvControlData);
@@ -131,7 +133,6 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
         } else if (aodvControlData->getPacketType() == RERR) {
             if (msg->getArrivalGate() == networkLayerIn) {
                 udpPacket->encapsulate(aodvControlData);
-//                topologyUpdate->updateLinkedNeighbor(sourceAddr, 1.0, simTime());
                 send(udpPacket, "rsMgmntAODVOut");
             } else
                 handleRoutError(check_and_cast<AODVRERR*>(aodvControlData),
@@ -172,8 +173,10 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
         }
     }
 }
+
 /**
- * Test
+ * handleRouteResponse inserts the destination and the next hop
+ * of the received route into the routingTable
  */
 void RoutingServerManagement::handleRouteResponse(RouteResponse* routeResonse) {
 
@@ -219,8 +222,8 @@ void RoutingServerManagement::handleRouteResponse(RouteResponse* routeResonse) {
 
 }
 
-/**
- * Right place for sending neighbour topology to server, or is this for sending hello messages to neighbours?
+/*
+ * method is invoked when a new NeighborUpdateMessage has to be sent
  */
 void RoutingServerManagement::sendNeighborUpdateIfNeeded() {
     ASSERT(useHelloMessages);
@@ -255,6 +258,10 @@ void RoutingServerManagement::sendNeighborUpdateIfNeeded() {
             helloMsgTimer);
 }
 
+/*
+ * createNeighborUpdateMessage creates and returns an object of the type
+ * NeighborUpdateMessage
+ */
 NeighborUpdateMessage *RoutingServerManagement::createNeighborUpdateMessage() {
     NeighborUpdateMessage *neighborUpdate = new NeighborUpdateMessage(
             "NEIGHBOR_UPDATE_MSG");
@@ -266,19 +273,26 @@ NeighborUpdateMessage *RoutingServerManagement::createNeighborUpdateMessage() {
     return neighborUpdate;
 }
 
+/*
+ * Method changes the destination of the RREQ and forwards the packet
+ */ 
 void RoutingServerManagement::handleRouteRequest(AODVRREQ *rreq) {
     sendRoutingServerPacket(rreq, serverInformation.serverAddress, 3, 0);
 
 }
+
+/*
+ * Method is invoked by a self-msg.
+ * Method sends a RegistrationRequest to the RoutingService
+ */
 void RoutingServerManagement::handleRegistrationRequest() {
     RegistrationRequest* regRequest = createRegistrationRequest();
     sendRoutingServerPacket(regRequest, IPv4Address::ALLONES_ADDRESS, 3, 0);
     scheduleAt(simTime() + serverRegRetryInterval, checkServerRegistration);
 }
+
 /**
- * Establishes connection to the Routing
- * Server. First the method has to detect
- * the adaptive Routingserver
+ * Method creates and returns a RegistrationRequest 
  */
 RegistrationRequest*
 RoutingServerManagement::createRegistrationRequest() {
@@ -304,6 +318,9 @@ void RoutingServerManagement::handleRegistrationConfirmation(
     delete packet;
 }
 
+/**
+ * Method handles the incomming NeighborUpdateMessages
+ */
 void RoutingServerManagement::handleHelloMessage(NeighborUpdateMessage *packet,
         IPv4Address& srcAddress) {
     EV_INFO << "Received Neighbor Update Data" << endl;
@@ -316,7 +333,7 @@ void RoutingServerManagement::handleHelloMessage(NeighborUpdateMessage *packet,
 }
 
 /**
- * Is this for sending local topology to server?
+ * updates the local neighborhoodTable
  */
 void RoutingServerManagement::handleTopologyUpdateTable() {
     topologyUpdate->printTopologyUpdateData(routingTable->getRouterId());
@@ -385,6 +402,9 @@ double RoutingServerManagement::adaptSendingInterval(double speed, double minInt
     }
 }
 
+/**
+ * creates  RREQ for each RERR
+ */
 void RoutingServerManagement::handleRoutError(AODVRERR *rerr,
         IPv4Address &srcAddress) {
 
@@ -409,6 +429,10 @@ void RoutingServerManagement::handleRoutError(AODVRERR *rerr,
     }
     delete rerr;
 }
+
+/**
+ * Method sends NetworkTopologyUpdate-msgs to the server
+ */
 NetworkTopologyUpdate*
 RoutingServerManagement::createNetworkTopologyUpdate() {
     NetworkTopologyUpdate *neighborhodUpdate = new NetworkTopologyUpdate(
@@ -429,6 +453,11 @@ RoutingServerManagement::createNetworkTopologyUpdate() {
     return neighborhodUpdate;
 }
 
+/**
+ * The functionality of this method is not implemented yet.
+ * the method should maintain the routingTable. Routes have to be
+ * deleted depending on defined criteria
+ */
 void RoutingServerManagement::maintainRouteCache() {
 
     std::vector<std::pair<IPv4Address, SimTime> > orderedVector;
@@ -455,6 +484,9 @@ void RoutingServerManagement::maintainRouteCache() {
     }
 }
 
+/**
+ * creates a new route and inserts the route in the routingTable
+ */
 void RoutingServerManagement::createRoute(const IPv4Address& destAddr,
         const IPv4Address& nextHop, unsigned int hopCount, bool hasValidDestNum,
         unsigned int destSeqNum, bool isActive, simtime_t lifeTime,
@@ -467,9 +499,6 @@ void RoutingServerManagement::createRoute(const IPv4Address& destAddr,
     newProtocolData->setLifeTime(lifeTime);
     newProtocolData->setDestSeqNum(destSeqNum);
 
-    /*
-     * Interface must be the special
-     */
     InterfaceEntry *ifEntry;
     if (isUMTS)
         ifEntry = interfaceTable->getInterfaceByName("umtsIface");
@@ -480,7 +509,6 @@ void RoutingServerManagement::createRoute(const IPv4Address& destAddr,
         route->setInterface(ifEntry);
     route->setProtocolData(newProtocolData);
     route->setDestination(destAddr);
-//    route->setSourceType(IPv4Route::AODV);
     route->setSource(this);
     route->setMetric(0);
     route->setGateway(nextHop);
@@ -491,6 +519,9 @@ void RoutingServerManagement::createRoute(const IPv4Address& destAddr,
 
 }
 
+/**
+ * Method creates and returns a  RREP
+ */
 AODVRREP *
 RoutingServerManagement::createRREP(const IPv4Address& destAddress,
         simtime_t creationTime) {
@@ -533,6 +564,9 @@ RoutingServerManagement::createRREP(const IPv4Address& destAddress,
     return rrep;
 }
 
+/**
+ * Method is invoked when a message has to be sent to the RoutingService
+ */
 void RoutingServerManagement::sendRoutingServerPacket(AODVControlPacket *packet,
         const IPv4Address& destAddr, unsigned int timeToLive, double delay) {
     IPv4ControlInfo *networkProtocolControlInfo = new IPv4ControlInfo();
@@ -564,6 +598,10 @@ void RoutingServerManagement::sendRoutingServerPacket(AODVControlPacket *packet,
         sendDelayed(udpPacket, delay, "rsMgmntNLOut");
 }
 
+/**
+ * The method is invoked when a packet has to be sent to any nearby
+ * UserEquipment
+ */
 void RoutingServerManagement::sendAODVPacket(AODVControlPacket *packet,
         const IPv4Address& destAddr, unsigned int timeToLive, double delay) {
     IPv4ControlInfo *networkProtocolControlInfo = new IPv4ControlInfo();
@@ -574,9 +612,7 @@ void RoutingServerManagement::sendAODVPacket(AODVControlPacket *packet,
     networkProtocolControlInfo->setDestAddr(destAddr);
     networkProtocolControlInfo->setSrcAddr(routingTable->getRouterId());
 
-// TODO: Implement: support for multiple interfaces
     InterfaceEntry *ifEntry = interfaceTable->getInterfaceByName("wlan0");
-
     networkProtocolControlInfo->setInterfaceId(ifEntry->getInterfaceId());
 
     UDPPacket *udpPacket = new UDPPacket(packet->getName());
@@ -595,6 +631,9 @@ void RoutingServerManagement::sendAODVPacket(AODVControlPacket *packet,
         sendDelayed(udpPacket, delay, "rsMgmntNLOut");
 }
 
+/**
+ * the method send aodv-msgs within the own UserEquipment
+ */
 void RoutingServerManagement::sendLocalPacket(AODVControlPacket *packet,
         const IPv4Address& destAddr, unsigned int timeToLive, double delay,
         const IPv4Address& srcAddress) {
@@ -618,6 +657,9 @@ void RoutingServerManagement::sendLocalPacket(AODVControlPacket *packet,
         sendDelayed(udpPacket, delay, "rsMgmntAODVOut");
 }
 
+/**
+ * This method deactivates the UserEquipment
+ */ 
 bool RoutingServerManagement::handleOperationStage(
         LifecycleOperation *operation, int stage, IDoneCallback *doneCallback) {
     Enter_Method_Silent

@@ -132,8 +132,6 @@ private:
     virtual void sendLocalPacket(AODVControlPacket *packet,
             const IPv4Address& destAddr, unsigned int timeToLive, double delay,
             const IPv4Address& srcAddress);
-//    virtual void handleRouteResponse(RouteResponse *packet,
-//            IPv4Address& destAddr);
     virtual void createRoute(const IPv4Address& destAddr,
             const IPv4Address& nextHop, unsigned int hopCount,
             bool hasValidDestNum, unsigned int destSeqNum, bool isActive,

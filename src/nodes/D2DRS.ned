@@ -17,7 +17,9 @@ package networkstructures.src.nodes;
 
 import networkstructures.src.routing.D2DRA;
 
-
+//
+//Module describes the architecture of a D2DRS
+//
 module D2DRS extends RoutingServiceArchitecture
 {
 

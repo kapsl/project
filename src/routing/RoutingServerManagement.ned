@@ -16,9 +16,8 @@
 package networkstructures.src.routing;
 
 import inet.networklayer.routing.aodv.AODVRouting;
-//
-// TODO auto-generated module
-//
+
+// SimpleModule describes the client side D2DR-logic
 simple RoutingServerManagement //extends  AODVRouting
 {
     parameters:
@@ -27,14 +26,20 @@ simple RoutingServerManagement //extends  AODVRouting
         int timeToLive = default(2);
         
         // I think this indicates, how often a update over local topology is sent to the server
+		// defines the update interval between D2DRS and UserEquipment
         double serverUpdateInterval @unit("s") = default(0.5s);
         
         int speedParameterStudy = default(1);
         
+		// NOT IMPLEMENTED YET. The routingTable should contain only a specific number of routes.
         int maxRouteCacheSize = default(10);
+
+		// NeighborhoodUpdateMSG interval
         double helloInterval = default(1.0);
         int allowedHelloLoss = default(2);
         bool useHelloMessages = default(true);
+
+		// After 2sec, the ServerRegistrationMSG is sent again if no response
         int serverRegRetryInterval @unit("s") = default(2s);
         
         // Somehow used by aodv to determine how often to send something

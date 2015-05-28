@@ -76,6 +76,10 @@
 
 template<typename T>
 
+/*
+ * The class constructs and maintains a generic networkGraph
+ * The class provides methods to manipulate the networkGraph
+ */
 class tNetworkTopologyGraph {
 
 public:
@@ -857,6 +861,9 @@ public:
         return s;
     }
 
+/**
+ * Computes the Dijkstra Algorithm
+ */ 
     void computeDijkstra(vertex srcNode) {
         if (G_.size() != 0) {
             paths.erase(paths.begin(), paths.end());
