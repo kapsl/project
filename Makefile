@@ -283,7 +283,6 @@ $O/src/linklayer/WLanPacketCapsulation.o: src/linklayer/WLanPacketCapsulation.cc
 	src/networklayer/D2DRS/GraphUtil.h \
 	src/networklayer/D2DRS/HostCharacteristic.h \
 	src/networklayer/D2DRS/NetworkTopologyGraph.h \
-	src/networklayer/D2DRS/NodeCharacteristic.h \
 	src/networklayer/D2DRS/setops.h \
 	src/routing/messagetypes/RoutingServerControlData_m.h \
 	$(INET_PROJ)/src/base/Compat.h \
@@ -328,7 +327,6 @@ $O/src/networklayer/D2DRS/GraphUtil.o: src/networklayer/D2DRS/GraphUtil.cc \
 	src/hosts/HostCharacteristic.h \
 	src/networklayer/D2DRS/GraphUtil.h \
 	src/networklayer/D2DRS/HostCharacteristic.h \
-	src/networklayer/D2DRS/NodeCharacteristic.h \
 	$(INET_PROJ)/src/base/Compat.h \
 	$(INET_PROJ)/src/base/Coord.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
@@ -424,7 +422,6 @@ $O/src/routing/DSDRA.o: src/routing/DSDRA.cc \
 	src/networklayer/D2DRS/GraphUtil.h \
 	src/networklayer/D2DRS/HostCharacteristic.h \
 	src/networklayer/D2DRS/NetworkTopologyGraph.h \
-	src/networklayer/D2DRS/NodeCharacteristic.h \
 	src/networklayer/D2DRS/setops.h \
 	src/routing/DSDRA.h \
 	src/routing/messagetypes/RoutingServerControlData_m.h \
@@ -466,7 +463,6 @@ $O/src/routing/RoutingServerManagement.o: src/routing/RoutingServerManagement.cc
 	src/networklayer/D2DRS/HostCharacteristic.h \
 	src/networklayer/D2DRS/NeighborTopologyData.h \
 	src/networklayer/D2DRS/NetworkTopologyGraph.h \
-	src/networklayer/D2DRS/NodeCharacteristic.h \
 	src/networklayer/D2DRS/setops.h \
 	src/routing/RoutingServerManagement.h \
 	src/routing/messagetypes/RoutingServerControlData_m.h \
@@ -519,7 +515,6 @@ $O/src/routing/messagetypes/RoutingServerControlData_m.o: src/routing/messagetyp
 	src/networklayer/D2DRS/GraphUtil.h \
 	src/networklayer/D2DRS/HostCharacteristic.h \
 	src/networklayer/D2DRS/NetworkTopologyGraph.h \
-	src/networklayer/D2DRS/NodeCharacteristic.h \
 	src/networklayer/D2DRS/setops.h \
 	src/routing/messagetypes/RoutingServerControlData_m.h \
 	$(INET_PROJ)/src/base/Compat.h \

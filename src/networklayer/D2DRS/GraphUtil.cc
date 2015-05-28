@@ -14,25 +14,28 @@
 // 
 
 #include <GraphUtil.h>
-std::map<IPv4Address, NodeCharacteristic> GraphUtil::graphInformations;
+std::map<IPv4Address, HostCharacteristic> GraphUtil::graphInformations;
 GraphUtil::GraphUtil() {
+    // TODO Auto-generated constructor stub
+
 }
 
 GraphUtil::~GraphUtil() {
+    // TODO Auto-generated destructor stub
 }
 
-std::map<IPv4Address, NodeCharacteristic>::iterator GraphUtil::getElement(
+std::map<IPv4Address, HostCharacteristic>::iterator GraphUtil::getElement(
         IPv4Address address) {
     return GraphUtil::graphInformations.find(address);
 }
 
 void GraphUtil::insertElement(IPv4Address address,
-        NodeCharacteristic characteristic) {
+        HostCharacteristic characteristic) {
     graphInformations.insert(
-            std::pair<IPv4Address, NodeCharacteristic>(address,
+            std::pair<IPv4Address, HostCharacteristic>(address,
                     characteristic));
 }
 
-void GraphUtil::removeElement(IPv4Address address) {
+void GraphUtil::removeElement(IPv4Address address){
     graphInformations.erase(address);
 }

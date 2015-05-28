@@ -37,14 +37,12 @@
 #include "IARPCache.h"
 #include "ARP.h"
 /**
- * TODO - Generated class
+ * Class controls incoming and outgoing traffic.
  */
 class WLanPacketCapsulation: public cSimpleModule, public INotifiable {
 
 public:
 
-//    typedef std::list<IPv4Address> IPRoute;
-//    typedef std::list<MACAddress> MACRoute;
     typedef std::pair<IPv4Address, MACAddress> RouteData;
     typedef std::list<RouteData> Route;
 private:
@@ -55,7 +53,6 @@ private:
     IRoutingTable * routingTable;
     NotificationBoard *nb;
     IPv4Datagram *udpIpv4Datagram;
-//    std::set<IPv4Datagram*> datagramQueue;
 
     unsigned int defaultUDPPort;
     simtime_t lastBroadcastTime;
@@ -84,8 +81,6 @@ public:
     WLanPacketCapsulation();
     virtual ~WLanPacketCapsulation();
 public:
-//    static std::set<IPRoute*> ipRouteQueue;
-//    static std::set<MACRoute*> macRouteQueue;
     static std::set<Route*> routeQueue;
 };
 
