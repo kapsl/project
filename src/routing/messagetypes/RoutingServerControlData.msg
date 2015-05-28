@@ -13,14 +13,6 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-
-
-
-
-
-//
-// This MSG-Class contains of all Message-Types generated for the D2DRS Algorithm
-//
 cplusplus {{
 #include "IPv4Address.h"
 #include "simtime_t.h"
@@ -36,6 +28,7 @@ typedef std::list<MACAddress> MACRoute;
 typedef std::vector<HostCharacteristic> Neighbors; 
 typedef std::list< std::pair<IPv4Address,MACAddress> > Route;
 }}
+
 class noncobject IPv4Address;
 class noncobject HostCharacteristic;
 class noncobject Route;
@@ -43,7 +36,6 @@ class noncobject PayLoadPacket;
 class noncobject Neighbors;
 class noncobject Coord;
 class noncobject MACAddress;
-
 
 packet AODVControlPacket;
 packet RoutingServerControlData{
@@ -80,8 +72,7 @@ class RegistrationRequest extends AODVControlPacket{
     	simtime_t lifeTime;
     	unsigned int hopCount;
     }
-
-
+    
 class RouteResponse extends AODVControlPacket {
     unsigned int packetType= ROUTERESPONSEMSG;
       	simtime_t lifeTime;
@@ -96,7 +87,6 @@ class PayLoadData extends AODVControlPacket {
       Route route;
  }
 
-// Local HelloMessage between the UserEquipments
 class NeighborUpdateMessage extends AODVControlPacket {
     unsigned int packetType= NEIGHBORUPDATEMESSAGE;
     Coord position;
