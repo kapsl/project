@@ -352,20 +352,20 @@ void RoutingServerManagement::handleTopologyUpdateTable() {
     // Make parameter study
     simtime_t adaptedServerUpdateInterval;
 
-    if (speedParameterStudy == 1) {
-        adaptedServerUpdateInterval = 1;
-    } else if (speedParameterStudy == 2) {
-        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 5, 0.96);
-    } else if (speedParameterStudy == 3) {
-        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 10, 1.9);
-    } else if (speedParameterStudy == 4) {
-        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 20, 3.9);
-    } else if (speedParameterStudy == 5) {
-        adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 2, 0.36);
-    } else if (speedParameterStudy == 6) {
-        adaptedServerUpdateInterval = 0.5;
-    } else if (speedParameterStudy == 7) {
-        adaptedServerUpdateInterval = 5;
+    switch (speedParameterStudy) {
+    case 1: adaptedServerUpdateInterval = 0.3; break;
+    case 2: adaptedServerUpdateInterval = 0.5; break;
+    case 3: adaptedServerUpdateInterval = 1; break;
+    case 4: adaptedServerUpdateInterval = 2; break;
+    case 5: adaptedServerUpdateInterval = 5; break;
+    case 6: adaptedServerUpdateInterval = 10; break;
+    case 7: adaptedServerUpdateInterval = 15; break;
+    case 8: adaptedServerUpdateInterval = 20; break;
+    case 9: adaptedServerUpdateInterval = 30; break;
+    case 10: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 5, 0.96); break;
+    case 11: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 10, 1.9); break;
+    case 12: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 20, 3.9); break;
+    case 13: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 5, 15, 2); break;
     }
 
     //std::cout << "Adapted Interval : " << adaptedServerUpdateInterval << "\n";

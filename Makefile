@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for NetworkStructures
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -O out -I../inet/src/linklayer/ieee80211/radio -I../inet/src/networklayer/routing/aodv -I../inet/src/networklayer/common -I../inet/src -I../inet/src/networklayer/icmpv6 -I../inet/src/world/obstacles -I../inet/src/networklayer/xmipv6 -I../inet/src/networklayer/contract -I../inet/src/networklayer/autorouting/ipv4 -I../inet/src/util -I../inet/src/transport/contract -I../inet/src/linklayer/common -I../inet/src/status -I../inet/src/linklayer/radio/propagation -I../inet/src/linklayer/ieee80211/radio/errormodel -I../inet/src/linklayer/radio -I../inet/src/util/headerserializers/tcp -I../inet/src/networklayer/ipv4 -I../inet/src/mobility/contract -I../inet/src/util/headerserializers/ipv4 -I../inet/src/base -I../inet/src/util/headerserializers -I../inet/src/world/radio -I../inet/src/linklayer/ieee80211/mac -I../inet/src/networklayer/ipv6 -I../inet/src/transport/sctp -I../inet/src/util/headerserializers/udp -I../inet/src/networklayer/ipv6tunneling -I../inet/src/applications/pingapp -I../inet/src/battery/models -I../inet/src/util/headerserializers/ipv6 -I../inet/src/util/headerserializers/sctp -I../inet/src/linklayer/contract -I../inet/src/networklayer/arp -I../inet/src/transport/tcp_common -I../inet/src/mobility/common -I../inet/src/transport/udp -L../inet/out/$$\(CONFIGNAME\)/src -linet -DINET_IMPORT -KINET_PROJ=../inet
+#  opp_makemake -f --deep -O out -I../inet/src/linklayer/ieee80211/radio -I../inet/src/networklayer/routing/aodv -I../inet/src/networklayer/common -I../inet/src -I../inet/src/networklayer/icmpv6 -I../inet/src/world/obstacles -I../inet/src/networklayer/xmipv6 -I../inet/src/networklayer/contract -I../inet/src/networklayer/autorouting/ipv4 -I../inet/src/util -I../inet/src/transport/contract -I../inet/src/linklayer/common -I../inet/src/status -I../inet/src/linklayer/radio/propagation -I../inet/src/linklayer/ieee80211/radio/errormodel -I../inet/src/linklayer/radio -I../inet/src/util/headerserializers/tcp -I../inet/src/networklayer/ipv4 -I../inet/src/mobility/contract -I../inet/src/util/headerserializers/ipv4 -I../inet/src/base -I../inet/src/util/headerserializers -I../inet/src/world/radio -I../inet/src/linklayer/ieee80211/mac -I../inet/src/networklayer/ipv6 -I../inet/src/transport/sctp -I../inet/src/util/headerserializers/udp -I../inet/src/networklayer/ipv6tunneling -I../inet/src/applications/pingapp -I../inet/src/battery/models -I../inet/src/util/headerserializers/ipv6 -I../inet/src/util/headerserializers/sctp -I../inet/src/linklayer/contract -I../inet/src/networklayer/arp -I../inet/src/transport/tcp_common -I../inet/src/transport/udp -I../inet/src/mobility/common -L../inet/out/$$\(CONFIGNAME\)/src -linet -DINET_IMPORT -KINET_PROJ=../inet
 #
 
 # Name of target to be created (-o option)
@@ -50,8 +50,8 @@ INCLUDE_PATH = \
     -I../inet/src/linklayer/contract \
     -I../inet/src/networklayer/arp \
     -I../inet/src/transport/tcp_common \
-    -I../inet/src/mobility/common \
     -I../inet/src/transport/udp \
+    -I../inet/src/mobility/common \
     -I. \
     -IAuswertung \
     -IAuswertung/plottingEndToEndDelyInterval \
@@ -117,7 +117,6 @@ OBJS = \
     $O/src/networklayer/D2DRS/NodeCharacteristic.o \
     $O/src/routing/DSDRA.o \
     $O/src/routing/RoutingServerManagement.o \
-    $O/src/routing/AODVRouting.o \
     $O/src/routing/messagetypes/RoutingServerControlData_m.o
 
 # Message files
@@ -344,48 +343,6 @@ $O/src/networklayer/D2DRS/NodeCharacteristic.o: src/networklayer/D2DRS/NodeChara
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/networklayer/contract/IPv4Address.h \
 	$(INET_PROJ)/src/util/FWMath.h
-$O/src/routing/AODVRouting.o: src/routing/AODVRouting.cc \
-	src/routing/AODVRouting.h \
-	$(INET_PROJ)/src/base/Compat.h \
-	$(INET_PROJ)/src/base/ILifecycle.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	$(INET_PROJ)/src/base/INotifiable.h \
-	$(INET_PROJ)/src/base/LifecycleOperation.h \
-	$(INET_PROJ)/src/base/ModuleAccess.h \
-	$(INET_PROJ)/src/base/NodeOperations.h \
-	$(INET_PROJ)/src/base/NotificationBoard.h \
-	$(INET_PROJ)/src/base/NotifierConsts.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	$(INET_PROJ)/src/linklayer/ieee80211/mac/Ieee80211Consts.h \
-	$(INET_PROJ)/src/linklayer/ieee80211/mac/Ieee80211Frame_m.h \
-	$(INET_PROJ)/src/networklayer/arp/ARPPacket_m.h \
-	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
-	$(INET_PROJ)/src/networklayer/common/INetfilter.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
-	$(INET_PROJ)/src/networklayer/contract/IPProtocolId_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPSocket.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv4Address.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv4ControlInfo.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv4ControlInfo_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IPv4Datagram.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IPv4Datagram_m.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IPv4Route.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h \
-	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
-	$(INET_PROJ)/src/networklayer/routing/aodv/AODVControlPackets_m.h \
-	$(INET_PROJ)/src/networklayer/routing/aodv/AODVRouteData.h \
-	$(INET_PROJ)/src/networklayer/routing/aodv/AODVRouting.h \
-	$(INET_PROJ)/src/status/NodeStatus.h \
-	$(INET_PROJ)/src/transport/contract/UDPControlInfo.h \
-	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	$(INET_PROJ)/src/transport/contract/UDPSocket.h \
-	$(INET_PROJ)/src/transport/udp/UDPPacket.h \
-	$(INET_PROJ)/src/transport/udp/UDPPacket_m.h
 $O/src/routing/DSDRA.o: src/routing/DSDRA.cc \
 	src/hosts/HostCharacteristic.h \
 	src/networklayer/D2DRS/GraphUtil.h \
@@ -432,7 +389,6 @@ $O/src/routing/RoutingServerManagement.o: src/routing/RoutingServerManagement.cc
 	src/networklayer/D2DRS/NetworkTopologyGraph.h \
 	src/networklayer/D2DRS/NodeCharacteristic.h \
 	src/networklayer/D2DRS/setops.h \
-	src/routing/AODVRouting.h \
 	src/routing/RoutingServerManagement.h \
 	src/routing/messagetypes/RoutingServerControlData_m.h \
 	$(INET_PROJ)/src/base/Compat.h \
