@@ -8,8 +8,6 @@ sumLostGeneral=0
 
 echo "Calculating packet loss..."	
 
-sumSentGeneral = 0
-
 for filename in `ls $1*.sca`
 do
 
@@ -33,13 +31,14 @@ fi
 
 done < $filename
 
-if [$sumSentGeneral == 0] 
+if [ $sumSentGeneral == 0 ]
 then
 	sumLostGeneral = 100
 else
 	sumLostGeneral=$((100*$sumRcvdGeneral/$sumSentGeneral ))
 fi
 
+echo $filename
 echo "UDPPackets sent: "$sumSentGeneral
 echo "UDPPackets received: "$sumRcvdGeneral
 echo "UDPPackets lost: " $((100 - $sumLostGeneral))
