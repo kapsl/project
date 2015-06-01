@@ -1,9 +1,15 @@
+#!/bin/bash
+#
+
 val=0
 sumSentGeneral=0
 sumRcvdGeneral=0
 sumLostGeneral=0
 
-echo "1sec calculations General..."	
+echo "Calculating packet loss..."	
+
+for filename in `ls $1*.sca`
+do
 
 while read line
 do 
@@ -23,10 +29,13 @@ val=$(echo $line | cut -d ' ' -f 4- )
 sumRcvdGeneral=$(($sumRcvdGeneral + $val))
 fi
 
-done < $1;
+done < $filename
 
 sumLostGeneral=$((100*$sumRcvdGeneral/$sumSentGeneral ))
 
-echo "UDPPackets sent General: "$sumSentGeneral
-echo "UDPPackets rcvd General: "$sumRcvdGeneral
-echo "UDPPackets lost General: "$sumLostGeneral
+echo "UDPPackets sent: "$sumSentGeneral
+echo "UDPPackets received: "$sumRcvdGeneral
+echo "UDPPackets lost: " $((100 - $sumLostGeneral))
+echo -e "\n"
+
+done
