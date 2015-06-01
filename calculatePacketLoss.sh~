@@ -38,6 +38,7 @@ else
 	sumLostGeneral=$((100*$sumRcvdGeneral/$sumSentGeneral ))
 fi
 
+echo $filename
 echo "UDPPackets sent: "$sumSentGeneral
 echo "UDPPackets received: "$sumRcvdGeneral
 echo "UDPPackets lost: " $((100 - $sumLostGeneral))

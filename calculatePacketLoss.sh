@@ -33,7 +33,7 @@ done < $filename
 
 if [ $sumSentGeneral == 0 ]
 then
-	sumLostGeneral = 100
+	sumLostGeneral=100;
 else
 	sumLostGeneral=$((100*$sumRcvdGeneral/$sumSentGeneral ))
 fi
