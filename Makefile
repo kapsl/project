@@ -109,6 +109,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
 OBJS = \
+    $O/AODVRouting.o \
     $O/src/hosts/HostCharacteristic.o \
     $O/src/hosts/NeighborTopologyData.o \
     $O/src/linklayer/WLanPacketCapsulation.o \
@@ -248,6 +249,48 @@ depend:
 	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc Auswertung/*.cc Auswertung/plottingEndToEndDelyInterval/*.cc Auswertung/plottingEndToEndDelyNumHost/*.cc Auswertung/plottingRREQRREPInterval/*.cc Auswertung/plottingRREQRREPNumHost/*.cc Auswertung/plottingRoutingLoadInterval/*.cc Auswertung/plottingRoutingLoadNumHost/*.cc Auswertung/plottingSendingInterval/*.cc Auswertung/plottingSendingNumHost/*.cc Auswertung/plottingThrougputInterval/*.cc Auswertung/plottingThrougputNumHost/*.cc Auswertung/resultsMobile/*.cc IPv4AddressResolver/*.cc MobileSingleSourceDest/*.cc MobileThirtySourceDest/*.cc MobileTwentySourceDest/*.cc Simulation/*.cc html/*.cc html/search/*.cc latex/*.cc plottingEndToEndDelyInterval/*.cc plottingEndToEndDelyNumHost/*.cc plottingRREQRREPInterval/*.cc plottingRREQRREPNumHost/*.cc plottingRoutingLoadInterval/*.cc plottingRoutingLoadNumHost/*.cc plottingSendingInterval/*.cc plottingSendingNumHost/*.cc plottingThrougputInterval/*.cc plottingThrougputNumHost/*.cc resultsMobile/*.cc resultsMobile/plottingSendingInterval/*.cc resultsMobile/plottingThrougputNumHost/*.cc src/*.cc src/hosts/*.cc src/linklayer/*.cc src/networklayer/*.cc src/networklayer/D2DRS/*.cc src/nodes/*.cc src/routing/*.cc src/routing/messagetypes/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
+$O/AODVRouting.o: AODVRouting.cc \
+	AODVRouting.h \
+	$(INET_PROJ)/src/base/Compat.h \
+	$(INET_PROJ)/src/base/ILifecycle.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/base/INotifiable.h \
+	$(INET_PROJ)/src/base/LifecycleOperation.h \
+	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/base/NodeOperations.h \
+	$(INET_PROJ)/src/base/NotificationBoard.h \
+	$(INET_PROJ)/src/base/NotifierConsts.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ieee80211/mac/Ieee80211Consts.h \
+	$(INET_PROJ)/src/linklayer/ieee80211/mac/Ieee80211Frame_m.h \
+	$(INET_PROJ)/src/networklayer/arp/ARPPacket_m.h \
+	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	$(INET_PROJ)/src/networklayer/common/INetfilter.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
+	$(INET_PROJ)/src/networklayer/contract/IPProtocolId_m.h \
+	$(INET_PROJ)/src/networklayer/contract/IPSocket.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv4Address.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv4ControlInfo.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv4ControlInfo_m.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IPv4Datagram.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IPv4Datagram_m.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IPv4Route.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h \
+	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
+	$(INET_PROJ)/src/networklayer/routing/aodv/AODVControlPackets_m.h \
+	$(INET_PROJ)/src/networklayer/routing/aodv/AODVRouteData.h \
+	$(INET_PROJ)/src/networklayer/routing/aodv/AODVRouting.h \
+	$(INET_PROJ)/src/status/NodeStatus.h \
+	$(INET_PROJ)/src/transport/contract/UDPControlInfo.h \
+	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
+	$(INET_PROJ)/src/transport/contract/UDPSocket.h \
+	$(INET_PROJ)/src/transport/udp/UDPPacket.h \
+	$(INET_PROJ)/src/transport/udp/UDPPacket_m.h
 $O/src/hosts/HostCharacteristic.o: src/hosts/HostCharacteristic.cc \
 	src/hosts/HostCharacteristic.h \
 	$(INET_PROJ)/src/base/Compat.h \
@@ -382,6 +425,7 @@ $O/src/routing/DSDRA.o: src/routing/DSDRA.cc \
 	$(INET_PROJ)/src/transport/udp/UDPPacket_m.h \
 	$(INET_PROJ)/src/util/FWMath.h
 $O/src/routing/RoutingServerManagement.o: src/routing/RoutingServerManagement.cc \
+	AODVRouting.h \
 	src/hosts/HostCharacteristic.h \
 	src/hosts/NeighborTopologyData.h \
 	src/linklayer/WLanPacketCapsulation.h \
