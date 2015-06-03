@@ -481,7 +481,7 @@ void RoutingServerManagement::maintainRouteCache() {
  */
 void RoutingServerManagement::createRoute(const IPv4Address& destAddr,
         const IPv4Address& nextHop, unsigned int hopCount, bool hasValidDestNum,
-        unsigned int destSeq./NetworkStructures -r $i -u Cmdenv -n .:../inet/examples:../inet/src -l ../inet/src/inet omnetpp.iniNum, bool isActive, simtime_t lifeTime,
+        unsigned int destSeqNum, bool isActive, simtime_t lifeTime,
         bool isUMTS) {
     IPv4Route *route = new IPv4Route;
     AODVRouteData *newProtocolData = new AODVRouteData;
