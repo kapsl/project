@@ -140,7 +140,7 @@ private:
     virtual void handleRouteRequest(AODVRREQ* rreqq);
     virtual void handleRoutError(AODVRERR *rerr, IPv4Address &srcAddress);
 
-    virtual double adaptSendingInterval(double speed, double minInterval, double maxInterval, double gradient);
+    virtual double adaptSendingInterval(double speed, double minInterval, double maxInterval);
 
     /*
      * LifeCycle

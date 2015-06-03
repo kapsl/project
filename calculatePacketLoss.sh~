@@ -4,12 +4,16 @@
 val=0
 sumSentGeneral=0
 sumRcvdGeneral=0
-sumLostGeneral=0
+sumLostGeneral=100
 
 echo "Calculating packet loss..."	
 
 for filename in `ls $1*.sca`
 do
+
+sumSentGeneral=0
+sumRcvdGeneral=0
+val=0
 
 while read line
 do 
@@ -33,7 +37,7 @@ done < $filename
 
 if [ $sumSentGeneral == 0 ]
 then
-	sumLostGeneral = 100
+	sumLostGeneral=100
 else
 	sumLostGeneral=$((100*$sumRcvdGeneral/$sumSentGeneral ))
 fi

@@ -362,10 +362,10 @@ void RoutingServerManagement::handleTopologyUpdateTable() {
     case 7: adaptedServerUpdateInterval = 15; break;
     case 8: adaptedServerUpdateInterval = 20; break;
     case 9: adaptedServerUpdateInterval = 30; break;
-    case 10: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 5, 0.96); break;
-    case 11: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 10, 1.9); break;
-    case 12: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 20, 3.9); break;
-    case 13: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 5, 15, 2); break;
+    case 10: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 5); break;
+    case 11: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 10); break;
+    case 12: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 20); break;
+    case 13: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 5, 15); break;
     }
 
     //std::cout << "Adapted Interval : " << adaptedServerUpdateInterval << "\n";
@@ -373,10 +373,6 @@ void RoutingServerManagement::handleTopologyUpdateTable() {
     scheduleAt(
             simTime() + adaptedServerUpdateInterval - delayTimeTopologyUpdate,
             networkTopologyUpdate);
-
-    /*
-     * more Information!!
-     */
 
     if (isRegistrated && topologyUpdate->getNetworkTopologyTable().size() > 0) {
         NetworkTopologyUpdate* neighborhodUpdate =
@@ -389,14 +385,11 @@ void RoutingServerManagement::handleTopologyUpdateTable() {
 
 /**
  * Get the sending interval from moving speed.
- *
- * TODO find the right function here
- *
- * I used the function y = -0.95x + 4.95
  */
-double RoutingServerManagement::adaptSendingInterval(double speed, double minInterval, double maxInterval, double gradient) {
+double RoutingServerManagement::adaptSendingInterval(double speed, double minInterval, double maxInterval) {
+    // If we are faster than 5 m/s don't send more often
     if (speed < 5.0) {
-        return -gradient * speed + maxInterval;
+        return ((maxInterval - minInterval) / (-5)) * speed + maxInterval;
     } else {
         return minInterval;
     }
@@ -407,7 +400,6 @@ double RoutingServerManagement::adaptSendingInterval(double speed, double minInt
  */
 void RoutingServerManagement::handleRoutError(AODVRERR *rerr,
         IPv4Address &srcAddress) {
-
     for (int i = 0; i < rerr->getUnreachableNodesArraySize(); i++) {
         IPv4Route *inactiveRoute = routingTable->findBestMatchingRoute(
                 rerr->getUnreachableNodes(i).addr);
@@ -489,7 +481,7 @@ void RoutingServerManagement::maintainRouteCache() {
  */
 void RoutingServerManagement::createRoute(const IPv4Address& destAddr,
         const IPv4Address& nextHop, unsigned int hopCount, bool hasValidDestNum,
-        unsigned int destSeqNum, bool isActive, simtime_t lifeTime,
+        unsigned int destSeq./NetworkStructures -r $i -u Cmdenv -n .:../inet/examples:../inet/src -l ../inet/src/inet omnetpp.iniNum, bool isActive, simtime_t lifeTime,
         bool isUMTS) {
     IPv4Route *route = new IPv4Route;
     AODVRouteData *newProtocolData = new AODVRouteData;

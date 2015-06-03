@@ -8,7 +8,7 @@ sumLostGeneral=100
 
 echo "Calculating packet loss..."	
 
-for filename in `ls $1*.sca`
+for filename in `ls -1v $1*.sca`
 do
 
 sumSentGeneral=0
