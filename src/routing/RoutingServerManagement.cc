@@ -83,7 +83,6 @@ void RoutingServerManagement::initialize(int stage) {
  * The looks after the type of message and invokes the corresponding method
  */
 void RoutingServerManagement::handleMessage(cMessage *msg) {
-
     if (msg->getKind() == IP_C_REGISTER_PROTOCOL) {
         send(msg, "rsMgmntNLOut");
     } else if (msg->isSelfMessage()) {
@@ -92,7 +91,7 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
         } else if (msg == networkTopologyUpdate) {
             handleTopologyUpdateTable();
         } else if (msg == helloMsgTimer) {
-            sendNeighborUpdateIfNeeded();
+            sendNeighborUpdateIfNeeded();https://omnetpp.org/doc/inet/api-current/neddoc/index.html?p=inet.linklayer.IWirelessNic.html
         }
     } else {
         UDPPacket *udpPacket = dynamic_cast<UDPPacket *>(msg);
@@ -102,6 +101,7 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
                 dynamic_cast<IPv4ControlInfo *>(udpPacket->getControlInfo());
         ASSERT(udpProtocolCtrlInfo != NULL);
         IPv4Address sourceAddr = udpProtocolCtrlInfo->getSrcAddr();
+
         if ((aodvControlData->getPacketType() == RREQ)
                 || (aodvControlData->getPacketType() == RREPACK)) {
             if (msg->getArrivalGate() == networkLayerIn) {
@@ -114,6 +114,7 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
         } else if (aodvControlData->getPacketType() == RREP) {
             if (msg->getArrivalGate() == networkLayerIn) {
                 AODVRREP *packet = check_and_cast<AODVRREP *>(aodvControlData);
+
                 if (packet->getOriginatorAddr().isUnspecified()) {
                     /*
                      *AODV Hello MSG are not supported
@@ -121,10 +122,11 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
                     throw cRuntimeError(
                             "Simulation only works without AODV's own  %d",
                             aodvControlData->getPacketType());
-
                 }
+
                 delete udpPacket;
             }
+
             if (msg->getArrivalGate() == AODVRoutingIn) {
                 udpPacket->encapsulate(aodvControlData);
                 send(udpPacket, "rsMgmntNLOut");
@@ -138,16 +140,16 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
                 handleRoutError(check_and_cast<AODVRERR*>(aodvControlData),
                         sourceAddr);
 
-        } else if (aodvControlData->getPacketType()
-
-        == REGISTRATIONCONFIRMATIONMSG) {
+        } else if (aodvControlData->getPacketType() == REGISTRATIONCONFIRMATIONMSG) {
             handleRegistrationConfirmation(
                     check_and_cast<RegistrationConfirmation*>(aodvControlData),
                     sourceAddr);
+
             delete udpPacket;
         } else if (aodvControlData->getPacketType()
                 == NETWORKTOPOLOGYUPDATEMSG) {
             EV_INFO << "komisch" << endl;
+
             delete aodvControlData;
             delete udpPacket;
         } else if (aodvControlData->getPacketType() == REGISTRATIONREQUESTMSG) {
@@ -156,15 +158,16 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
                       << endl;
             delete aodvControlData;
             delete udpPacket;
-
         } else if (aodvControlData->getPacketType() == ROUTERESPONSEMSG) {
             handleRouteResponse(
                     check_and_cast<RouteResponse*>(aodvControlData));
+
             delete udpPacket;
         } else if (aodvControlData->getPacketType() == NEIGHBORUPDATEMESSAGE) {
             handleHelloMessage(
                     check_and_cast<NeighborUpdateMessage*>(aodvControlData),
                     sourceAddr);
+
             delete udpPacket;
         } else {
             throw cRuntimeError(
@@ -179,7 +182,6 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
  * of the received route into the routingTable
  */
 void RoutingServerManagement::handleRouteResponse(RouteResponse* routeResonse) {
-
     if (routeResonse->getIsHostWhoRequested()) {
         simtime_t creationTime = routeResonse->getCreationTimeRREQ();
         simtime_t delay = simTime() - creationTime;
@@ -278,7 +280,6 @@ NeighborUpdateMessage *RoutingServerManagement::createNeighborUpdateMessage() {
  */ 
 void RoutingServerManagement::handleRouteRequest(AODVRREQ *rreq) {
     sendRoutingServerPacket(rreq, serverInformation.serverAddress, 3, 0);
-
 }
 
 /*
@@ -336,9 +337,10 @@ void RoutingServerManagement::handleHelloMessage(NeighborUpdateMessage *packet,
  * updates the local neighborhoodTable
  */
 void RoutingServerManagement::handleTopologyUpdateTable() {
-    topologyUpdate->printTopologyUpdateData(routingTable->getRouterId());
+    //topologyUpdate->printTopologyUpdateData(routingTable->getRouterId());
+
     topologyUpdate->updateNeighborhoodTopology(allowedHelloLoss, timeToLive,
-            helloInterval);
+               helloInterval);
 
     // Probably here we have to calculate the speed and adapt the serverUpdateInterval
     double vx = mobility->getCurrentSpeed().x;
@@ -348,31 +350,15 @@ void RoutingServerManagement::handleTopologyUpdateTable() {
 
     //std::cout << "Speed : " << speed << "\n";
 
-    // TODO find some good value to adapt the interval
-    // Make parameter study
-    simtime_t adaptedServerUpdateInterval;
-
-    switch (speedParameterStudy) {
-    case 1: adaptedServerUpdateInterval = 0.3; break;
-    case 2: adaptedServerUpdateInterval = 0.5; break;
-    case 3: adaptedServerUpdateInterval = 1; break;
-    case 4: adaptedServerUpdateInterval = 2; break;
-    case 5: adaptedServerUpdateInterval = 5; break;
-    case 6: adaptedServerUpdateInterval = 10; break;
-    case 7: adaptedServerUpdateInterval = 15; break;
-    case 8: adaptedServerUpdateInterval = 20; break;
-    case 9: adaptedServerUpdateInterval = 30; break;
-    case 10: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 5); break;
-    case 11: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 10); break;
-    case 12: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 20); break;
-    case 13: adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 5, 15); break;
-    }
+    // Parameter study showed, that the interval from 1 to 20 shows the best results for a low packet loss
+    simtime_t adaptedServerUpdateInterval = this->adaptSendingInterval(speed, 1, 20);
 
     //std::cout << "Adapted Interval : " << adaptedServerUpdateInterval << "\n";
 
+    // Send a self message after adaptedServerUpdateInterval to call this function again
     scheduleAt(
-            simTime() + adaptedServerUpdateInterval - delayTimeTopologyUpdate,
-            networkTopologyUpdate);
+       simTime() + adaptedServerUpdateInterval - delayTimeTopologyUpdate,
+       networkTopologyUpdate);
 
     if (isRegistrated && topologyUpdate->getNetworkTopologyTable().size() > 0) {
         NetworkTopologyUpdate* neighborhodUpdate =
@@ -384,7 +370,12 @@ void RoutingServerManagement::handleTopologyUpdateTable() {
 }
 
 /**
- * Get the sending interval from moving speed.
+ * \brief Get the sending interval from moving speed. The borders are set by params,
+ *          the values in between are calculated by linear function
+ *
+ * \param speed the actual speed of the device - in theese simulations normaly between 0 and 5
+ * \param minInterval how often should the message be sent at 5 m/s
+ * \param maxInterval how often should the message be sent at 0 m/s
  */
 double RoutingServerManagement::adaptSendingInterval(double speed, double minInterval, double maxInterval) {
     // If we are faster than 5 m/s don't send more often
@@ -400,7 +391,7 @@ double RoutingServerManagement::adaptSendingInterval(double speed, double minInt
  */
 void RoutingServerManagement::handleRoutError(AODVRERR *rerr,
         IPv4Address &srcAddress) {
-    for (int i = 0; i < rerr->getUnreachableNodesArraySize(); i++) {
+    for (unsigned int i = 0; i < rerr->getUnreachableNodesArraySize(); i++) {
         IPv4Route *inactiveRoute = routingTable->findBestMatchingRoute(
                 rerr->getUnreachableNodes(i).addr);
         AODVRouteData *routeData =
@@ -451,10 +442,10 @@ RoutingServerManagement::createNetworkTopologyUpdate() {
  * deleted depending on defined criteria
  */
 void RoutingServerManagement::maintainRouteCache() {
-
     std::vector<std::pair<IPv4Address, SimTime> > orderedVector;
+
     while (routingTable->getNumRoutes() > 0
-            && routingTable->getNumRoutes() < maxRoutesInCache) {
+            && (unsigned) routingTable->getNumRoutes() < maxRoutesInCache) {
 
         for (int i = routingTable->getNumRoutes() - 1; i >= 0; i--) {
             IPv4Route *route = routingTable->getRoute(i);
@@ -463,8 +454,10 @@ void RoutingServerManagement::maintainRouteCache() {
                 if (route->getSource() != this) {
                     if (!routeData->isActive()) {
                         routingTable->deleteRoute(route);
+
                         return;
                     }
+
                     orderedVector.push_back(
                             std::make_pair(route->getDestination(),
                                     routeData->getLifeTime()));
@@ -593,6 +586,8 @@ void RoutingServerManagement::sendRoutingServerPacket(AODVControlPacket *packet,
 /**
  * The method is invoked when a packet has to be sent to any nearby
  * UserEquipment
+ *
+ * Seems that is is used for neighbour update (hello) message
  */
 void RoutingServerManagement::sendAODVPacket(AODVControlPacket *packet,
         const IPv4Address& destAddr, unsigned int timeToLive, double delay) {
@@ -613,10 +608,12 @@ void RoutingServerManagement::sendAODVPacket(AODVControlPacket *packet,
     udpPacket->setDestinationPort(defaultUDPPort);
     udpPacket->setControlInfo(
             dynamic_cast<cObject *>(networkProtocolControlInfo));
+
     if (packet->getPacketType() == NEIGHBORUPDATEMESSAGE) {
         if (destAddr.isLimitedBroadcastAddress())
             lastBroadcastTime = simTime();
     }
+
     if (delay == 0)
         send(udpPacket, "rsMgmntNLOut");
     else
@@ -654,8 +651,8 @@ void RoutingServerManagement::sendLocalPacket(AODVControlPacket *packet,
  */ 
 bool RoutingServerManagement::handleOperationStage(
         LifecycleOperation *operation, int stage, IDoneCallback *doneCallback) {
-    Enter_Method_Silent
-    ();
+    Enter_Method_Silent();
+
     if (dynamic_cast<NodeStartOperation *>(operation)) {
         if (stage == NodeStartOperation::STAGE_APPLICATION_LAYER) {
             isOperational = true;
@@ -694,11 +691,13 @@ void RoutingServerManagement::finish() {
     recordScalar("Number Received RouteResponses", numberOfRREP);
     recordScalar("Number Sent RREQs", numberOfRREQSent);
 }
+
 void RoutingServerManagement::clearState() {
     cancelEvent(checkServerRegistration);
     cancelEvent(networkTopologyUpdate);
     cancelEvent(helloMsgTimer);
 }
+
 RoutingServerManagement::RoutingServerManagement() {
     checkServerRegistration = NULL;
     networkTopologyUpdate = NULL;
@@ -709,6 +708,7 @@ RoutingServerManagement::RoutingServerManagement() {
     topologyUpdate = NULL;
     mobility = NULL;
 }
+
 RoutingServerManagement::~RoutingServerManagement() {
     clearState();
     delete ownCharacteristic;

@@ -29,8 +29,6 @@ simple RoutingServerManagement //extends  AODVRouting
 		// defines the update interval between D2DRS and UserEquipment
         double serverUpdateInterval @unit("s") = default(0.5s);
         
-        int speedParameterStudy = default(1);
-        
 		// NOT IMPLEMENTED YET. The routingTable should contain only a specific number of routes.
         int maxRouteCacheSize = default(10);
 

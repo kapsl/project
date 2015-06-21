@@ -14,9 +14,11 @@
 // 
 
 #include <NeighborTopologyData.h>
+
 void NeighborTopologyData::updateLinkedNeighbor(IPv4Address originatorAddr,
         MACAddress macAddress, Coord position, simtime_t liveTime) {
     HostCharacteristic *linkedNeighbor = getNeighbor(originatorAddr);
+
     if (!linkedNeighbor) {
         linkedNeighbor = new HostCharacteristic;
         linkedNeighbor->setPosition(position);
@@ -28,11 +30,12 @@ void NeighborTopologyData::updateLinkedNeighbor(IPv4Address originatorAddr,
         linkedNeighbor->setPosition(position);
         linkedNeighbor->setLifeTime(liveTime);
     }
-
 }
+
 void NeighborTopologyData::deleteNeibor(HostCharacteristic *neighbor) {
     bool hasEntry = false;
     HostCharacteristic *tmp = 0;
+
     for (Neighbors::iterator it = neighbors.begin(); it != neighbors.end();) {
         *tmp = *it;
 
@@ -41,43 +44,52 @@ void NeighborTopologyData::deleteNeibor(HostCharacteristic *neighbor) {
             neighbors.erase(it);
             hasEntry = true;
         }
+
         it++;
     }
+
     if (!hasEntry) {
         delete tmp;
     }
 }
 
-void NeighborTopologyData::updateNeighborhoodTopology(int allowedHelloLoss,
+bool NeighborTopologyData::updateNeighborhoodTopology(int allowedHelloLoss,
         int currentSimTime, double helloIntervall) {
+    bool neighbourLost = false;
 
     for (Neighbors::iterator it = neighbors.begin(); it != neighbors.end();) {
-
         if ((it->getLifeTime() + (helloIntervall * allowedHelloLoss)).operator <(
                 simTime())) {
+            // I think here we handle, that a neighbour is not connected anymore
             it = neighbors.erase(it);
+
+            neighbourLost = true;
         } else {
             it++;
         }
     }
 
+    return neighbourLost;
 }
 
 HostCharacteristic *NeighborTopologyData::getNeighbor(IPv4Address& address) {
     for (Neighbors::iterator it = neighbors.begin(); it != neighbors.end();
             it++) {
-
         if (it->getOriginatorAddress().operator ==(address) == true) {
             return &(*it);
         }
     }
+
     return NULL;
 }
+
 void NeighborTopologyData::printTopologyUpdateData(IPv4Address hostAddress) {
     for (Neighbors::iterator it = neighbors.begin(); it != neighbors.end();) {
+        // I think this is not used at the moment
         it++;
     }
 }
+
 NeighborTopologyData::Neighbors NeighborTopologyData::getNetworkTopologyTable() {
     return neighbors;
 }
@@ -87,13 +99,15 @@ bool NeighborTopologyData::AddrAreEqual(const IPv4Address& addr1,
     if (addr1.getInt() == addr2.getInt()) {
         return true;
     }
+
     return false;
 }
+
 void NeighborTopologyData::removeNeighborTopologyData() {
     neighbors.erase(neighbors.begin(), neighbors.end());
 }
-NeighborTopologyData::NeighborTopologyData() {
 
+NeighborTopologyData::NeighborTopologyData() {
 }
 
 NeighborTopologyData::~NeighborTopologyData() {

@@ -67,14 +67,17 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
             bool hasKnownDest = false;
             InterfaceEntry *ie = interfaceTable->getInterfaceByName("wlan0");
             Ieee802Ctrl *controlInfo = new Ieee802Ctrl();
+
             for (std::set<Route*>::iterator it = routeQueue.begin();
                     it != routeQueue.end(); it++) {
                 ARPPacket * arp = dynamic_cast<ARPPacket *>(msg);
+
                 if ((*it)->begin()->first == arp->getDestIPAddress()) {
                     if (arp->getOpcode() == ARP_RARP_REQUEST
                             || arp->getOpcode() == ARP_REQUEST) {
                         hasKnownDest = true;
                         delete arp->removeControlInfo();
+
                         arp->setDestIPAddress(routingTable->getRouterId());
                         arp->setDestMACAddress(ie->getMacAddress());
                         controlInfo->setDest(ie->getMacAddress());
@@ -85,7 +88,9 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
                         controlInfo->setEtherType(ETHERTYPE_ARP);
                         controlInfo->setInterfaceId(ie->getInterfaceId());
                         arp->setControlInfo(controlInfo);
+
                         send(arp, "upperLayerOut");
+
                         break;
                     }
                 }
@@ -94,7 +99,6 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
             if (!hasKnownDest)
                 send(msg, "mgmntOut");
         } else {
-
             datagram = dynamic_cast<IPv4Datagram*>(msg);
             Ieee802Ctrl *ieeeCtrInfo =
                     dynamic_cast<Ieee802Ctrl *>(datagram->removeControlInfo());
@@ -166,6 +170,7 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
             UDPPacket* udpPacket =
                     dynamic_cast<UDPPacket*>(datagram->decapsulate());
             cPacket *CPacket = dynamic_cast<cPacket*>(udpPacket->decapsulate());
+
             if (CPacket) {
                 udpPacket->encapsulate(CPacket);
                 AODVControlPacket* aodvControlPacket =
@@ -173,6 +178,8 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
 
                 if (aodvControlPacket) {
                     if (aodvControlPacket->getPacketType() == PAYLOADMSG) {
+
+
 
                         PayLoadData *payloadData = check_and_cast<PayLoadData*>(
                                 aodvControlPacket);
@@ -185,11 +192,11 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
                             udpIpv4Datagram = datagram;
                             udpIpv4Datagram->encapsulate(packet);
                             udpIpv4Datagram->setControlInfo(ieeee802CtrlInfo);
+
                             if ((payloadData->getRoute().rbegin()->first)
                                     == routingTable->getRouterId()) {
                                 send(udpIpv4Datagram, "upperLayerOut");
                             } else {
-
                                 RouteResponse *routeResponse = new RouteResponse;
                                 routeResponse->setRoute(
                                         (payloadData->getRoute()));
@@ -197,6 +204,7 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
                                 routeResponse->setName(
                                         "LOCAL-ROUTERESPONSE-MSG");
                                 routeResponse->setIsHostWhoRequested(false);
+
                                 UDPPacket *routeResponseUDPPacket =
                                         new UDPPacket(routeResponse->getName());
                                 routeResponseUDPPacket->encapsulate(
@@ -205,6 +213,7 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
                                         defaultUDPPort);
                                 routeResponseUDPPacket->setDestinationPort(
                                         defaultUDPPort);
+
                                 IPv4Datagram * ipv4Datatagram =
                                         new IPv4Datagram(
                                                 "LOCAL-ROUTERESPONSE-MSG");
@@ -218,12 +227,14 @@ void WLanPacketCapsulation::handleMessage(cMessage *msg) {
 
                                 ipv4Datatagram->encapsulate(
                                         routeResponseUDPPacket);
+
                                 Ieee802Ctrl *controlInfo = new Ieee802Ctrl();
                                 controlInfo->setDest(
                                         arpCache->getMACAddressFor(
                                                 routingTable->getRouterId()));
                                 controlInfo->setEtherType(ETHERTYPE_IPv4);
                                 ipv4Datatagram->setControlInfo(controlInfo);
+
                                 hasPayload = true;
                                 send(ipv4Datatagram, "upperLayerOut");
                             }

@@ -40,7 +40,7 @@ public:
 public:
     virtual void updateLinkedNeighbor(IPv4Address originatorAddr, MACAddress macAddress,
             Coord position,  simtime_t liveTime);
-    virtual void updateNeighborhoodTopology(int regRetries, int currentSimTime,
+    virtual bool updateNeighborhoodTopology(int regRetries, int currentSimTime,
             double helloIntervall);
     virtual Neighbors getNetworkTopologyTable();
     virtual bool AddrAreEqual(const IPv4Address& addr1,
@@ -50,7 +50,6 @@ public:
 private:
     virtual void deleteNeibor(HostCharacteristic *neighbor);
     HostCharacteristic *getNeighbor(IPv4Address& address);
-
 };
 
 #endif /* NETWORKTOPOLOGYUPDATE_H_ */
