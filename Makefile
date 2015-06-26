@@ -113,6 +113,7 @@ OBJS = \
     $O/src/hosts/HostCharacteristic.o \
     $O/src/hosts/NeighborTopologyData.o \
     $O/src/linklayer/WLanPacketCapsulation.o \
+    $O/src/linklayer/Ieee80211Mac.o \
     $O/src/networklayer/D2DRS/GraphUtil.o \
     $O/src/networklayer/D2DRS/LinkedNeighbor.o \
     $O/src/networklayer/D2DRS/NodeCharacteristic.o \
@@ -273,6 +274,30 @@ $O/src/hosts/NeighborTopologyData.o: src/hosts/NeighborTopologyData.cc \
 	$(INET_PROJ)/src/networklayer/ipv4/RoutingTable.h \
 	$(INET_PROJ)/src/networklayer/routing/aodv/AODVControlPackets_m.h \
 	$(INET_PROJ)/src/util/FWMath.h
+$O/src/linklayer/Ieee80211Mac.o: src/linklayer/Ieee80211Mac.cc \
+	$(INET_PROJ)/src/base/Compat.h \
+	$(INET_PROJ)/src/base/Coord.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/base/NotifierConsts.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/contract/PhyControlInfo_m.h \
+	$(INET_PROJ)/src/linklayer/contract/RadioState.h \
+	$(INET_PROJ)/src/linklayer/ieee80211/mac/IQoSClassifier.h \
+	$(INET_PROJ)/src/linklayer/ieee80211/mac/Ieee80211DataRate.h \
+	$(INET_PROJ)/src/linklayer/ieee80211/mac/Ieee80211eClassifier.h \
+	$(INET_PROJ)/src/linklayer/radio/AirFrame_m.h \
+	$(INET_PROJ)/src/linklayer/radio/ModulationType.h \
+	$(INET_PROJ)/src/linklayer/radio/Radio80211aControlInfo_m.h \
+	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv4Address.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	$(INET_PROJ)/src/util/FWMath.h \
+	$(INET_PROJ)/src/util/opp_utils.h
 $O/src/linklayer/WLanPacketCapsulation.o: src/linklayer/WLanPacketCapsulation.cc \
 	src/hosts/HostCharacteristic.h \
 	src/linklayer/WLanPacketCapsulation.h \

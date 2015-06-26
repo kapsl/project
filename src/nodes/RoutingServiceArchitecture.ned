@@ -109,7 +109,7 @@ module RoutingServiceArchitecture
         }
         umtsIface: <default("Ieee80211Nic")> like IWirelessNic {
             parameters:
-                @display("p=216,406,row,60;q=queue");
+                @display("p=279,406,row,60;q=queue");
         }
         eth[sizeof(ethg)]: <default("EthernetInterface")> like IWiredNic {
             parameters:
@@ -121,7 +121,7 @@ module RoutingServiceArchitecture
         }
         ext[numExtInterfaces]: <default("ExtInterface")> like IExternalNic {
             parameters:
-                @display("p=149,406,row,10;q=txQueue;i=block/ifcard");
+                @display("p=184,413,row,10;q=txQueue;i=block/ifcard");
         }
 
     connections allowunconnected:
@@ -129,11 +129,11 @@ module RoutingServiceArchitecture
         networkLayer.ifOut++ --> lo0.upperLayerIn;
         lo0.upperLayerOut --> networkLayer.ifIn++;
 
-     
-            radioIn[0] --> { @display("m=s"); } --> umtsIface.radioIn;
-            umtsIface.upperLayerOut --> networkLayer.ifIn++;
-            umtsIface.upperLayerIn <-- networkLayer.ifOut++;
-      
+
+        radioIn[0] --> { @display("m=s"); } --> umtsIface.radioIn;
+        umtsIface.upperLayerOut --> networkLayer.ifIn++;
+        umtsIface.upperLayerIn <-- networkLayer.ifOut++;
+
 
         for i=0..sizeof(ethg)-1 {
             ethg[i] <--> { @display("m=s"); } <--> eth[i].phys;

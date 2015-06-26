@@ -75,7 +75,6 @@ protected:
     simtime_t serverRegRetryInterval;
     simtime_t myRouteTimeout;
     simtime_t serverUpdateInteval;
-    int speedParameterStudy;
     bool isOperational;
 
     cPar *periodicJitter;

@@ -48,8 +48,6 @@ void RoutingServerManagement::initialize(int stage) {
         myRouteTimeout = par("myRouteTimeout");
         rebootTime = SIMTIME_ZERO;
 
-        speedParameterStudy = par("speedParameterStudy");
-
         /*
          * Evaluation
          */
@@ -91,7 +89,7 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
         } else if (msg == networkTopologyUpdate) {
             handleTopologyUpdateTable();
         } else if (msg == helloMsgTimer) {
-            sendNeighborUpdateIfNeeded();https://omnetpp.org/doc/inet/api-current/neddoc/index.html?p=inet.linklayer.IWirelessNic.html
+            sendNeighborUpdateIfNeeded();
         }
     } else {
         UDPPacket *udpPacket = dynamic_cast<UDPPacket *>(msg);
@@ -271,6 +269,7 @@ NeighborUpdateMessage *RoutingServerManagement::createNeighborUpdateMessage() {
     neighborUpdate->setPosition(mobility->getCurrentPosition());
     neighborUpdate->setMacAddress(
             interfaceTable->getInterfaceByName("wlan0")->getMacAddress());
+    //interfaceTable->getInterfaceByName("wlan0")->getInterfaceModule()->
 
     return neighborUpdate;
 }
