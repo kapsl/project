@@ -28,6 +28,8 @@
 #include "Ieee80211DataRate.h"
 #include "opp_utils.h"
 
+#include <iostream>
+
 // TODO: 9.3.2.1, If there are buffered multicast or broadcast frames, the PC shall transmit these prior to any unicast frames.
 // TODO: control frames must send before
 
@@ -109,6 +111,7 @@ void Ieee80211Mac::initialize(int stage)
     if (stage == 0)
     {
         EV << "Initializing stage 0\n";
+
         int numQueues = 1;
         if (par("EDCA"))
         {
@@ -392,7 +395,8 @@ void Ieee80211Mac::initialize(int stage)
         movingAverageNumGivenUp = 0;
         calculateCongestion = new cMessage("calculateCongestion");
 
-        scheduleAt(simTime() + 30.0, calculateCongestion);
+        // TODO
+        scheduleAt(simTime() + 1.0, calculateCongestion);
     }
 }
 
@@ -564,18 +568,36 @@ void Ieee80211Mac::handleSelfMsg(cMessage *msg)
     EV << "received self message: " << msg << "(kind: " << msg->getKind() << ")" << endl;
 
     // By Manuel Kaspar
+    // TODO UMTS Interface also uses this --> shouldn't
     // Every 30 seconds calculate the now given up packages
     if (msg == calculateCongestion) {
-        // TODO find out, what is the parameter exactly categories?
-        // TODO how can we upload this infomation to the Routing Manager and
-        // send the help message
+        cModule* parentmod = getParentModule();
+        cModule* p1 = parentmod->getParentModule();
+        cModule* rsmmod = p1->getSubmodule("rsmgmnt");
+
+        RoutingServerManagement* rsm = dynamic_cast<RoutingServerManagement*>(rsmmod);
+
+        // Not sure if this is ok
+        if (!rsm) {
+            return;
+        }
+
+        // TODO
+        rsm->congestionDetected();
+
         // TODO make a param out of the 30 seconds time (also see above)
+        // Seems thate we have only one category so numGivenUp(0) should be ok
         int givenUpSinceLast = numGivenUp(0) - movingAverageNumGivenUp;
         movingAverageNumGivenUp = numGivenUp(0);
 
-        EV << "Average Given Up: " << givenUpSinceLast;
+        // TODO
+        if (givenUpSinceLast > 1) {
 
-        scheduleAt(simTime() + 30.0, calculateCongestion);
+        }
+
+        EV << "\nAverage Given Up: " << givenUpSinceLast;
+
+        scheduleAt(simTime() + 1.0, calculateCongestion);
     }
 
     if (msg == endReserve)

@@ -24,6 +24,7 @@ NodeCharacteristic::NodeCharacteristic() {
 NodeCharacteristic::NodeCharacteristic(HostCharacteristic hostCharacteristic) {
     this->position = hostCharacteristic.getPosition();
     this->macAddress = hostCharacteristic.getMacAddress();
+    this->congestionState = hostCharacteristic.getCongestionState();
 }
 
 NodeCharacteristic::~NodeCharacteristic() {

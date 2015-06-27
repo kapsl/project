@@ -24,6 +24,10 @@ class NodeCharacteristic {
 private:
     Coord position;
     MACAddress macAddress;
+    /**
+     * 0 if everything is ok, 1 if node is congested
+     */
+    bool congestionState;
 
 public:
     NodeCharacteristic();
@@ -45,6 +49,14 @@ public:
 
     void setMacAddress(const MACAddress& macAddress) {
         this->macAddress = macAddress;
+    }
+
+    const bool getCongestionState() const {
+        return congestionState;
+    }
+
+    void setCongestionState(const bool congestionState) {
+        this->congestionState = congestionState;
     }
 };
 

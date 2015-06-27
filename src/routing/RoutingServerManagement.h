@@ -105,6 +105,8 @@ protected:
     int numberOfRREQSent;
     cOutVector delayOfRREQ;
 
+    bool congestionState;
+
 private:
     virtual void finish();
 
@@ -156,7 +158,7 @@ private:
 public:
     RoutingServerManagement();
     virtual ~RoutingServerManagement();
-
+    virtual void congestionDetected();
 };
 
 #endif

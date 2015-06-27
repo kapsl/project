@@ -35,6 +35,8 @@
 #include "FSMA.h"
 #include "IQoSClassifier.h"
 
+#include "RoutingServerManagement.h"
+
 /**
  * IEEE 802.11g with e Media Access Control Layer.
  *
@@ -195,7 +197,7 @@ class INET_API Ieee80211Mac : public WirelessMacBase
      * @name Ieee80211Mac state variables
      * Various state information checked and modified according to the state machine.
      */
-    //@{
+    //@{#include "RoutingServerControlData_m.h"
     // don't forget to keep synchronized the C++ enum and the runtime enum definition
     /** the 80211 MAC state machine */
     enum State

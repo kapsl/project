@@ -55,6 +55,8 @@ void RoutingServerManagement::initialize(int stage) {
         numberOfRREP = 0;
         numberOfRREQSent = 0;
 
+        congestionState = 0;
+
     } else if (stage == 4) {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule(
                 "status"));
@@ -420,6 +422,11 @@ RoutingServerManagement::createNetworkTopologyUpdate() {
     NetworkTopologyUpdate *neighborhodUpdate = new NetworkTopologyUpdate(
             "TOPOLOGY-UPDATE-MSG");
 
+    // TODO
+    /*cModule* parentmod = getParentModule();
+    cModule* mobilitymod = parentmod->getParentModule()->getSubmodule("mobility");
+    MassMobility* massMobilityMod = dynamic_cast<MassMobility*>(mobilitymod);*/
+
     neighborhodUpdate->setPacketType(NETWORKTOPOLOGYUPDATEMSG);
     neighborhodUpdate->setHopCount(0);
     neighborhodUpdate->setLifeTime(simTime());
@@ -430,9 +437,25 @@ RoutingServerManagement::createNetworkTopologyUpdate() {
             interfaceTable->getInterfaceByName("wlan0")->getMacAddress());
     ownCharacteristic->setOriginatorAddress(routingTable->getRouterId());
     ownCharacteristic->setPosition(mobility->getCurrentPosition());
+    ownCharacteristic->setCongestionState(congestionState);
     neighborhodUpdate->setHostCharacteristic(*ownCharacteristic);
 
     return neighborhodUpdate;
+}
+
+void RoutingServerManagement::congestionDetected() {
+    EV << "Congestion detected\n";
+
+    Enter_Method_Silent();
+
+    // TODO
+    congestionState = 1;
+
+    // Send update about neighbours and congestion to basis station
+    cancelEvent(networkTopologyUpdate);
+    scheduleAt(
+           simTime() + 0.5,
+           networkTopologyUpdate);
 }
 
 /**
@@ -561,6 +584,7 @@ void RoutingServerManagement::sendRoutingServerPacket(AODVControlPacket *packet,
     if (packet->getPacketType() == RREQ) {
         numberOfRREQSent = numberOfRREQSent + 1;
     }
+
     InterfaceEntry *ifEntry = interfaceTable->getInterfaceByName("umtsIface");
     networkProtocolControlInfo->setTimeToLive(timeToLive);
     networkProtocolControlInfo->setProtocol(IP_PROT_MANET);
