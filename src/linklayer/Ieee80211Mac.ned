@@ -53,6 +53,9 @@ package networkstructures.src.linklayer;
 // listen interval which is related to power management, capability information
 // which is related to PCF and other non-modelled features).
 //
+
+// This is an extension of the normal mac layer by making it possible to detect congestions
+// By Manuel Kaspar
 simple Ieee80211Mac
 {
     parameters:
@@ -113,6 +116,9 @@ simple Ieee80211Mac
         // statistics
         double throughputTimePeriod @unit("s") = default(0); // period of time used by throughput measurement statistic
         bool multiMac = default(false); // allows multiples mac interfaces in the same link layer
+        
+        double timeCongestionStateCalc = default(30.0); // How often should the congestion state be calculated
+        
         @display("i=block/layer");
 
         @signal[packetSentToLower](type=Ieee80211Frame);

@@ -422,11 +422,6 @@ RoutingServerManagement::createNetworkTopologyUpdate() {
     NetworkTopologyUpdate *neighborhodUpdate = new NetworkTopologyUpdate(
             "TOPOLOGY-UPDATE-MSG");
 
-    // TODO
-    /*cModule* parentmod = getParentModule();
-    cModule* mobilitymod = parentmod->getParentModule()->getSubmodule("mobility");
-    MassMobility* massMobilityMod = dynamic_cast<MassMobility*>(mobilitymod);*/
-
     neighborhodUpdate->setPacketType(NETWORKTOPOLOGYUPDATEMSG);
     neighborhodUpdate->setHopCount(0);
     neighborhodUpdate->setLifeTime(simTime());
@@ -443,14 +438,16 @@ RoutingServerManagement::createNetworkTopologyUpdate() {
     return neighborhodUpdate;
 }
 
-void RoutingServerManagement::congestionDetected() {
-    EV << "Congestion detected\n";
+void RoutingServerManagement::congestionDetected(unsigned int givenUpSinceLast) {
+    //EV << "Congestion detected\n";
 
     Enter_Method_Silent();
 
-    // TODO
-    congestionState = 1;
+    congestionState = givenUpSinceLast;
 
+    EV << "\nRoutingServer: " << congestionState;
+
+    // TODO maybe we should send extra, when congestion is very high?
     // Send update about neighbours and congestion to basis station
     cancelEvent(networkTopologyUpdate);
     scheduleAt(

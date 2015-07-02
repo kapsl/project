@@ -165,10 +165,9 @@ void D2DRA::handleTopologyUpdate(NetworkTopologyUpdate *topologyUpdate,
             topologyUpdate->getHostCharacteristic());
 
     // Detect congestion
-    if (nodeCharacteristic->getCongestionState() == 1) {
+    /*if (nodeCharacteristic->getCongestionState() == 1) {
         EV << "We have a congestion!!!";
-    }
-
+    }*/
 
     GraphUtil::insertElement(
             topologyUpdate->getHostCharacteristic().getOriginatorAddress(),

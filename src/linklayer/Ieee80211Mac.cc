@@ -17,7 +17,7 @@
 // along with this program; if not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "./Ieee80211Mac.h"
+#include "./MyIeee80211Mac.h"
 #include "RadioState.h"
 #include "IInterfaceTable.h"
 #include "InterfaceTableAccess.h"
@@ -390,13 +390,12 @@ void Ieee80211Mac::initialize(int stage)
         radioModule = gate("lowerLayerOut")->getNextGate()->getOwnerModule()->getId();
 
         // By Manuel Kaspar
-        // Initialize recording of acutal congestion
+        // Initialize recording of actual congestion
         calculateCongestion = NULL;
         movingAverageNumGivenUp = 0;
         calculateCongestion = new cMessage("calculateCongestion");
 
-        // TODO
-        scheduleAt(simTime() + 1.0, calculateCongestion);
+        scheduleAt(simTime() + 10.0, calculateCongestion);
     }
 }
 
@@ -473,7 +472,7 @@ void Ieee80211Mac::configureAutoBitRate()
 
 void Ieee80211Mac::finish()
 {
-    recordScalar("number of received packets", numReceived);
+    recordScalar("number of receiveunsigned d packets", numReceived);
     recordScalar("number of collisions", numCollision);
     recordScalar("number of internal collisions", numInternalCollision);
     for (int i=0; i<numCategories(); i++)
@@ -582,22 +581,18 @@ void Ieee80211Mac::handleSelfMsg(cMessage *msg)
             return;
         }
 
-        // TODO
-        rsm->congestionDetected();
-
-        // TODO make a param out of the 30 seconds time (also see above)
         // Seems thate we have only one category so numGivenUp(0) should be ok
         int givenUpSinceLast = numGivenUp(0) - movingAverageNumGivenUp;
         movingAverageNumGivenUp = numGivenUp(0);
 
-        // TODO
-        if (givenUpSinceLast > 1) {
+        if (givenUpSinceLast < 0)
+            givenUpSinceLast = 0;
 
-        }
+        rsm->congestionDetected(givenUpSinceLast);
 
         EV << "\nAverage Given Up: " << givenUpSinceLast;
 
-        scheduleAt(simTime() + 1.0, calculateCongestion);
+        scheduleAt(simTime() + 30.0, calculateCongestion);
     }
 
     if (msg == endReserve)
@@ -1642,8 +1637,7 @@ void Ieee80211Mac::scheduleAIFSPeriod()
         {
 
             if (lastReceiveFailed)
-            {
-                EV << "reception of last frame failed, scheduling EIFS-DIFS+AIFS period (" << i << ")\n";
+            {                EV << "reception of last frame failed, scheduling EIFS-DIFS+AIFS period (" << i << ")\n";
                 scheduleAt(simTime() + getEIFS() - getDIFS() + getAIFS(i), endAIFS(i));
             }
             else

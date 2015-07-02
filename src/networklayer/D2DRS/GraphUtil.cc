@@ -15,6 +15,7 @@
 
 #include <GraphUtil.h>
 std::map<IPv4Address, NodeCharacteristic> GraphUtil::graphInformations;
+
 GraphUtil::GraphUtil() {
 }
 

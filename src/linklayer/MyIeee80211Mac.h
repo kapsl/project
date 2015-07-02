@@ -141,6 +141,7 @@ class INET_API Ieee80211Mac : public WirelessMacBase
     cMessage * throughputTimer;
     double  throughputLastPeriod;
 
+    //double timeCongestionStateCalc;
 
     /** Maximum number of frames in the queue; should be set in the omnetpp.ini */
     int maxQueueSize;

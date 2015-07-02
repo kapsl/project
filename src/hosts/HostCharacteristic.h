@@ -35,9 +35,9 @@ private:
     MACAddress macAddress;
 
     /**
-     * 0 if everything is ok, 1 if node is congested
+     * Is nr of givenup packages -- means if high --> congestion is high
      */
-    bool congestionState;
+    int congestionState;
 
 public:
     HostCharacteristic();
@@ -77,11 +77,11 @@ public:
         this->macAddress = macAddress;
     }
 
-    const bool getCongestionState() const {
+    const int getCongestionState() const {
         return congestionState;
     }
 
-    void setCongestionState(const bool congestionState) {
+    void setCongestionState(const int congestionState) {
         this->congestionState = congestionState;
     }
 };

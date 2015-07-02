@@ -92,6 +92,7 @@ protected:
 
     ServerInformation serverInformation;
     HostCharacteristic *ownCharacteristic;
+
     /*
      * Simulation Values
      */
@@ -105,7 +106,10 @@ protected:
     int numberOfRREQSent;
     cOutVector delayOfRREQ;
 
-    bool congestionState;
+    /**
+     * Nr of given up packages in mac layer
+     */
+    int congestionState;
 
 private:
     virtual void finish();
@@ -158,7 +162,7 @@ private:
 public:
     RoutingServerManagement();
     virtual ~RoutingServerManagement();
-    virtual void congestionDetected();
+    virtual void congestionDetected(unsigned int givenUpSinceLast);
 };
 
 #endif

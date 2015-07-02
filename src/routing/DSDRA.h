@@ -36,7 +36,7 @@
 #include "GraphUtil.h"
 
 /**
- * I think, this class handles the basis station
+ * This class handles the basis station
  */
 class D2DRA: public cSimpleModule {
 public:
@@ -65,7 +65,6 @@ protected:
     /*
      * Simulaton Values
      */
-
     cOutVector delayofReceivedREEQ;
     int rreqIterator;
 private:

@@ -35,6 +35,7 @@
 #include "IPv4Address.h"
 #include "GraphUtil.h"
 #include "Coord.h"
+
 // TEMPLATE DIRECTED GRAPH (with in-out adjacency list)
 //
 //
@@ -87,7 +88,6 @@ public:
     typedef T vertex;
     typedef T value_type;
     typedef std::pair<vertex, vertex> edge;
-    //typedef struct{ vertex from; vertex to;} edge;
     typedef std::set<vertex> vertex_set;
     typedef std::set<edge> edge_set;
     typedef std::pair<vertex_set, vertex_set> in_out_edge_sets;
@@ -111,31 +111,14 @@ public:
     typedef typename vertex_set::const_iterator vertex_neighbor_const_iterator;
 
 private:
-
     adj_graph G_;
     unsigned int num_edges_;
     bool undirected_;
     PrecursorMap paths;
     std::list<vertex> shortestPath;
     static const int ACCEPTEDTRANSMITTIONRANGE = 195;
+
 public:
-
-    //(
-    //
-
-    /**
-     tGraph::iterator refers to pair<const vertex, in_out_edge_sets> .
-
-     <pre>
-     tGraph::const_iterator p = G.begin();
-
-     tGraph::vertex a = node(p);
-     tGraph::vertex_set  &in_edges = in_neighbors(p);
-     tGraph::vertex_set  &out_edges = out_neighbors(p);
-
-     </pre>
-     */
-
     typedef typename adj_graph::iterator iterator;
     typedef typename adj_graph::const_iterator const_iterator;
 
@@ -198,6 +181,7 @@ public:
     tNetworkTopologyGraph(const tNetworkTopologyGraph &B) :
             G_(B.G_), num_edges_(B.num_edges_), undirected_(B.undirected_) {
     }
+
     tNetworkTopologyGraph(const edge_set &E) {
         for (typename edge_set::const_iterator p = E.begin(); p != E.end(); p++)
             insert_edge(*p);
@@ -291,7 +275,6 @@ public:
 
         if (is_undirected()) {
             vertex smallest = (a < b ? a : b);
-            //vertex biggest =  ( a < b ? b : a);
 
             if (smallest == b) {
                 std::swap(a, b);
@@ -901,16 +884,24 @@ public:
                         Coord coordParent =
                                 GraphUtil::getElement(u)->second.getPosition();
 
-                        // Weight is somehow adjusted to the coord position
+                        // Weight is adjusted to the distances between the nodes
+                        // TODO but this is not the euklidian distance?
                         double weight = sqrt(
                                 pow((coordParent.x - coordChild.x), 2)
                                         + pow((coordParent.y - coordChild.y),
                                                 2));
 
                         if (weight >= ACCEPTEDTRANSMITTIONRANGE) {
+                            // What happens here? num_edges is total nr. of edges?!
+                            // Make weight so high, that this never happens?
                             weight = weight * num_edges();
-                            //            std::cout << edgeWeight << endl;
                         }
+
+                        // Handle congestion
+                        int congestionState = GraphUtil::getElement(*it)->second.getCongestionState();
+                        weight += congestionState;
+                        EV << "\nCongestion state: " << congestionState << " Weight: " << weight;
+                        // end congestion
 
                         double newDistance = weight + dist;
 
