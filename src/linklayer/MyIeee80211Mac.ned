@@ -56,7 +56,7 @@ package networkstructures.src.linklayer;
 
 // This is an extension of the normal mac layer by making it possible to detect congestions
 // By Manuel Kaspar
-simple Ieee80211Mac
+simple MyIeee80211Mac
 {
     parameters:
         string address = default("auto"); // MAC address as hex string (12 hex digits), or
@@ -117,7 +117,7 @@ simple Ieee80211Mac
         double throughputTimePeriod @unit("s") = default(0); // period of time used by throughput measurement statistic
         bool multiMac = default(false); // allows multiples mac interfaces in the same link layer
         
-        double timeCongestionStateCalc = default(30.0); // How often should the congestion state be calculated
+        double timeCongestionStateCalc = default(15.0); // How often should the congestion state be calculated
         
         @display("i=block/layer");
 

@@ -60,7 +60,7 @@
  * @ingroup macLayer
  */
 //class INET_API Ieee80211Mac : public WirelessMacBase
-class Ieee80211Mac : public WirelessMacBase
+class MyIeee80211Mac : public WirelessMacBase
 {
     typedef std::list<Ieee80211DataOrMgmtFrame*> Ieee80211DataOrMgmtFrameList;
     /**
@@ -193,6 +193,14 @@ class Ieee80211Mac : public WirelessMacBase
     // For calculating moving average of numGiven up to get congestion
     int movingAverageNumGivenUp;
     cMessage * calculateCongestion;
+
+    // Get default congestionCalcTime from parameters
+    double timeCongestionStateCalc;
+
+    /**
+     * In what time differences will we calculate the congestion
+     */
+    double congestionCalculationTime;
 
   public:
     /**
@@ -436,8 +444,8 @@ class Ieee80211Mac : public WirelessMacBase
      * @name Construction functions
      */
     //@{
-    Ieee80211Mac();
-    virtual ~Ieee80211Mac();
+    MyIeee80211Mac();
+    virtual ~MyIeee80211Mac();
     //@}
 
   protected:

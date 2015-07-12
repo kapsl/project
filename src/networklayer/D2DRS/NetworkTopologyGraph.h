@@ -905,7 +905,7 @@ public:
                         // Handle congestion
                         int congestionState = GraphUtil::getElement(*it)->second.getCongestionState();
                         weight += getScaledCongestion(congestionState);
-                        EV << "\nCongestion state: " << getScaledCongestion(congestionState) << " Weight: " << weight;
+                        EV << "\nGivenUp: " << congestionState << " Congestion state: " << getScaledCongestion(congestionState) << " Weight: " << weight;
                         // end congestion
 
                         // Add random value
