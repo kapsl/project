@@ -5,6 +5,7 @@ val=0
 sumSentGeneral=0
 sumRcvdGeneral=0
 sumLostGeneral=100
+counter=0
 
 echo "Calculating packet loss..."	
 
@@ -42,10 +43,20 @@ else
 	sumLostGeneral=$((100*$sumRcvdGeneral/$sumSentGeneral ))
 fi
 
-echo $filename
-echo "UDPPackets sent: "$sumSentGeneral
-echo "UDPPackets received: "$sumRcvdGeneral
-echo "UDPPackets lost: " $((100 - $sumLostGeneral))
-echo -e "\n"
+#echo $filename
+#echo "UDPPackets sent: "$sumSentGeneral
+#echo "UDPPackets received: "$sumRcvdGeneral
+#echo "UDPPackets lost: " $((100 - $sumLostGeneral))
+#echo -e "\n"
 
+#echo -n $((100 - $sumLostGeneral)) " "
+
+if [ $(($counter%3)) == 0 ] 
+then
+	echo -e ""
+fi
+
+echo -n $((100 - $sumLostGeneral)) " "
+
+((counter++))
 done
