@@ -452,16 +452,15 @@ void RoutingServerManagement::congestionDetected(unsigned int givenUpSinceLast) 
 
     EV << "\nRoutingServer: " << congestionState;
 
-    // TODO maybe we should send extra, when congestion is very high?
     // Send update about neighbours and congestion to basis station
     // If we are over a threshold - send immediately
-    if (givenUpSinceLast > 40) {
+   //if (givenUpSinceLast > 10) {
         cancelEvent(networkTopologyUpdate);
 
         scheduleAt(
            simTime() + 0.5,
            networkTopologyUpdate);
-    }
+    //}
 }
 
 /**

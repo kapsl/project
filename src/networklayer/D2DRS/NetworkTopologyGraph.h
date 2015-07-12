@@ -847,7 +847,7 @@ public:
 /**
  * Computes the Dijkstra Algorithm
  */ 
-    void computeDijkstra(vertex srcNode) {
+    void computeDijkstra(vertex srcNode, int parameterStudy) {
         if (G_.size() != 0) {
             paths.erase(paths.begin(), paths.end());
             paths.insert(std::pair<vertex, vertex>(srcNode, srcNode));
@@ -904,14 +904,16 @@ public:
 
                         // Handle congestion
                         int congestionState = GraphUtil::getElement(*it)->second.getCongestionState();
-                        weight += getScaledCongestion(congestionState);
-                        EV << "\nGivenUp: " << congestionState << " Congestion state: " << getScaledCongestion(congestionState) << " Weight: " << weight;
+                        weight += getScaledCongestion(congestionState, parameterStudy);
+                        EV << "\nGivenUp: " << congestionState << " Congestion state: " << getScaledCongestion(congestionState, parameterStudy) << " Weight: " << weight;
                         // end congestion
 
                         // Add random value
                         // Doesn't seem to be a good idea, much worse results!!!
                         // TODO maybe smaller plus?
-                        //weight = weight + (uniform(1, 20) - 10);
+                        if (parameterStudy == 3) {
+                            weight = weight + (normal(0, 3));
+                        }
                         //weight = weight * uniform(1, 10);
 
                         double newDistance = weight + dist;
@@ -943,9 +945,14 @@ public:
         }
     }
 
-    double getScaledCongestion(int congestionVal) {
-        return (1 / 60) * congestionVal * congestionVal;
-        //return (3 / 2) * congestionVal;
+    double getScaledCongestion(int congestionVal, int parameterStudy) {
+        if (parameterStudy == 1) {
+            return (1 / 60) * congestionVal * congestionVal;
+        } else if (parameterStudy == 2) {
+            return (3 / 2) * congestionVal;
+        }
+
+        else return 0;
     }
 
     void showPrecursorList() {

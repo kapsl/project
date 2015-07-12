@@ -119,6 +119,8 @@ simple MyIeee80211Mac
         
         double timeCongestionStateCalc = default(15.0); // How often should the congestion state be calculated
         
+        int normalStudy = default(1);
+        
         @display("i=block/layer");
 
         @signal[packetSentToLower](type=Ieee80211Frame);

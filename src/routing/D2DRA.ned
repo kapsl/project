@@ -33,6 +33,8 @@ simple D2DRA
         double maxJitter @unit("s") = default(5ms);
         volatile double jitter @unit("s") = default(uniform(0ms, maxJitter)); // jitter for broadcasts
         
+        int dijkstraStudy = default(1);
+        
                 //Statistic 
     gates:
         input d2dIn;
