@@ -16,6 +16,7 @@
 #include <HostCharacteristic.h>
 
 HostCharacteristic::HostCharacteristic() {
+    this->congestionState = 0;
 }
 
 HostCharacteristic::~HostCharacteristic() {

@@ -885,11 +885,16 @@ public:
                                 GraphUtil::getElement(u)->second.getPosition();
 
                         // Weight is adjusted to the distances between the nodes
-                        // TODO but this is not the euklidian distance?
                         double weight = sqrt(
                                 pow((coordParent.x - coordChild.x), 2)
                                         + pow((coordParent.y - coordChild.y),
                                                 2));
+
+                        // TODO test again
+                        // Maybe it makes sense to see if the distance is too small? Then we would reduce hops?!
+                        if (weight <= 35) {
+                            weight = weight * num_edges() / 4;
+                        }
 
                         if (weight >= ACCEPTEDTRANSMITTIONRANGE) {
                             // What happens here? num_edges is total nr. of edges?!
@@ -899,9 +904,15 @@ public:
 
                         // Handle congestion
                         int congestionState = GraphUtil::getElement(*it)->second.getCongestionState();
-                        weight += congestionState;
-                        EV << "\nCongestion state: " << congestionState << " Weight: " << weight;
+                        weight += getScaledCongestion(congestionState);
+                        EV << "\nCongestion state: " << getScaledCongestion(congestionState) << " Weight: " << weight;
                         // end congestion
+
+                        // Add random value
+                        // Doesn't seem to be a good idea, much worse results!!!
+                        // TODO maybe smaller plus?
+                        //weight = weight + (uniform(1, 20) - 10);
+                        //weight = weight * uniform(1, 10);
 
                         double newDistance = weight + dist;
 
@@ -930,6 +941,11 @@ public:
                 paths.erase(paths.begin(), paths.end());
             }
         }
+    }
+
+    double getScaledCongestion(int congestionVal) {
+        return (1 / 60) * congestionVal * congestionVal;
+        //return (3 / 2) * congestionVal;
     }
 
     void showPrecursorList() {

@@ -68,10 +68,12 @@ void RoutingServerManagement::initialize(int stage) {
         networkTopologyUpdate = new cMessage("Topology-Update-MSG");
         checkServerRegistration = new cMessage(
                 "Server-Registration-Request-MSG");
+
         if (!isRegistrated) {
             scheduleAt(simTime() + delayTimeServerRegistration,
                     checkServerRegistration);
         }
+
         if (useHelloMessages) {
             helloMsgTimer = new cMessage("HelloMsgTimer");
         }
@@ -315,8 +317,11 @@ void RoutingServerManagement::handleRegistrationConfirmation(
     existingRoute = 0;
     isRegistrated = true;
     serverInformation.serverAddress = address;
+
+    // Start hello messages and topology updates
     scheduleAt(simTime() + periodicJitter->doubleValue(), helloMsgTimer);
     scheduleAt(simTime() + delayTimeTopologyUpdate, networkTopologyUpdate);
+
     delete packet;
 }
 
@@ -326,12 +331,11 @@ void RoutingServerManagement::handleRegistrationConfirmation(
 void RoutingServerManagement::handleHelloMessage(NeighborUpdateMessage *packet,
         IPv4Address& srcAddress) {
     EV_INFO << "Received Neighbor Update Data" << endl;
-//livetime was hello allowedHelloLoss * helloInterval
-//    std::cerr << host->getId() << endl;
+
     topologyUpdate->updateLinkedNeighbor(srcAddress, packet->getMacAddress(),
             packet->getPosition(), simTime());
-    delete packet;
 
+    delete packet;
 }
 
 /**
@@ -433,6 +437,7 @@ RoutingServerManagement::createNetworkTopologyUpdate() {
     ownCharacteristic->setOriginatorAddress(routingTable->getRouterId());
     ownCharacteristic->setPosition(mobility->getCurrentPosition());
     ownCharacteristic->setCongestionState(congestionState);
+    //ownCharacteristic->setCongestionState(5);
     neighborhodUpdate->setHostCharacteristic(*ownCharacteristic);
 
     return neighborhodUpdate;

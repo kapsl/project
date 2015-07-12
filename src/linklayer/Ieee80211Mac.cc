@@ -29,6 +29,7 @@
 #include "opp_utils.h"
 
 #include <iostream>
+#include <string>
 
 // TODO: 9.3.2.1, If there are buffered multicast or broadcast frames, the PC shall transmit these prior to any unicast frames.
 // TODO: control frames must send before
@@ -392,10 +393,13 @@ void Ieee80211Mac::initialize(int stage)
         // By Manuel Kaspar
         // Initialize recording of actual congestion
         calculateCongestion = NULL;
+
+        // We want 30s +- 5s, so that not every device does it at the same time
+        //calculateCongestionTime = 30.0 + normal(0, 4);
         movingAverageNumGivenUp = 0;
         calculateCongestion = new cMessage("calculateCongestion");
 
-        scheduleAt(simTime() + 10.0, calculateCongestion);
+        scheduleAt(simTime() + 30.0, calculateCongestion);
     }
 }
 
@@ -567,10 +571,18 @@ void Ieee80211Mac::handleSelfMsg(cMessage *msg)
     EV << "received self message: " << msg << "(kind: " << msg->getKind() << ")" << endl;
 
     // By Manuel Kaspar
-    // TODO UMTS Interface also uses this --> shouldn't
     // Every 30 seconds calculate the now given up packages
     if (msg == calculateCongestion) {
         cModule* parentmod = getParentModule();
+
+        // If it is not the wlan module - don't do this
+        // Fullname of wlan has wlan[int]
+        const char* name = parentmod->getFullName();
+
+        if (name[0] != 'w') {
+            return;
+        }
+
         cModule* p1 = parentmod->getParentModule();
         cModule* rsmmod = p1->getSubmodule("rsmgmnt");
 

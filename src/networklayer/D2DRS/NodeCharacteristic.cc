@@ -16,6 +16,7 @@
 #include <NodeCharacteristic.h>
 
 NodeCharacteristic::NodeCharacteristic() {
+    this->congestionState = 0;
 }
 
 /**

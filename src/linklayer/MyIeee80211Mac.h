@@ -19,8 +19,8 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //
 
-#ifndef IEEE_80211_MAC_H
-#define IEEE_80211_MAC_H
+#ifndef MYIEEE_80211_MAC_H
+#define MYIEEE_80211_MAC_H
 
 // un-comment this if you do not want to log state machine transitions
 //#define FSM_DEBUG
@@ -59,7 +59,8 @@
  *
  * @ingroup macLayer
  */
-class INET_API Ieee80211Mac : public WirelessMacBase
+//class INET_API Ieee80211Mac : public WirelessMacBase
+class Ieee80211Mac : public WirelessMacBase
 {
     typedef std::list<Ieee80211DataOrMgmtFrame*> Ieee80211DataOrMgmtFrameList;
     /**

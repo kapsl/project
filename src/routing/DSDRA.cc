@@ -53,8 +53,8 @@ void D2DRA::handleMessage(cMessage *msg) {
             dynamic_cast<IPv4ControlInfo *>(udpPacket->getControlInfo());
     ASSERT(udpProtocolCtrlInfo != NULL);
     IPv4Address sourceAddr = udpProtocolCtrlInfo->getSrcAddr();
-    if (aodvControlData->getPacketType() == RREQ) {
 
+    if (aodvControlData->getPacketType() == RREQ) {
         handleRouteRequest(check_and_cast<AODVRREQ*>(aodvControlData),
                 sourceAddr);
     } else if (aodvControlData->getPacketType() == RREP) {
@@ -73,8 +73,8 @@ void D2DRA::handleMessage(cMessage *msg) {
                 "AODV Control Packet arrived with undefined packet type: %d",
                 aodvControlData->getPacketType());
     }
-    delete udpPacket;
 
+    delete udpPacket;
 }
 
 /**
@@ -96,8 +96,8 @@ void D2DRA::handleRegistrationRequest(RegistrationRequest *packet,
 
     sendRoutingServerPacket(this->createRegConfirmation(address), address, 3,
             0);
-    delete packet;
 
+    delete packet;
 }
 
 /*
@@ -165,9 +165,9 @@ void D2DRA::handleTopologyUpdate(NetworkTopologyUpdate *topologyUpdate,
             topologyUpdate->getHostCharacteristic());
 
     // Detect congestion
-    /*if (nodeCharacteristic->getCongestionState() == 1) {
-        EV << "We have a congestion!!!";
-    }*/
+    //if (nodeCharacteristic->getCongestionState() == 1) {
+        EV << "CongestionState " << nodeCharacteristic->getCongestionState();
+    //}*/
 
     GraphUtil::insertElement(
             topologyUpdate->getHostCharacteristic().getOriginatorAddress(),
@@ -197,7 +197,9 @@ void D2DRA::handleTopologyUpdate(NetworkTopologyUpdate *topologyUpdate,
 void D2DRA::handleRouteRequest(AODVRREQ *rreq, IPv4Address& address) {
     emit(rcvdRREQSignal, rreq);
     delayofReceivedREEQ.record(simTime() - rreq->getCreationTime());
+
     networkGraph.computeDijkstra(rreq->getOriginatorAddr());
+
     std::list<IPv4Address> &shortestPath = networkGraph.computeShortestPathTo(
             rreq->getDestAddr(), rreq->getOriginatorAddr());
 //    networkGraph.printShortestPath();
