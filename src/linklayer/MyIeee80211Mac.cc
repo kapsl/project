@@ -396,11 +396,12 @@ void MyIeee80211Mac::initialize(int stage)
         timeCongestionStateCalc = par("timeCongestionStateCalc");
 
         // We want 30s +- 5s, so that not every device does it at the same time
-        if ((int) par("normalStudy") == 1) {
+        /*if ((int) par("normalStudy") == 1) {
             congestionCalculationTime = timeCongestionStateCalc;
         } else {
             congestionCalculationTime = timeCongestionStateCalc + normal(0, 1);
-        }
+        }*/
+        congestionCalculationTime = timeCongestionStateCalc + normal(0, 1);
 
         movingAverageNumGivenUp = 0;
         calculateCongestion = new cMessage("calculateCongestion");

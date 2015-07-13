@@ -437,15 +437,12 @@ RoutingServerManagement::createNetworkTopologyUpdate() {
     ownCharacteristic->setOriginatorAddress(routingTable->getRouterId());
     ownCharacteristic->setPosition(mobility->getCurrentPosition());
     ownCharacteristic->setCongestionState(congestionState);
-    //ownCharacteristic->setCongestionState(5);
     neighborhodUpdate->setHostCharacteristic(*ownCharacteristic);
 
     return neighborhodUpdate;
 }
 
 void RoutingServerManagement::congestionDetected(unsigned int givenUpSinceLast) {
-    //EV << "Congestion detected\n";
-
     Enter_Method_Silent();
 
     congestionState = givenUpSinceLast;
@@ -454,13 +451,13 @@ void RoutingServerManagement::congestionDetected(unsigned int givenUpSinceLast) 
 
     // Send update about neighbours and congestion to basis station
     // If we are over a threshold - send immediately
-   //if (givenUpSinceLast > 10) {
+    if (givenUpSinceLast > 10) {
         cancelEvent(networkTopologyUpdate);
 
         scheduleAt(
            simTime() + 0.5,
            networkTopologyUpdate);
-    //}
+    }
 }
 
 /**

@@ -910,11 +910,9 @@ public:
 
                         // Add random value
                         // Doesn't seem to be a good idea, much worse results!!!
-                        // TODO maybe smaller plus?
-                        if (parameterStudy == 3) {
+                        if (parameterStudy == 6) {
                             weight = weight + (normal(0, 3));
                         }
-                        //weight = weight * uniform(1, 10);
 
                         double newDistance = weight + dist;
 
@@ -945,14 +943,25 @@ public:
         }
     }
 
+    /**
+     * A function that scales the congestionVal
+     */
     double getScaledCongestion(int congestionVal, int parameterStudy) {
+        //return (1 / 60) * congestionVal * congestionVal;
+
         if (parameterStudy == 1) {
-            return (1 / 60) * congestionVal * congestionVal;
-        } else if (parameterStudy == 2) {
             return (3 / 2) * congestionVal;
+        } else if (parameterStudy == 2) {
+            return (2 / 3) * congestionVal;
+        } else if (parameterStudy == 3) {
+            return (1 / 10) * congestionVal;
+        } else if (parameterStudy == 4) {
+            return (10 / 2) * congestionVal;
+        } else if (parameterStudy == 5) {
+            return (30 / 2) * congestionVal;
         }
 
-        else return 0;
+        else return (3/2) * congestionVal;
     }
 
     void showPrecursorList() {
