@@ -24,10 +24,7 @@ simple RoutingServerManagement //extends  AODVRouting
         //        bool isRegistrated;	//Handles preregistration with the adaptiveServer
 
         int timeToLive = default(2);
-        
-        // I think this indicates, how often a update over local topology is sent to the server
-		// defines the update interval between D2DRS and UserEquipment
-        double serverUpdateInterval @unit("s") = default(0.5s);
+        double serverUpdateInterval @unit("s") = default(8s);
         
 		// NOT IMPLEMENTED YET. The routingTable should contain only a specific number of routes.
         int maxRouteCacheSize = default(10);
@@ -40,12 +37,17 @@ simple RoutingServerManagement //extends  AODVRouting
 		// After 2sec, the ServerRegistrationMSG is sent again if no response
         int serverRegRetryInterval @unit("s") = default(2s);
         
-        // Somehow used by aodv to determine how often to send something
-        double maxPeriodicJitter @unit("s") = default(serverUpdateInterval / 4); // it MUST NOT be negative; it MUST NOT be greater than MESSAGE_INTERVAL/2; it SHOULD NOT be greater than MESSAGE_INTERVAL/4.
+        // Somehow used by aodv to determine how often to send something - probably the topology update
+        // When using this - the jitter becomes to large, and we get errors, that it is scheduled in the past
+        //double maxPeriodicJitter @unit("s") = default(serverUpdateInterval / 4);
+        double maxPeriodicJitter @unit("s") = default(1s / 4); // it MUST NOT be negative; it MUST NOT be greater than MESSAGE_INTERVAL/2; it SHOULD NOT be greater than MESSAGE_INTERVAL/4.
         volatile double periodicJitter @unit("s") = default(uniform(0s, maxPeriodicJitter)); // jitter for externally triggered message generation and message forwarding
-        double activeRouteTimeout @unit("s") = default(3s); // the timeout value for cached routes If Hello messages are used, then the
+        //double activeRouteTimeout @unit("s") = default(3s); // the timeout value for cached routes If Hello messages are used, then the
                                                             // ACTIVE_ROUTE_TIMEOUT parameter value MUST be more than the value
                                                             // (ALLOWED_HELLO_LOSS * HELLO_INTERVAL).
+        //double activeRouteTimeout @unit("s") = default(3s);                                                  
+        double activeRouteTimeout @unit("s") = default(21s);                                                   
+                                                         
         double myRouteTimeout @unit("s") = default(2 * activeRouteTimeout); // the value of the lifetime field that a destination node places in RREPs
         int udpPort = default(654);
 

@@ -846,6 +846,8 @@ public:
 
 /**
  * Computes the Dijkstra Algorithm
+ *
+ * @param parameterStudy can be used to run studies
  */ 
     void computeDijkstra(vertex srcNode, int parameterStudy) {
         if (G_.size() != 0) {
@@ -890,29 +892,28 @@ public:
                                         + pow((coordParent.y - coordChild.y),
                                                 2));
 
-                        // TODO test again
                         // Maybe it makes sense to see if the distance is too small? Then we would reduce hops?!
                         if (weight <= 35) {
                             weight = weight * num_edges() / 4;
                         }
 
                         if (weight >= ACCEPTEDTRANSMITTIONRANGE) {
-                            // What happens here? num_edges is total nr. of edges?!
-                            // Make weight so high, that this never happens?
+                            // Make weight so high, that this is very unlikely, that we don't hop to a node going out of
+                            // distance very soon
                             weight = weight * num_edges();
                         }
 
-                        // Handle congestion
+                        // #### Handle congestion ####
                         int congestionState = GraphUtil::getElement(*it)->second.getCongestionState();
                         weight += getScaledCongestion(congestionState, parameterStudy);
                         EV << "\nGivenUp: " << congestionState << " Congestion state: " << getScaledCongestion(congestionState, parameterStudy) << " Weight: " << weight;
-                        // end congestion
+                        // #### end congestion ####
 
-                        // Add random value
-                        // Doesn't seem to be a good idea, much worse results!!!
-                        if (parameterStudy == 6) {
+                        // Tried to add a random value, so more different routes are generated, but this
+                        // decreased the performance!!!
+                        /*if (parameterStudy == 6) {
                             weight = weight + (normal(0, 3));
-                        }
+                        }*/
 
                         double newDistance = weight + dist;
 
@@ -945,23 +946,13 @@ public:
 
     /**
      * A function that scales the congestionVal
+     *
+     * @param parameterStudy possibility to test different functions
      */
     double getScaledCongestion(int congestionVal, int parameterStudy) {
         //return (1 / 60) * congestionVal * congestionVal;
 
-        if (parameterStudy == 1) {
-            return (3 / 2) * congestionVal;
-        } else if (parameterStudy == 2) {
-            return (2 / 3) * congestionVal;
-        } else if (parameterStudy == 3) {
-            return (1 / 10) * congestionVal;
-        } else if (parameterStudy == 4) {
-            return (10 / 2) * congestionVal;
-        } else if (parameterStudy == 5) {
-            return (30 / 2) * congestionVal;
-        }
-
-        else return (3/2) * congestionVal;
+        return (3/2) * congestionVal;
     }
 
     void showPrecursorList() {

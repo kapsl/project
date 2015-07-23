@@ -395,12 +395,7 @@ void MyIeee80211Mac::initialize(int stage)
         calculateCongestion = NULL;
         timeCongestionStateCalc = par("timeCongestionStateCalc");
 
-        // We want 30s +- 5s, so that not every device does it at the same time
-        /*if ((int) par("normalStudy") == 1) {
-            congestionCalculationTime = timeCongestionStateCalc;
-        } else {
-            congestionCalculationTime = timeCongestionStateCalc + normal(0, 1);
-        }*/
+        // We want 30s +- a jitter, so that not every device does it at the same time
         congestionCalculationTime = timeCongestionStateCalc + normal(0, 1);
 
         movingAverageNumGivenUp = 0;

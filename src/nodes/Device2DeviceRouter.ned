@@ -35,6 +35,9 @@ module Device2DeviceRouter extends Device2DeviceStandardHost
     submodules:
         aodv: AODVRouting {
             @display("p=582,287");
+            
+            // I think these values are specifiein RoutingServerManagement.ned
+            //myRouteTimeout = 31s;
         }
         rsmgmnt: RoutingServerManagement {
             @display("p=461,287;i=block/routing");

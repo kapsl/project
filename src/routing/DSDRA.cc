@@ -198,7 +198,7 @@ void D2DRA::handleRouteRequest(AODVRREQ *rreq, IPv4Address& address) {
     emit(rcvdRREQSignal, rreq);
     delayofReceivedREEQ.record(simTime() - rreq->getCreationTime());
 
-    networkGraph.computeDijkstra(rreq->getOriginatorAddr(), (int) par("dijkstraStudy"));
+    networkGraph.computeDijkstra(rreq->getOriginatorAddr(), 0);
 
     std::list<IPv4Address> &shortestPath = networkGraph.computeShortestPathTo(
             rreq->getDestAddr(), rreq->getOriginatorAddr());

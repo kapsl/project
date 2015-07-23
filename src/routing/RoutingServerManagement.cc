@@ -473,6 +473,7 @@ void RoutingServerManagement::maintainRouteCache() {
 
         for (int i = routingTable->getNumRoutes() - 1; i >= 0; i--) {
             IPv4Route *route = routingTable->getRoute(i);
+
             if (AODVRouteData *routeData =
                     dynamic_cast<AODVRouteData *>(route->getProtocolData())) {
                 if (route->getSource() != this) {
@@ -489,7 +490,6 @@ void RoutingServerManagement::maintainRouteCache() {
                 }
             }
         }
-
     }
 }
 
