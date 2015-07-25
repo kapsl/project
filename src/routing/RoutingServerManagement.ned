@@ -45,8 +45,10 @@ simple RoutingServerManagement //extends  AODVRouting
         //double activeRouteTimeout @unit("s") = default(3s); // the timeout value for cached routes If Hello messages are used, then the
                                                             // ACTIVE_ROUTE_TIMEOUT parameter value MUST be more than the value
                                                             // (ALLOWED_HELLO_LOSS * HELLO_INTERVAL).
-        //double activeRouteTimeout @unit("s") = default(3s);                                                  
-        double activeRouteTimeout @unit("s") = default(21s);                                                   
+        //double activeRouteTimeout @unit("s") = default(3s); Was set from Klement
+        
+        // Higher timeoute showed no performance increase except in the 30s sending interval                                              
+        double activeRouteTimeout @unit("s") = default(10s);                                                   
                                                          
         double myRouteTimeout @unit("s") = default(2 * activeRouteTimeout); // the value of the lifetime field that a destination node places in RREPs
         int udpPort = default(654);

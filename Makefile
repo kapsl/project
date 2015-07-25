@@ -76,16 +76,6 @@ INCLUDE_PATH = \
     -Ihtml \
     -Ihtml/search \
     -Ilatex \
-    -IplottingEndToEndDelyInterval \
-    -IplottingEndToEndDelyNumHost \
-    -IplottingRREQRREPInterval \
-    -IplottingRREQRREPNumHost \
-    -IplottingRoutingLoadInterval \
-    -IplottingRoutingLoadNumHost \
-    -IplottingSendingInterval \
-    -IplottingSendingNumHost \
-    -IplottingThrougputInterval \
-    -IplottingThrougputNumHost \
     -IresultsMobile \
     -IresultsMobile/plottingSendingInterval \
     -IresultsMobile/plottingThrougputNumHost \
@@ -225,16 +215,6 @@ clean:
 	$(Q)-rm -f html/*_m.cc html/*_m.h
 	$(Q)-rm -f html/search/*_m.cc html/search/*_m.h
 	$(Q)-rm -f latex/*_m.cc latex/*_m.h
-	$(Q)-rm -f plottingEndToEndDelyInterval/*_m.cc plottingEndToEndDelyInterval/*_m.h
-	$(Q)-rm -f plottingEndToEndDelyNumHost/*_m.cc plottingEndToEndDelyNumHost/*_m.h
-	$(Q)-rm -f plottingRREQRREPInterval/*_m.cc plottingRREQRREPInterval/*_m.h
-	$(Q)-rm -f plottingRREQRREPNumHost/*_m.cc plottingRREQRREPNumHost/*_m.h
-	$(Q)-rm -f plottingRoutingLoadInterval/*_m.cc plottingRoutingLoadInterval/*_m.h
-	$(Q)-rm -f plottingRoutingLoadNumHost/*_m.cc plottingRoutingLoadNumHost/*_m.h
-	$(Q)-rm -f plottingSendingInterval/*_m.cc plottingSendingInterval/*_m.h
-	$(Q)-rm -f plottingSendingNumHost/*_m.cc plottingSendingNumHost/*_m.h
-	$(Q)-rm -f plottingThrougputInterval/*_m.cc plottingThrougputInterval/*_m.h
-	$(Q)-rm -f plottingThrougputNumHost/*_m.cc plottingThrougputNumHost/*_m.h
 	$(Q)-rm -f resultsMobile/*_m.cc resultsMobile/*_m.h
 	$(Q)-rm -f resultsMobile/plottingSendingInterval/*_m.cc resultsMobile/plottingSendingInterval/*_m.h
 	$(Q)-rm -f resultsMobile/plottingThrougputNumHost/*_m.cc resultsMobile/plottingThrougputNumHost/*_m.h
@@ -252,7 +232,7 @@ cleanall: clean
 
 depend:
 	$(qecho) Creating dependencies...
-	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc Auswertung/*.cc Auswertung/plottingEndToEndDelyInterval/*.cc Auswertung/plottingEndToEndDelyNumHost/*.cc Auswertung/plottingRREQRREPInterval/*.cc Auswertung/plottingRREQRREPNumHost/*.cc Auswertung/plottingRoutingLoadInterval/*.cc Auswertung/plottingRoutingLoadNumHost/*.cc Auswertung/plottingSendingInterval/*.cc Auswertung/plottingSendingNumHost/*.cc Auswertung/plottingThrougputInterval/*.cc Auswertung/plottingThrougputNumHost/*.cc Auswertung/resultsMobile/*.cc IPv4AddressResolver/*.cc MobileSingleSourceDest/*.cc MobileThirtySourceDest/*.cc MobileTwentySourceDest/*.cc Simulation/*.cc StaticFifteenSourceDest/*.cc StaticThirtySourceDest/*.cc StaticTwentySourceDest/*.cc html/*.cc html/search/*.cc latex/*.cc plottingEndToEndDelyInterval/*.cc plottingEndToEndDelyNumHost/*.cc plottingRREQRREPInterval/*.cc plottingRREQRREPNumHost/*.cc plottingRoutingLoadInterval/*.cc plottingRoutingLoadNumHost/*.cc plottingSendingInterval/*.cc plottingSendingNumHost/*.cc plottingThrougputInterval/*.cc plottingThrougputNumHost/*.cc resultsMobile/*.cc resultsMobile/plottingSendingInterval/*.cc resultsMobile/plottingThrougputNumHost/*.cc src/*.cc src/hosts/*.cc src/linklayer/*.cc src/networklayer/*.cc src/networklayer/D2DRS/*.cc src/nodes/*.cc src/routing/*.cc src/routing/messagetypes/*.cc
+	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc Auswertung/*.cc Auswertung/plottingEndToEndDelyInterval/*.cc Auswertung/plottingEndToEndDelyNumHost/*.cc Auswertung/plottingRREQRREPInterval/*.cc Auswertung/plottingRREQRREPNumHost/*.cc Auswertung/plottingRoutingLoadInterval/*.cc Auswertung/plottingRoutingLoadNumHost/*.cc Auswertung/plottingSendingInterval/*.cc Auswertung/plottingSendingNumHost/*.cc Auswertung/plottingThrougputInterval/*.cc Auswertung/plottingThrougputNumHost/*.cc Auswertung/resultsMobile/*.cc IPv4AddressResolver/*.cc MobileSingleSourceDest/*.cc MobileThirtySourceDest/*.cc MobileTwentySourceDest/*.cc Simulation/*.cc StaticFifteenSourceDest/*.cc StaticThirtySourceDest/*.cc StaticTwentySourceDest/*.cc html/*.cc html/search/*.cc latex/*.cc resultsMobile/*.cc resultsMobile/plottingSendingInterval/*.cc resultsMobile/plottingThrougputNumHost/*.cc src/*.cc src/hosts/*.cc src/linklayer/*.cc src/networklayer/*.cc src/networklayer/D2DRS/*.cc src/nodes/*.cc src/routing/*.cc src/routing/messagetypes/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/src/hosts/HostCharacteristic.o: src/hosts/HostCharacteristic.cc \

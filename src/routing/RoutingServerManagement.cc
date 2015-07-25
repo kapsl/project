@@ -713,8 +713,12 @@ bool RoutingServerManagement::handleOperationStage(
 }
 
 void RoutingServerManagement::finish() {
-    recordScalar("Number Received RouteResponses", numberOfRREP);
-    recordScalar("Number Sent RREQs", numberOfRREQSent);
+    /*recordScalar("Number Received RouteResponses", numberOfRREP);
+    recordScalar("Number Sent RREQs", numberOfRREQSent);*/
+
+    // Sent route requests and sent route responses. Used for calculating routing load
+    recordScalar("RREQSent:count", numberOfRREQSent);
+    recordScalar("RREPSent:count", numberOfRREP);
 }
 
 void RoutingServerManagement::clearState() {
