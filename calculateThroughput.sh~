@@ -6,9 +6,17 @@ sumRcvdGeneral=0
 throughputGeneral=0
 val=0
 i=0
+counter=0
 
 echo "Calculating Throughput..."
-echo -e "interval\tThroughputD2DRS\tCollD2DRS\troughputAODV\tCollAODV"
+#echo -e "interval\tThroughputD2DRS\tCollD2DRS\troughputAODV\tCollAODV"
+
+for filename in `ls -1v $1*.sca`
+do
+
+sumRcvdGeneral=0
+val=0
+i=0
 
 while read line
 do
@@ -26,7 +34,7 @@ i=$(echo $i+1 | bc -l)
 fi
 fi
 
-done < $1;
+done < $filename;
 
 # *512 Message length of udp packages is 512 bytes
 # :890 when we have 900s simulation time, the first 10 seconds are cut
@@ -36,3 +44,13 @@ throughputGeneral=$(echo "scale=2;"$sumRcvdGeneral*"512"/"890"/$i/"1024"/1 | bc 
 
 echo  "sum Rcvd packtes complete: "$sumRcvdGeneral
 echo "Throughput: "$throughputGeneral
+
+if [ $(($counter%3)) == 0 ] 
+then
+	echo -e ""
+fi
+
+echo -n $throughputGeneral " "
+
+((counter++))
+done
