@@ -135,7 +135,8 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
 
             }
         } else if (aodvControlData->getPacketType() == RERR) {
-            if (msg->getArrivalGate() == networkLayerIn) {
+            if (msg->getArrivalGate() ==das so, wie es bisher war nicht, weil z.B. Felder andere Namen haben etc.
+ networkLayerIn) {
                 udpPacket->encapsulate(aodvControlData);
                 send(udpPacket, "rsMgmntAODVOut");
             } else
@@ -717,6 +718,8 @@ void RoutingServerManagement::finish() {
     recordScalar("Number Sent RREQs", numberOfRREQSent);*/
 
     // Sent route requests and sent route responses. Used for calculating routing load
+    // In this fields also packages for registration, topologyupdates, etc. are included
+    // Hello packages are not included...
     recordScalar("RREQSent:count", numberOfRREQSent);
     recordScalar("RREPSent:count", numberOfRREP);
 }
