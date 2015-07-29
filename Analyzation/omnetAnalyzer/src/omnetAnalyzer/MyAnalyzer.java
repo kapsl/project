@@ -12,11 +12,13 @@ public abstract class MyAnalyzer {
 	protected ArrayList<Integer> receivedPackages = new ArrayList<>();
 
 	public MyAnalyzer() {
-		// 65 is nr of hosts in simulation
-		// TODO extract var
+		this.initializeArrayForHosts(this.sentPackages, 0);
+		this.initializeArrayForHosts(this.receivedPackages, 0);
+	}
+	
+	protected <T> void initializeArrayForHosts(ArrayList<T> list, T initializationValue) {
 		for (int i = 0; i < OmnetAnalyzer.NR_OF_HOSTS; i++) {
-			this.sentPackages.add(0);
-			this.receivedPackages.add(0);
+			list.add(initializationValue);
 		}
 	}
 	

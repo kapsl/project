@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import omnetAnalyzer.MyAnalyzer;
-import omnetAnalyzer.OmnetAnalyzer;
 import cern.colt.list.DoubleArrayList;
 
 public class EndToEndDelayAnalyzer extends MyAnalyzer {
@@ -19,15 +18,11 @@ public class EndToEndDelayAnalyzer extends MyAnalyzer {
 	 */
 	private ArrayList<Double> stddevEndToEndDelay = new ArrayList<>();
 
-	// TODO somehow externalize initialization
 	public EndToEndDelayAnalyzer() {
 		super();
 		
-		// 65 is nr of hosts in simulation
-		for (int i = 0; i < OmnetAnalyzer.NR_OF_HOSTS; i++) {
-			meanEndToEndDelay.add(0.0);
-			stddevEndToEndDelay.add(null);
-		}
+		this.initializeArrayForHosts(this.meanEndToEndDelay, 0.0);
+		this.initializeArrayForHosts(this.stddevEndToEndDelay, null);
 	}
 
 	@Override
@@ -62,7 +57,7 @@ public class EndToEndDelayAnalyzer extends MyAnalyzer {
 
 		ArrayList<Double> weightedMeanDelay = new ArrayList<>();
 
-		// TODO probably we have to weight the means by package count???? Ask Prof. Hähner
+		// We have to weight the mean by the package count
 		for (int i = 0; i < this.meanEndToEndDelay.size(); i++) {
 			weightedMeanDelay.add(this.receivedPackages.get(i) * this.meanEndToEndDelay.get(i));
 		}
@@ -80,8 +75,12 @@ public class EndToEndDelayAnalyzer extends MyAnalyzer {
 		DoubleArrayList meanDelay = new DoubleArrayList();
 		
 		for (int i = 0; i < this.meanEndToEndDelay.size(); i++) {
-			if (this.meanEndToEndDelay.get(i) != 0.0)
-				meanDelay.add(this.meanEndToEndDelay.get(i));
+			if (this.meanEndToEndDelay.get(i) != 0.0) {
+				// Add this value nr. of received packages for this host times, to get weighted middle
+				for (int x = 0; x < this.receivedPackages.get(i); x++) {
+					meanDelay.add(this.meanEndToEndDelay.get(i));
+				}
+			}
 		}
 		
 		this.printStatistics(meanDelay);

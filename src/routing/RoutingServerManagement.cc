@@ -54,6 +54,7 @@ void RoutingServerManagement::initialize(int stage) {
         delayOfRREQ.setName("Delay of RREQ");
         numberOfRREP = 0;
         numberOfRREQSent = 0;
+        numberOfHelloMsg = 0;
 
         congestionState = 0;
 
@@ -135,8 +136,7 @@ void RoutingServerManagement::handleMessage(cMessage *msg) {
 
             }
         } else if (aodvControlData->getPacketType() == RERR) {
-            if (msg->getArrivalGate() ==das so, wie es bisher war nicht, weil z.B. Felder andere Namen haben etc.
- networkLayerIn) {
+            if (msg->getArrivalGate() == networkLayerIn) {
                 udpPacket->encapsulate(aodvControlData);
                 send(udpPacket, "rsMgmntAODVOut");
             } else
@@ -636,14 +636,18 @@ void RoutingServerManagement::sendAODVPacket(AODVControlPacket *packet,
             dynamic_cast<cObject *>(networkProtocolControlInfo));
 
     if (packet->getPacketType() == NEIGHBORUPDATEMESSAGE) {
+        // Statistics - hello msgs are not counted as udp packages!
+        numberOfHelloMsg++;
+
         if (destAddr.isLimitedBroadcastAddress())
             lastBroadcastTime = simTime();
     }
 
-    if (delay == 0)
+    if (delay == 0) {
         send(udpPacket, "rsMgmntNLOut");
-    else
+    } else {
         sendDelayed(udpPacket, delay, "rsMgmntNLOut");
+    }
 }
 
 /**
@@ -722,6 +726,7 @@ void RoutingServerManagement::finish() {
     // Hello packages are not included...
     recordScalar("RREQSent:count", numberOfRREQSent);
     recordScalar("RREPSent:count", numberOfRREP);
+    recordScalar("HelloMsg:count", numberOfHelloMsg);
 }
 
 void RoutingServerManagement::clearState() {

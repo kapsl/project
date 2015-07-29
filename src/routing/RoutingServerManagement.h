@@ -105,6 +105,7 @@ protected:
     int numberOfRREP;
     int numberOfRREQSent;
     cOutVector delayOfRREQ;
+    int numberOfHelloMsg;
 
     /**
      * Nr of given up packages in mac layer

@@ -4,31 +4,26 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 
 import omnetAnalyzer.MyAnalyzer;
-import omnetAnalyzer.OmnetAnalyzer;
 import cern.colt.list.DoubleArrayList;
-import cern.jet.stat.Descriptive;
 
 public class RoutingLoadAnalyzer extends MyAnalyzer {
 	private ArrayList<Integer> routingPackages = new ArrayList<Integer>();
 
 	public RoutingLoadAnalyzer() {
 		super();
-		
-		// TODO 65 is nr of hosts in simulation
-		for (int i = 0; i < OmnetAnalyzer.NR_OF_HOSTS; i++) {
-			routingPackages.add(0);
-		}
+
+		this.initializeArrayForHosts(this.routingPackages, 0);
 	}
 
 	@Override
 	protected void parseIndividualLine(String line, BufferedReader br) {
 		// Routing Load packages all packages that go to and come from the basis
 		// station
-		// TODO no hello packages included
 		if (line.contains("scalar")
 				&& (line.contains("RREPSent:count")
 						|| line.contains("RREQSent:count") || line
 							.contains("RERRSentNow"))) {
+			// || line .contains("HelloMsg:count"))) {
 			int pk = this.routingPackages.get(this.extractHostNumber(line));
 			this.routingPackages.set(this.extractHostNumber(line),
 					pk + this.extractInteger(line));
@@ -36,44 +31,34 @@ public class RoutingLoadAnalyzer extends MyAnalyzer {
 	}
 
 	protected void getIndividualResult() throws Exception {
-		/*
-		 * if (this.sentPackages.size() != this.routingPackages.size()) { throw
-		 * new Exception("Wrong host count..."); }
-		 */
-
 		// Calculate Routing load: (Routing Packages / All Packages) * 100
-		DoubleArrayList routingLoad = new DoubleArrayList();
-		ArrayList<Double> myroutingLoad = new ArrayList<Double>();
+		DoubleArrayList normalizedRoutingPackageNr = new DoubleArrayList();
 
-		for (int i = 0; i < this.sentPackages.size(); i++) {
-			Integer sum = this.routingPackages.get(i)
-					+ this.sentPackages.get(i);
+		int sumOfRoutingPackages = this.routingPackages.stream()
+				.mapToInt(value -> value).sum();
 
-			if (sum != 0) {
-				routingLoad.add(100.0 * this.routingPackages.get(i) / (sum));
-				myroutingLoad.add(100.0 * this.routingPackages.get(i)
-						/ (sum + 1.0));
+		for (int i = 0; i < this.routingPackages.size(); i++) {
+			int sum = this.sentPackages.get(i)
+					+ this.routingPackages.get(i);
+
+			// Add this value nr. of received packages for this host times, to
+			// get weighted middle
+			for (int x = 0; x < sum; x++) {
+				if (sum != 0)
+					normalizedRoutingPackageNr
+							.add(100.0
+									* Double.valueOf(this.routingPackages
+											.get(i)) / sum);
 			}
 		}
 
-		System.out.println("NewAvg. "
-				+ myroutingLoad.stream().mapToDouble(value -> value).average());
-
-		// Calculating standard deviation doesn't make sense, because it is a
-		// calculation of overall received / sent packages.
 		double mmean = 100
-				* this.getSumOfReceivedPackages()
-				/ (this.getSumOfSentPackages() + this
-						.getSumOfReceivedPackages());
+				* Double.valueOf(sumOfRoutingPackages)
+				/ (this.getSumOfSentPackages() + Double
+						.valueOf(sumOfRoutingPackages));
+		System.out.println("Old Routing Load: " + mmean);
 
-		System.out.println(mmean);
-
-		double mean = Descriptive.mean(routingLoad);
-		double variance = Descriptive.sampleVariance(routingLoad, mean);
-		double standardDeviation = Descriptive.standardDeviation(variance);
-
-		System.out.println("Routing Load: Mean: " + mean + " Var: " + variance
-				+ "Std: " + standardDeviation);
+		this.printStatistics(normalizedRoutingPackageNr);
 	}
 
 	@Override
