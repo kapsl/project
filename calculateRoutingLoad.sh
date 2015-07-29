@@ -3,11 +3,6 @@
 # Calculate routing load
 # TODO parameters
 
-val=0
-sumSentPayloadGeneral=0
-sumSentAODVPktsGeneral=0
-routingLoadD2DRS=0
-routingLoadAODV=0
 counter=0
 
 echo "Calculating routing load"	
@@ -20,7 +15,6 @@ sumSentPayloadGeneral=0
 sumSentAODVPktsGeneral=0
 routingLoadD2DRS=0
 routingLoadAODV=0
-
 
 #echo -e '#interval(sec)\t%RLGeneral\t%RLAODV\tPayloadD2DRS\tAODVAODV' > RoutingLoad${11}.dat;
 #echo -e '#interval(sec)\t%RLGeneral\t%RLAODV\tPayloadD2DRS\tAODVAODV';

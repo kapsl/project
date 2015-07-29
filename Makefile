@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for NetworkStructures
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -O out -I../inet/src/linklayer/ieee80211/radio -I../inet/src/networklayer/routing/aodv -I../inet/src/networklayer/common -I../inet/src -I../inet/src/networklayer/icmpv6 -I../inet/src/world/obstacles -I../inet/src/networklayer/xmipv6 -I../inet/src/networklayer/contract -I../inet/src/networklayer/autorouting/ipv4 -I../inet/src/util -I../inet/src/transport/contract -I../inet/src/linklayer/common -I../inet/src/status -I../inet/src/linklayer/radio/propagation -I../inet/src/linklayer/ieee80211/radio/errormodel -I../inet/src/linklayer/radio -I../inet/src/util/headerserializers/tcp -I../inet/src/networklayer/ipv4 -I../inet/src/mobility/contract -I../inet/src/util/headerserializers/ipv4 -I../inet/src/base -I../inet/src/util/headerserializers -I../inet/src/world/radio -I../inet/src/linklayer/ieee80211/mac -I../inet/src/networklayer/ipv6 -I../inet/src/transport/sctp -I../inet/src/util/headerserializers/udp -I../inet/src/networklayer/ipv6tunneling -I../inet/src/applications/pingapp -I../inet/src/battery/models -I../inet/src/util/headerserializers/ipv6 -I../inet/src/util/headerserializers/sctp -I../inet/src/linklayer/contract -I../inet/src/networklayer/arp -I../inet/src/transport/tcp_common -I../inet/src/transport/udp -I../inet/src/mobility/common -L../inet/out/$$\(CONFIGNAME\)/src -linet -DINET_IMPORT -KINET_PROJ=../inet
+#  opp_makemake -f --deep -O out -I../inet/src/transport/tcp_common -I../inet/src/base -I../inet/src/util -I../inet/src/linklayer/ieee80211/mac -I../inet/src/transport/udp -I../inet/src/linklayer/ieee80211/radio/errormodel -I../inet/src/util/headerserializers -I../inet/src/linklayer/ieee80211/radio -I../inet/src/status -I../inet/src/transport/sctp -I../inet/src/networklayer/icmpv6 -I../inet/src/linklayer/radio/propagation -I../inet/src/transport/contract -I../inet/src/networklayer/ipv6tunneling -I../inet/src/world/radio -I../inet/src/linklayer/contract -I../inet/src/util/headerserializers/udp -I../inet/src/util/headerserializers/tcp -I../inet/src/linklayer/radio -I../inet/src/world/obstacles -I../inet/src/networklayer/common -I../inet/src/networklayer/ipv6 -I../inet/src/networklayer/arp -I../inet/src/networklayer/routing/aodv -I../inet/src/networklayer/contract -I../inet/src -I../inet/src/networklayer/xmipv6 -I../inet/src/util/headerserializers/sctp -I../inet/src/util/headerserializers/ipv6 -I../inet/src/battery/models -I../inet/src/networklayer/autorouting/ipv4 -I../inet/src/networklayer/ipv4 -I../inet/src/mobility/contract -I../inet/src/applications/pingapp -I../inet/src/linklayer/common -I../inet/src/util/headerserializers/ipv4 -I../inet/src/mobility/common -L../inet/out/$$\(CONFIGNAME\)/src -linet -DINET_IMPORT -KINET_PROJ=../inet
 #
 
 # Name of target to be created (-o option)
@@ -15,56 +15,64 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
 
 # C++ include paths (with -I)
 INCLUDE_PATH = \
-    -I../inet/src/linklayer/ieee80211/radio \
-    -I../inet/src/networklayer/routing/aodv \
-    -I../inet/src/networklayer/common \
-    -I../inet/src \
-    -I../inet/src/networklayer/icmpv6 \
-    -I../inet/src/world/obstacles \
-    -I../inet/src/networklayer/xmipv6 \
-    -I../inet/src/networklayer/contract \
-    -I../inet/src/networklayer/autorouting/ipv4 \
+    -I../inet/src/transport/tcp_common \
+    -I../inet/src/base \
     -I../inet/src/util \
-    -I../inet/src/transport/contract \
-    -I../inet/src/linklayer/common \
-    -I../inet/src/status \
-    -I../inet/src/linklayer/radio/propagation \
+    -I../inet/src/linklayer/ieee80211/mac \
+    -I../inet/src/transport/udp \
     -I../inet/src/linklayer/ieee80211/radio/errormodel \
-    -I../inet/src/linklayer/radio \
+    -I../inet/src/util/headerserializers \
+    -I../inet/src/linklayer/ieee80211/radio \
+    -I../inet/src/status \
+    -I../inet/src/transport/sctp \
+    -I../inet/src/networklayer/icmpv6 \
+    -I../inet/src/linklayer/radio/propagation \
+    -I../inet/src/transport/contract \
+    -I../inet/src/networklayer/ipv6tunneling \
+    -I../inet/src/world/radio \
+    -I../inet/src/linklayer/contract \
+    -I../inet/src/util/headerserializers/udp \
     -I../inet/src/util/headerserializers/tcp \
+    -I../inet/src/linklayer/radio \
+    -I../inet/src/world/obstacles \
+    -I../inet/src/networklayer/common \
+    -I../inet/src/networklayer/ipv6 \
+    -I../inet/src/networklayer/arp \
+    -I../inet/src/networklayer/routing/aodv \
+    -I../inet/src/networklayer/contract \
+    -I../inet/src \
+    -I../inet/src/networklayer/xmipv6 \
+    -I../inet/src/util/headerserializers/sctp \
+    -I../inet/src/util/headerserializers/ipv6 \
+    -I../inet/src/battery/models \
+    -I../inet/src/networklayer/autorouting/ipv4 \
     -I../inet/src/networklayer/ipv4 \
     -I../inet/src/mobility/contract \
-    -I../inet/src/util/headerserializers/ipv4 \
-    -I../inet/src/base \
-    -I../inet/src/util/headerserializers \
-    -I../inet/src/world/radio \
-    -I../inet/src/linklayer/ieee80211/mac \
-    -I../inet/src/networklayer/ipv6 \
-    -I../inet/src/transport/sctp \
-    -I../inet/src/util/headerserializers/udp \
-    -I../inet/src/networklayer/ipv6tunneling \
     -I../inet/src/applications/pingapp \
-    -I../inet/src/battery/models \
-    -I../inet/src/util/headerserializers/ipv6 \
-    -I../inet/src/util/headerserializers/sctp \
-    -I../inet/src/linklayer/contract \
-    -I../inet/src/networklayer/arp \
-    -I../inet/src/transport/tcp_common \
-    -I../inet/src/transport/udp \
+    -I../inet/src/linklayer/common \
+    -I../inet/src/util/headerserializers/ipv4 \
     -I../inet/src/mobility/common \
     -I. \
-    -IAuswertung \
-    -IAuswertung/plottingEndToEndDelyInterval \
-    -IAuswertung/plottingEndToEndDelyNumHost \
-    -IAuswertung/plottingRREQRREPInterval \
-    -IAuswertung/plottingRREQRREPNumHost \
-    -IAuswertung/plottingRoutingLoadInterval \
-    -IAuswertung/plottingRoutingLoadNumHost \
-    -IAuswertung/plottingSendingInterval \
-    -IAuswertung/plottingSendingNumHost \
-    -IAuswertung/plottingThrougputInterval \
-    -IAuswertung/plottingThrougputNumHost \
-    -IAuswertung/resultsMobile \
+    -IAnalyzation \
+    -IAnalyzation/omnetAnalyzer \
+    -IAnalyzation/omnetAnalyzer/bin \
+    -IAnalyzation/omnetAnalyzer/bin/omnetAnalyzer \
+    -IAnalyzation/omnetAnalyzer/bin/omnetAnalyzer/analyzer \
+    -IAnalyzation/omnetAnalyzer/libs \
+    -IAnalyzation/omnetAnalyzer/src \
+    -IAnalyzation/omnetAnalyzer/src/omnetAnalyzer \
+    -IAnalyzation/omnetAnalyzer/src/omnetAnalyzer/analyzer \
+    -IAnalyzation/plottingEndToEndDelyInterval \
+    -IAnalyzation/plottingEndToEndDelyNumHost \
+    -IAnalyzation/plottingRREQRREPInterval \
+    -IAnalyzation/plottingRREQRREPNumHost \
+    -IAnalyzation/plottingRoutingLoadInterval \
+    -IAnalyzation/plottingRoutingLoadNumHost \
+    -IAnalyzation/plottingSendingInterval \
+    -IAnalyzation/plottingSendingNumHost \
+    -IAnalyzation/plottingThrougputInterval \
+    -IAnalyzation/plottingThrougputNumHost \
+    -IAnalyzation/resultsMobile \
     -IIPv4AddressResolver \
     -IMobileSingleSourceDest \
     -IMobileThirtySourceDest \
@@ -76,9 +84,6 @@ INCLUDE_PATH = \
     -Ihtml \
     -Ihtml/search \
     -Ilatex \
-    -IresultsMobile \
-    -IresultsMobile/plottingSendingInterval \
-    -IresultsMobile/plottingThrougputNumHost \
     -Isrc \
     -Isrc/hosts \
     -Isrc/linklayer \
@@ -192,18 +197,26 @@ clean:
 	$(Q)-rm -rf $O
 	$(Q)-rm -f NetworkStructures NetworkStructures.exe libNetworkStructures.so libNetworkStructures.a libNetworkStructures.dll libNetworkStructures.dylib
 	$(Q)-rm -f ./*_m.cc ./*_m.h
-	$(Q)-rm -f Auswertung/*_m.cc Auswertung/*_m.h
-	$(Q)-rm -f Auswertung/plottingEndToEndDelyInterval/*_m.cc Auswertung/plottingEndToEndDelyInterval/*_m.h
-	$(Q)-rm -f Auswertung/plottingEndToEndDelyNumHost/*_m.cc Auswertung/plottingEndToEndDelyNumHost/*_m.h
-	$(Q)-rm -f Auswertung/plottingRREQRREPInterval/*_m.cc Auswertung/plottingRREQRREPInterval/*_m.h
-	$(Q)-rm -f Auswertung/plottingRREQRREPNumHost/*_m.cc Auswertung/plottingRREQRREPNumHost/*_m.h
-	$(Q)-rm -f Auswertung/plottingRoutingLoadInterval/*_m.cc Auswertung/plottingRoutingLoadInterval/*_m.h
-	$(Q)-rm -f Auswertung/plottingRoutingLoadNumHost/*_m.cc Auswertung/plottingRoutingLoadNumHost/*_m.h
-	$(Q)-rm -f Auswertung/plottingSendingInterval/*_m.cc Auswertung/plottingSendingInterval/*_m.h
-	$(Q)-rm -f Auswertung/plottingSendingNumHost/*_m.cc Auswertung/plottingSendingNumHost/*_m.h
-	$(Q)-rm -f Auswertung/plottingThrougputInterval/*_m.cc Auswertung/plottingThrougputInterval/*_m.h
-	$(Q)-rm -f Auswertung/plottingThrougputNumHost/*_m.cc Auswertung/plottingThrougputNumHost/*_m.h
-	$(Q)-rm -f Auswertung/resultsMobile/*_m.cc Auswertung/resultsMobile/*_m.h
+	$(Q)-rm -f Analyzation/*_m.cc Analyzation/*_m.h
+	$(Q)-rm -f Analyzation/omnetAnalyzer/*_m.cc Analyzation/omnetAnalyzer/*_m.h
+	$(Q)-rm -f Analyzation/omnetAnalyzer/bin/*_m.cc Analyzation/omnetAnalyzer/bin/*_m.h
+	$(Q)-rm -f Analyzation/omnetAnalyzer/bin/omnetAnalyzer/*_m.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/*_m.h
+	$(Q)-rm -f Analyzation/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*_m.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*_m.h
+	$(Q)-rm -f Analyzation/omnetAnalyzer/libs/*_m.cc Analyzation/omnetAnalyzer/libs/*_m.h
+	$(Q)-rm -f Analyzation/omnetAnalyzer/src/*_m.cc Analyzation/omnetAnalyzer/src/*_m.h
+	$(Q)-rm -f Analyzation/omnetAnalyzer/src/omnetAnalyzer/*_m.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/*_m.h
+	$(Q)-rm -f Analyzation/omnetAnalyzer/src/omnetAnalyzer/analyzer/*_m.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/analyzer/*_m.h
+	$(Q)-rm -f Analyzation/plottingEndToEndDelyInterval/*_m.cc Analyzation/plottingEndToEndDelyInterval/*_m.h
+	$(Q)-rm -f Analyzation/plottingEndToEndDelyNumHost/*_m.cc Analyzation/plottingEndToEndDelyNumHost/*_m.h
+	$(Q)-rm -f Analyzation/plottingRREQRREPInterval/*_m.cc Analyzation/plottingRREQRREPInterval/*_m.h
+	$(Q)-rm -f Analyzation/plottingRREQRREPNumHost/*_m.cc Analyzation/plottingRREQRREPNumHost/*_m.h
+	$(Q)-rm -f Analyzation/plottingRoutingLoadInterval/*_m.cc Analyzation/plottingRoutingLoadInterval/*_m.h
+	$(Q)-rm -f Analyzation/plottingRoutingLoadNumHost/*_m.cc Analyzation/plottingRoutingLoadNumHost/*_m.h
+	$(Q)-rm -f Analyzation/plottingSendingInterval/*_m.cc Analyzation/plottingSendingInterval/*_m.h
+	$(Q)-rm -f Analyzation/plottingSendingNumHost/*_m.cc Analyzation/plottingSendingNumHost/*_m.h
+	$(Q)-rm -f Analyzation/plottingThrougputInterval/*_m.cc Analyzation/plottingThrougputInterval/*_m.h
+	$(Q)-rm -f Analyzation/plottingThrougputNumHost/*_m.cc Analyzation/plottingThrougputNumHost/*_m.h
+	$(Q)-rm -f Analyzation/resultsMobile/*_m.cc Analyzation/resultsMobile/*_m.h
 	$(Q)-rm -f IPv4AddressResolver/*_m.cc IPv4AddressResolver/*_m.h
 	$(Q)-rm -f MobileSingleSourceDest/*_m.cc MobileSingleSourceDest/*_m.h
 	$(Q)-rm -f MobileThirtySourceDest/*_m.cc MobileThirtySourceDest/*_m.h
@@ -215,9 +228,6 @@ clean:
 	$(Q)-rm -f html/*_m.cc html/*_m.h
 	$(Q)-rm -f html/search/*_m.cc html/search/*_m.h
 	$(Q)-rm -f latex/*_m.cc latex/*_m.h
-	$(Q)-rm -f resultsMobile/*_m.cc resultsMobile/*_m.h
-	$(Q)-rm -f resultsMobile/plottingSendingInterval/*_m.cc resultsMobile/plottingSendingInterval/*_m.h
-	$(Q)-rm -f resultsMobile/plottingThrougputNumHost/*_m.cc resultsMobile/plottingThrougputNumHost/*_m.h
 	$(Q)-rm -f src/*_m.cc src/*_m.h
 	$(Q)-rm -f src/hosts/*_m.cc src/hosts/*_m.h
 	$(Q)-rm -f src/linklayer/*_m.cc src/linklayer/*_m.h
@@ -232,7 +242,7 @@ cleanall: clean
 
 depend:
 	$(qecho) Creating dependencies...
-	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc Auswertung/*.cc Auswertung/plottingEndToEndDelyInterval/*.cc Auswertung/plottingEndToEndDelyNumHost/*.cc Auswertung/plottingRREQRREPInterval/*.cc Auswertung/plottingRREQRREPNumHost/*.cc Auswertung/plottingRoutingLoadInterval/*.cc Auswertung/plottingRoutingLoadNumHost/*.cc Auswertung/plottingSendingInterval/*.cc Auswertung/plottingSendingNumHost/*.cc Auswertung/plottingThrougputInterval/*.cc Auswertung/plottingThrougputNumHost/*.cc Auswertung/resultsMobile/*.cc IPv4AddressResolver/*.cc MobileSingleSourceDest/*.cc MobileThirtySourceDest/*.cc MobileTwentySourceDest/*.cc Simulation/*.cc StaticFifteenSourceDest/*.cc StaticThirtySourceDest/*.cc StaticTwentySourceDest/*.cc html/*.cc html/search/*.cc latex/*.cc resultsMobile/*.cc resultsMobile/plottingSendingInterval/*.cc resultsMobile/plottingThrougputNumHost/*.cc src/*.cc src/hosts/*.cc src/linklayer/*.cc src/networklayer/*.cc src/networklayer/D2DRS/*.cc src/nodes/*.cc src/routing/*.cc src/routing/messagetypes/*.cc
+	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc Analyzation/*.cc Analyzation/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/bin/*.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*.cc Analyzation/omnetAnalyzer/libs/*.cc Analyzation/omnetAnalyzer/src/*.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/analyzer/*.cc Analyzation/plottingEndToEndDelyInterval/*.cc Analyzation/plottingEndToEndDelyNumHost/*.cc Analyzation/plottingRREQRREPInterval/*.cc Analyzation/plottingRREQRREPNumHost/*.cc Analyzation/plottingRoutingLoadInterval/*.cc Analyzation/plottingRoutingLoadNumHost/*.cc Analyzation/plottingSendingInterval/*.cc Analyzation/plottingSendingNumHost/*.cc Analyzation/plottingThrougputInterval/*.cc Analyzation/plottingThrougputNumHost/*.cc Analyzation/resultsMobile/*.cc IPv4AddressResolver/*.cc MobileSingleSourceDest/*.cc MobileThirtySourceDest/*.cc MobileTwentySourceDest/*.cc Simulation/*.cc StaticFifteenSourceDest/*.cc StaticThirtySourceDest/*.cc StaticTwentySourceDest/*.cc html/*.cc html/search/*.cc latex/*.cc src/*.cc src/hosts/*.cc src/linklayer/*.cc src/networklayer/*.cc src/networklayer/D2DRS/*.cc src/nodes/*.cc src/routing/*.cc src/routing/messagetypes/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/src/hosts/HostCharacteristic.o: src/hosts/HostCharacteristic.cc \

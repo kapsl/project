@@ -3,12 +3,9 @@
 # Calculate routing load
 # TODO parameters
 
-val=0
-sumSentPayloadGeneral=0
-sumSentAODVPktsGeneral=0
-routingLoadD2DRS=0
-routingLoadAODV=0
-counter=0
+$counter=0
+
+echo "Calculating routing load"	
 
 for filename in `ls -1v $1*.sca`
 do
@@ -19,7 +16,6 @@ sumSentAODVPktsGeneral=0
 routingLoadD2DRS=0
 routingLoadAODV=0
 
-echo "Calculating routing load"	
 #echo -e '#interval(sec)\t%RLGeneral\t%RLAODV\tPayloadD2DRS\tAODVAODV' > RoutingLoad${11}.dat;
 #echo -e '#interval(sec)\t%RLGeneral\t%RLAODV\tPayloadD2DRS\tAODVAODV';
 
@@ -66,7 +62,7 @@ done < $filename;
 tmpValueD2DRS=$(echo $sumSentPayloadGeneral+$sumSentAODVPktsGeneral | bc -l)
 tmpValueD2DRS=$(echo 100/$tmpValueD2DRS | bc -l)
 routingLoadD2DRS=$(echo "scale=2; "$tmpValueD2DRS*$sumSentAODVPktsGeneral/1 | bc -l)
-echo "RoutingLoadD2DRS: "$routingLoadD2DRS
+#echo "RoutingLoadD2DRS: "$routingLoadD2DRS
 
 #tmpValueAODV=$(echo $sumSentPayloadAODV+$sumSentAODVPktsAODV | bc -l)
 #tmpValueAODV=$(echo 100/$tmpValueAODV | bc -l)

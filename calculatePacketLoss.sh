@@ -1,9 +1,6 @@
 #!/bin/bash
 #
 
-val=0
-sumSentGeneral=0
-sumRcvdGeneral=0
 sumLostGeneral=100
 counter=0
 
