@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 
 import omnetAnalyzer.MyAnalyzer;
+import omnetAnalyzer.OmnetAnalyzer;
 import cern.colt.list.DoubleArrayList;
 
 public class RoutingLoadAnalyzer extends MyAnalyzer {
@@ -56,7 +57,7 @@ public class RoutingLoadAnalyzer extends MyAnalyzer {
 				* Double.valueOf(sumOfRoutingPackages)
 				/ (this.getSumOfSentPackages() + Double
 						.valueOf(sumOfRoutingPackages));
-		System.out.println("Old Routing Load: " + mmean);
+		OmnetAnalyzer.OUTPUT.add("Old Routing Load: " + mmean);
 
 		this.printStatistics(normalizedRoutingPackageNr);
 	}

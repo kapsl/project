@@ -3,6 +3,7 @@ package omnetAnalyzer.analyzer;
 import java.io.BufferedReader;
 
 import omnetAnalyzer.MyAnalyzer;
+import omnetAnalyzer.OmnetAnalyzer;
 
 public class PacketLossAnalyzer extends MyAnalyzer {
 	@Override
@@ -15,7 +16,8 @@ public class PacketLossAnalyzer extends MyAnalyzer {
 		double mean = 100 - 100 * this.getSumOfReceivedPackages()
 				/ this.getSumOfSentPackages();
 
-		System.out.println("Mean: " + mean);
+		OmnetAnalyzer.OUTPUT.add("Mean: " + mean);
+		OmnetAnalyzer.EXCEL_OUTPUT.add(mean + "\t" + "/");
 	}
 
 	@Override
