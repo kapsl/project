@@ -1,0 +1,508 @@
+Calculating packet loss...
+StaticThirtySourceDest/General-0.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-1.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-2.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-3.sca
+UDPPackets sent: 53213
+UDPPackets received: 53190
+UDPPackets lost:  1
+StaticThirtySourceDest/General-4.sca
+UDPPackets sent: 53213
+UDPPackets received: 53190
+UDPPackets lost:  1
+StaticThirtySourceDest/General-5.sca
+UDPPackets sent: 53213
+UDPPackets received: 53190
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-6.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-7.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-8.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-9.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-10.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-11.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-12.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-13.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-14.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-15.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+StaticThirtySourceDest/General-16.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+StaticThirtySourceDest/General-17.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-18.sca
+UDPPackets sent: 53213
+UDPPackets received: 53191
+UDPPackets lost:  1
+StaticThirtySourceDest/General-19.sca
+UDPPackets sent: 53213
+UDPPackets received: 53191
+UDPPackets lost:  1
+StaticThirtySourceDest/General-20.sca
+UDPPackets sent: 53213
+UDPPackets received: 53191
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-21.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+StaticThirtySourceDest/General-22.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+StaticThirtySourceDest/General-23.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-24.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-25.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-26.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-27.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-28.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+StaticThirtySourceDest/General-29.sca
+UDPPackets sent: 53213
+UDPPackets received: 53212
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-30.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+StaticThirtySourceDest/General-31.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+StaticThirtySourceDest/General-32.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-33.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+StaticThirtySourceDest/General-34.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+StaticThirtySourceDest/General-35.sca
+UDPPackets sent: 53213
+UDPPackets received: 53208
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-36.sca
+UDPPackets sent: 53213
+UDPPackets received: 53191
+UDPPackets lost:  1
+StaticThirtySourceDest/General-37.sca
+UDPPackets sent: 53213
+UDPPackets received: 53191
+UDPPackets lost:  1
+StaticThirtySourceDest/General-38.sca
+UDPPackets sent: 53213
+UDPPackets received: 53191
+UDPPackets lost:  1
+
+StaticThirtySourceDest/General-39.sca
+UDPPackets sent: 266001
+UDPPackets received: 43725
+UDPPackets lost:  84
+StaticThirtySourceDest/General-40.sca
+UDPPackets sent: 266001
+UDPPackets received: 43184
+UDPPackets lost:  84
+StaticThirtySourceDest/General-41.sca
+UDPPackets sent: 266001
+UDPPackets received: 40492
+UDPPackets lost:  85
+
+StaticThirtySourceDest/General-42.sca
+UDPPackets sent: 266001
+UDPPackets received: 45502
+UDPPackets lost:  83
+StaticThirtySourceDest/General-43.sca
+UDPPackets sent: 266001
+UDPPackets received: 36527
+UDPPackets lost:  87
+StaticThirtySourceDest/General-44.sca
+UDPPackets sent: 266001
+UDPPackets received: 41963
+UDPPackets lost:  85
+
+StaticThirtySourceDest/General-45.sca
+UDPPackets sent: 266001
+UDPPackets received: 40930
+UDPPackets lost:  85
+StaticThirtySourceDest/General-46.sca
+UDPPackets sent: 266001
+UDPPackets received: 52656
+UDPPackets lost:  81
+StaticThirtySourceDest/General-47.sca
+UDPPackets sent: 266001
+UDPPackets received: 50864
+UDPPackets lost:  81
+
+StaticThirtySourceDest/General-48.sca
+UDPPackets sent: 266001
+UDPPackets received: 47001
+UDPPackets lost:  83
+StaticThirtySourceDest/General-49.sca
+UDPPackets sent: 266001
+UDPPackets received: 39288
+UDPPackets lost:  86
+StaticThirtySourceDest/General-50.sca
+UDPPackets sent: 266001
+UDPPackets received: 42102
+UDPPackets lost:  85
+
+StaticThirtySourceDest/General-51.sca
+UDPPackets sent: 266001
+UDPPackets received: 56121
+UDPPackets lost:  79
+StaticThirtySourceDest/General-52.sca
+UDPPackets sent: 266001
+UDPPackets received: 53891
+UDPPackets lost:  80
+StaticThirtySourceDest/General-53.sca
+UDPPackets sent: 266001
+UDPPackets received: 50608
+UDPPackets lost:  81
+
+StaticThirtySourceDest/General-54.sca
+UDPPackets sent: 266001
+UDPPackets received: 75268
+UDPPackets lost:  72
+StaticThirtySourceDest/General-55.sca
+UDPPackets sent: 266001
+UDPPackets received: 99768
+UDPPackets lost:  63
+StaticThirtySourceDest/General-56.sca
+UDPPackets sent: 266001
+UDPPackets received: 62090
+UDPPackets lost:  77
+
+StaticThirtySourceDest/General-57.sca
+UDPPackets sent: 266001
+UDPPackets received: 82097
+UDPPackets lost:  70
+StaticThirtySourceDest/General-58.sca
+UDPPackets sent: 266001
+UDPPackets received: 79666
+UDPPackets lost:  71
+StaticThirtySourceDest/General-59.sca
+UDPPackets sent: 266001
+UDPPackets received: 87420
+UDPPackets lost:  68
+
+StaticThirtySourceDest/General-60.sca
+UDPPackets sent: 266001
+UDPPackets received: 94161
+UDPPackets lost:  65
+StaticThirtySourceDest/General-61.sca
+UDPPackets sent: 266001
+UDPPackets received: 101514
+UDPPackets lost:  62
+StaticThirtySourceDest/General-62.sca
+UDPPackets sent: 266001
+UDPPackets received: 84884
+UDPPackets lost:  69
+
+StaticThirtySourceDest/General-63.sca
+UDPPackets sent: 266001
+UDPPackets received: 90181
+UDPPackets lost:  67
+StaticThirtySourceDest/General-64.sca
+UDPPackets sent: 266001
+UDPPackets received: 115810
+UDPPackets lost:  57
+StaticThirtySourceDest/General-65.sca
+UDPPackets sent: 266001
+UDPPackets received: 148817
+UDPPackets lost:  45
+
+StaticThirtySourceDest/General-66.sca
+UDPPackets sent: 266001
+UDPPackets received: 52831
+UDPPackets lost:  81
+StaticThirtySourceDest/General-67.sca
+UDPPackets sent: 266001
+UDPPackets received: 49904
+UDPPackets lost:  82
+StaticThirtySourceDest/General-68.sca
+UDPPackets sent: 266001
+UDPPackets received: 59775
+UDPPackets lost:  78
+
+StaticThirtySourceDest/General-69.sca
+UDPPackets sent: 266001
+UDPPackets received: 81402
+UDPPackets lost:  70
+StaticThirtySourceDest/General-70.sca
+UDPPackets sent: 266001
+UDPPackets received: 73792
+UDPPackets lost:  73
+StaticThirtySourceDest/General-71.sca
+UDPPackets sent: 266001
+UDPPackets received: 99573
+UDPPackets lost:  63
+
+StaticThirtySourceDest/General-72.sca
+UDPPackets sent: 266001
+UDPPackets received: 125699
+UDPPackets lost:  53
+StaticThirtySourceDest/General-73.sca
+UDPPackets sent: 266001
+UDPPackets received: 116180
+UDPPackets lost:  57
+StaticThirtySourceDest/General-74.sca
+UDPPackets sent: 266001
+UDPPackets received: 125974
+UDPPackets lost:  53
+
+StaticThirtySourceDest/General-75.sca
+UDPPackets sent: 266001
+UDPPackets received: 86648
+UDPPackets lost:  68
+StaticThirtySourceDest/General-76.sca
+UDPPackets sent: 266001
+UDPPackets received: 77310
+UDPPackets lost:  71
+StaticThirtySourceDest/General-77.sca
+UDPPackets sent: 266001
+UDPPackets received: 84180
+UDPPackets lost:  69
+
+StaticThirtySourceDest/General-78.sca
+UDPPackets sent: 531986
+UDPPackets received: 74328
+UDPPackets lost:  87
+StaticThirtySourceDest/General-79.sca
+UDPPackets sent: 531986
+UDPPackets received: 76438
+UDPPackets lost:  86
+StaticThirtySourceDest/General-80.sca
+UDPPackets sent: 531986
+UDPPackets received: 85583
+UDPPackets lost:  84
+
+StaticThirtySourceDest/General-81.sca
+UDPPackets sent: 531986
+UDPPackets received: 86904
+UDPPackets lost:  84
+StaticThirtySourceDest/General-82.sca
+UDPPackets sent: 531986
+UDPPackets received: 89526
+UDPPackets lost:  84
+StaticThirtySourceDest/General-83.sca
+UDPPackets sent: 531986
+UDPPackets received: 78449
+UDPPackets lost:  86
+
+StaticThirtySourceDest/General-84.sca
+UDPPackets sent: 531986
+UDPPackets received: 80411
+UDPPackets lost:  85
+StaticThirtySourceDest/General-85.sca
+UDPPackets sent: 531986
+UDPPackets received: 83355
+UDPPackets lost:  85
+StaticThirtySourceDest/General-86.sca
+UDPPackets sent: 531986
+UDPPackets received: 86845
+UDPPackets lost:  84
+
+StaticThirtySourceDest/General-87.sca
+UDPPackets sent: 531986
+UDPPackets received: 82436
+UDPPackets lost:  85
+StaticThirtySourceDest/General-88.sca
+UDPPackets sent: 531986
+UDPPackets received: 87760
+UDPPackets lost:  84
+StaticThirtySourceDest/General-89.sca
+UDPPackets sent: 531986
+UDPPackets received: 69576
+UDPPackets lost:  87
+
+StaticThirtySourceDest/General-90.sca
+UDPPackets sent: 531986
+UDPPackets received: 80300
+UDPPackets lost:  85
+StaticThirtySourceDest/General-91.sca
+UDPPackets sent: 531986
+UDPPackets received: 81232
+UDPPackets lost:  85
+StaticThirtySourceDest/General-92.sca
+UDPPackets sent: 531986
+UDPPackets received: 75035
+UDPPackets lost:  86
+
+StaticThirtySourceDest/General-93.sca
+UDPPackets sent: 531986
+UDPPackets received: 82436
+UDPPackets lost:  85
+StaticThirtySourceDest/General-94.sca
+UDPPackets sent: 531986
+UDPPackets received: 78222
+UDPPackets lost:  86
+StaticThirtySourceDest/General-95.sca
+UDPPackets sent: 531986
+UDPPackets received: 66165
+UDPPackets lost:  88
+
+StaticThirtySourceDest/General-96.sca
+UDPPackets sent: 531986
+UDPPackets received: 76986
+UDPPackets lost:  86
+StaticThirtySourceDest/General-97.sca
+UDPPackets sent: 531986
+UDPPackets received: 106741
+UDPPackets lost:  80
+StaticThirtySourceDest/General-98.sca
+UDPPackets sent: 531986
+UDPPackets received: 75089
+UDPPackets lost:  86
+
+StaticThirtySourceDest/General-99.sca
+UDPPackets sent: 531986
+UDPPackets received: 73509
+UDPPackets lost:  87
+StaticThirtySourceDest/General-100.sca
+UDPPackets sent: 531986
+UDPPackets received: 79057
+UDPPackets lost:  86
+StaticThirtySourceDest/General-101.sca
+UDPPackets sent: 531986
+UDPPackets received: 94554
+UDPPackets lost:  83
+
+StaticThirtySourceDest/General-102.sca
+UDPPackets sent: 531986
+UDPPackets received: 89760
+UDPPackets lost:  84
+StaticThirtySourceDest/General-103.sca
+UDPPackets sent: 531986
+UDPPackets received: 88400
+UDPPackets lost:  84
+StaticThirtySourceDest/General-104.sca
+UDPPackets sent: 531986
+UDPPackets received: 92290
+UDPPackets lost:  83
+
+StaticThirtySourceDest/General-105.sca
+UDPPackets sent: 531986
+UDPPackets received: 81859
+UDPPackets lost:  85
+StaticThirtySourceDest/General-106.sca
+UDPPackets sent: 531986
+UDPPackets received: 81486
+UDPPackets lost:  85
+StaticThirtySourceDest/General-107.sca
+UDPPackets sent: 531986
+UDPPackets received: 78228
+UDPPackets lost:  86
+
+StaticThirtySourceDest/General-108.sca
+UDPPackets sent: 531986
+UDPPackets received: 57016
+UDPPackets lost:  90
+StaticThirtySourceDest/General-109.sca
+UDPPackets sent: 531986
+UDPPackets received: 61761
+UDPPackets lost:  89
+StaticThirtySourceDest/General-110.sca
+UDPPackets sent: 531986
+UDPPackets received: 74705
+UDPPackets lost:  86
+
+StaticThirtySourceDest/General-111.sca
+UDPPackets sent: 531986
+UDPPackets received: 97096
+UDPPackets lost:  82
+StaticThirtySourceDest/General-112.sca
+UDPPackets sent: 531986
+UDPPackets received: 76524
+UDPPackets lost:  86
+StaticThirtySourceDest/General-113.sca
+UDPPackets sent: 531986
+UDPPackets received: 80724
+UDPPackets lost:  85
+
+StaticThirtySourceDest/General-114.sca
+UDPPackets sent: 531986
+UDPPackets received: 66469
+UDPPackets lost:  88
+StaticThirtySourceDest/General-115.sca
+UDPPackets sent: 531986
+UDPPackets received: 68334
+UDPPackets lost:  88
+StaticThirtySourceDest/General-116.sca
+UDPPackets sent: 531986
+UDPPackets received: 85616
+UDPPackets lost:  84
+

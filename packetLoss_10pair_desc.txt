@@ -1,0 +1,521 @@
+Calculating packet loss...
+MobileTenSourceDest/General-0.sca
+UDPPackets sent: 300
+UDPPackets received: 296
+UDPPackets lost:  2
+MobileTenSourceDest/General-1.sca
+UDPPackets sent: 300
+UDPPackets received: 296
+UDPPackets lost:  2
+MobileTenSourceDest/General-2.sca
+UDPPackets sent: 300
+UDPPackets received: 296
+UDPPackets lost:  2
+
+MobileTenSourceDest/General-3.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+MobileTenSourceDest/General-4.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+MobileTenSourceDest/General-5.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+
+MobileTenSourceDest/General-6.sca
+UDPPackets sent: 300
+UDPPackets received: 297
+UDPPackets lost:  1
+MobileTenSourceDest/General-7.sca
+UDPPackets sent: 300
+UDPPackets received: 297
+UDPPackets lost:  1
+MobileTenSourceDest/General-8.sca
+UDPPackets sent: 300
+UDPPackets received: 297
+UDPPackets lost:  1
+
+MobileTenSourceDest/General-9.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+MobileTenSourceDest/General-10.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+MobileTenSourceDest/General-11.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+
+MobileTenSourceDest/General-12.sca
+UDPPackets sent: 300
+UDPPackets received: 300
+UDPPackets lost:  0
+MobileTenSourceDest/General-13.sca
+UDPPackets sent: 300
+UDPPackets received: 300
+UDPPackets lost:  0
+MobileTenSourceDest/General-14.sca
+UDPPackets sent: 300
+UDPPackets received: 300
+UDPPackets lost:  0
+
+MobileTenSourceDest/General-15.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+MobileTenSourceDest/General-16.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+MobileTenSourceDest/General-17.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+
+MobileTenSourceDest/General-18.sca
+UDPPackets sent: 300
+UDPPackets received: 284
+UDPPackets lost:  6
+MobileTenSourceDest/General-19.sca
+UDPPackets sent: 300
+UDPPackets received: 288
+UDPPackets lost:  4
+MobileTenSourceDest/General-20.sca
+UDPPackets sent: 300
+UDPPackets received: 288
+UDPPackets lost:  4
+
+MobileTenSourceDest/General-21.sca
+UDPPackets sent: 300
+UDPPackets received: 290
+UDPPackets lost:  4
+MobileTenSourceDest/General-22.sca
+UDPPackets sent: 300
+UDPPackets received: 283
+UDPPackets lost:  6
+MobileTenSourceDest/General-23.sca
+UDPPackets sent: 300
+UDPPackets received: 274
+UDPPackets lost:  9
+
+MobileTenSourceDest/General-24.sca
+UDPPackets sent: 300
+UDPPackets received: 271
+UDPPackets lost:  10
+MobileTenSourceDest/General-25.sca
+UDPPackets sent: 300
+UDPPackets received: 263
+UDPPackets lost:  13
+MobileTenSourceDest/General-26.sca
+UDPPackets sent: 300
+UDPPackets received: 262
+UDPPackets lost:  13
+
+MobileTenSourceDest/General-27.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+MobileTenSourceDest/General-28.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+MobileTenSourceDest/General-29.sca
+UDPPackets sent: 300
+UDPPackets received: 298
+UDPPackets lost:  1
+
+MobileTenSourceDest/General-30.sca
+UDPPackets sent: 300
+UDPPackets received: 296
+UDPPackets lost:  2
+MobileTenSourceDest/General-31.sca
+UDPPackets sent: 300
+UDPPackets received: 296
+UDPPackets lost:  2
+MobileTenSourceDest/General-32.sca
+UDPPackets sent: 300
+UDPPackets received: 296
+UDPPackets lost:  2
+
+MobileTenSourceDest/General-33.sca
+UDPPackets sent: 300
+UDPPackets received: 294
+UDPPackets lost:  2
+MobileTenSourceDest/General-34.sca
+UDPPackets sent: 300
+UDPPackets received: 294
+UDPPackets lost:  2
+MobileTenSourceDest/General-35.sca
+UDPPackets sent: 300
+UDPPackets received: 294
+UDPPackets lost:  2
+
+MobileTenSourceDest/General-36.sca
+UDPPackets sent: 300
+UDPPackets received: 299
+UDPPackets lost:  1
+MobileTenSourceDest/General-37.sca
+UDPPackets sent: 300
+UDPPackets received: 299
+UDPPackets lost:  1
+MobileTenSourceDest/General-38.sca
+UDPPackets sent: 300
+UDPPackets received: 299
+UDPPackets lost:  1
+
+MobileTenSourceDest/General-39.sca
+UDPPackets sent: 8874
+UDPPackets received: 7754
+UDPPackets lost:  13
+MobileTenSourceDest/General-40.sca
+UDPPackets sent: 8874
+UDPPackets received: 7814
+UDPPackets lost:  12
+MobileTenSourceDest/General-41.sca
+UDPPackets sent: 8874
+UDPPackets received: 7872
+UDPPackets lost:  12
+
+MobileTenSourceDest/General-42.sca
+UDPPackets sent: 8874
+UDPPackets received: 7685
+UDPPackets lost:  14
+MobileTenSourceDest/General-43.sca
+UDPPackets sent: 8874
+UDPPackets received: 7623
+UDPPackets lost:  15
+MobileTenSourceDest/General-44.sca
+UDPPackets sent: 8874
+UDPPackets received: 8019
+UDPPackets lost:  10
+
+MobileTenSourceDest/General-45.sca
+UDPPackets sent: 8874
+UDPPackets received: 8077
+UDPPackets lost:  9
+MobileTenSourceDest/General-46.sca
+UDPPackets sent: 8874
+UDPPackets received: 7700
+UDPPackets lost:  14
+MobileTenSourceDest/General-47.sca
+UDPPackets sent: 8874
+UDPPackets received: 8189
+UDPPackets lost:  8
+
+MobileTenSourceDest/General-48.sca
+UDPPackets sent: 8874
+UDPPackets received: 7927
+UDPPackets lost:  11
+MobileTenSourceDest/General-49.sca
+UDPPackets sent: 8874
+UDPPackets received: 7929
+UDPPackets lost:  11
+MobileTenSourceDest/General-50.sca
+UDPPackets sent: 8874
+UDPPackets received: 7776
+UDPPackets lost:  13
+
+MobileTenSourceDest/General-51.sca
+UDPPackets sent: 8874
+UDPPackets received: 7893
+UDPPackets lost:  12
+MobileTenSourceDest/General-52.sca
+UDPPackets sent: 8874
+UDPPackets received: 7860
+UDPPackets lost:  12
+MobileTenSourceDest/General-53.sca
+UDPPackets sent: 8874
+UDPPackets received: 7434
+UDPPackets lost:  17
+
+MobileTenSourceDest/General-54.sca
+UDPPackets sent: 8874
+UDPPackets received: 7581
+UDPPackets lost:  15
+MobileTenSourceDest/General-55.sca
+UDPPackets sent: 8874
+UDPPackets received: 7871
+UDPPackets lost:  12
+MobileTenSourceDest/General-56.sca
+UDPPackets sent: 8874
+UDPPackets received: 8008
+UDPPackets lost:  10
+
+MobileTenSourceDest/General-57.sca
+UDPPackets sent: 8874
+UDPPackets received: 7559
+UDPPackets lost:  15
+MobileTenSourceDest/General-58.sca
+UDPPackets sent: 8874
+UDPPackets received: 7778
+UDPPackets lost:  13
+MobileTenSourceDest/General-59.sca
+UDPPackets sent: 8874
+UDPPackets received: 7487
+UDPPackets lost:  16
+
+MobileTenSourceDest/General-60.sca
+UDPPackets sent: 8874
+UDPPackets received: 7775
+UDPPackets lost:  13
+MobileTenSourceDest/General-61.sca
+UDPPackets sent: 8874
+UDPPackets received: 7268
+UDPPackets lost:  19
+MobileTenSourceDest/General-62.sca
+UDPPackets sent: 8874
+UDPPackets received: 7368
+UDPPackets lost:  17
+
+MobileTenSourceDest/General-63.sca
+UDPPackets sent: 8874
+UDPPackets received: 7087
+UDPPackets lost:  21
+MobileTenSourceDest/General-64.sca
+UDPPackets sent: 8874
+UDPPackets received: 6471
+UDPPackets lost:  28
+MobileTenSourceDest/General-65.sca
+UDPPackets sent: 8874
+UDPPackets received: 6796
+UDPPackets lost:  24
+
+MobileTenSourceDest/General-66.sca
+UDPPackets sent: 8874
+UDPPackets received: 7627
+UDPPackets lost:  15
+MobileTenSourceDest/General-67.sca
+UDPPackets sent: 8874
+UDPPackets received: 7988
+UDPPackets lost:  10
+MobileTenSourceDest/General-68.sca
+UDPPackets sent: 8874
+UDPPackets received: 7886
+UDPPackets lost:  12
+
+MobileTenSourceDest/General-69.sca
+UDPPackets sent: 8874
+UDPPackets received: 8137
+UDPPackets lost:  9
+MobileTenSourceDest/General-70.sca
+UDPPackets sent: 8874
+UDPPackets received: 7838
+UDPPackets lost:  12
+MobileTenSourceDest/General-71.sca
+UDPPackets sent: 8874
+UDPPackets received: 7201
+UDPPackets lost:  19
+
+MobileTenSourceDest/General-72.sca
+UDPPackets sent: 8874
+UDPPackets received: 8025
+UDPPackets lost:  10
+MobileTenSourceDest/General-73.sca
+UDPPackets sent: 8874
+UDPPackets received: 8132
+UDPPackets lost:  9
+MobileTenSourceDest/General-74.sca
+UDPPackets sent: 8874
+UDPPackets received: 8163
+UDPPackets lost:  9
+
+MobileTenSourceDest/General-75.sca
+UDPPackets sent: 8874
+UDPPackets received: 7705
+UDPPackets lost:  14
+MobileTenSourceDest/General-76.sca
+UDPPackets sent: 8874
+UDPPackets received: 7984
+UDPPackets lost:  11
+MobileTenSourceDest/General-77.sca
+UDPPackets sent: 8874
+UDPPackets received: 7715
+UDPPackets lost:  14
+
+MobileTenSourceDest/General-78.sca
+UDPPackets sent: 17744
+UDPPackets received: 16722
+UDPPackets lost:  6
+MobileTenSourceDest/General-79.sca
+UDPPackets sent: 17744
+UDPPackets received: 16345
+UDPPackets lost:  8
+MobileTenSourceDest/General-80.sca
+UDPPackets sent: 17744
+UDPPackets received: 15673
+UDPPackets lost:  12
+
+MobileTenSourceDest/General-81.sca
+UDPPackets sent: 17744
+UDPPackets received: 15768
+UDPPackets lost:  12
+MobileTenSourceDest/General-82.sca
+UDPPackets sent: 17744
+UDPPackets received: 16585
+UDPPackets lost:  7
+MobileTenSourceDest/General-83.sca
+UDPPackets sent: 17744
+UDPPackets received: 16425
+UDPPackets lost:  8
+
+MobileTenSourceDest/General-84.sca
+UDPPackets sent: 17744
+UDPPackets received: 16537
+UDPPackets lost:  7
+MobileTenSourceDest/General-85.sca
+UDPPackets sent: 17744
+UDPPackets received: 16536
+UDPPackets lost:  7
+MobileTenSourceDest/General-86.sca
+UDPPackets sent: 17744
+UDPPackets received: 16795
+UDPPackets lost:  6
+
+MobileTenSourceDest/General-87.sca
+UDPPackets sent: 17744
+UDPPackets received: 16439
+UDPPackets lost:  8
+MobileTenSourceDest/General-88.sca
+UDPPackets sent: 17744
+UDPPackets received: 15666
+UDPPackets lost:  12
+MobileTenSourceDest/General-89.sca
+UDPPackets sent: 17744
+UDPPackets received: 15649
+UDPPackets lost:  12
+
+MobileTenSourceDest/General-90.sca
+UDPPackets sent: 17744
+UDPPackets received: 16002
+UDPPackets lost:  10
+MobileTenSourceDest/General-91.sca
+UDPPackets sent: 17744
+UDPPackets received: 16755
+UDPPackets lost:  6
+MobileTenSourceDest/General-92.sca
+UDPPackets sent: 17744
+UDPPackets received: 16685
+UDPPackets lost:  6
+
+MobileTenSourceDest/General-93.sca
+UDPPackets sent: 17744
+UDPPackets received: 16226
+UDPPackets lost:  9
+MobileTenSourceDest/General-94.sca
+UDPPackets sent: 17744
+UDPPackets received: 15307
+UDPPackets lost:  14
+MobileTenSourceDest/General-95.sca
+UDPPackets sent: 17744
+UDPPackets received: 16287
+UDPPackets lost:  9
+
+MobileTenSourceDest/General-96.sca
+UDPPackets sent: 17744
+UDPPackets received: 16162
+UDPPackets lost:  9
+MobileTenSourceDest/General-97.sca
+UDPPackets sent: 17744
+UDPPackets received: 14937
+UDPPackets lost:  16
+MobileTenSourceDest/General-98.sca
+UDPPackets sent: 17744
+UDPPackets received: 15414
+UDPPackets lost:  14
+
+MobileTenSourceDest/General-99.sca
+UDPPackets sent: 17744
+UDPPackets received: 15775
+UDPPackets lost:  12
+MobileTenSourceDest/General-100.sca
+UDPPackets sent: 17744
+UDPPackets received: 15853
+UDPPackets lost:  11
+MobileTenSourceDest/General-101.sca
+UDPPackets sent: 17744
+UDPPackets received: 15872
+UDPPackets lost:  11
+
+MobileTenSourceDest/General-102.sca
+UDPPackets sent: 17744
+UDPPackets received: 14311
+UDPPackets lost:  20
+MobileTenSourceDest/General-103.sca
+UDPPackets sent: 17744
+UDPPackets received: 13534
+UDPPackets lost:  24
+MobileTenSourceDest/General-104.sca
+UDPPackets sent: 17744
+UDPPackets received: 14682
+UDPPackets lost:  18
+
+MobileTenSourceDest/General-105.sca
+UDPPackets sent: 17744
+UDPPackets received: 16258
+UDPPackets lost:  9
+MobileTenSourceDest/General-106.sca
+UDPPackets sent: 17744
+UDPPackets received: 16836
+UDPPackets lost:  6
+MobileTenSourceDest/General-107.sca
+UDPPackets sent: 17744
+UDPPackets received: 16809
+UDPPackets lost:  6
+
+MobileTenSourceDest/General-108.sca
+UDPPackets sent: 17744
+UDPPackets received: 16593
+UDPPackets lost:  7
+MobileTenSourceDest/General-109.sca
+UDPPackets sent: 17744
+UDPPackets received: 16991
+UDPPackets lost:  5
+MobileTenSourceDest/General-110.sca
+UDPPackets sent: 17744
+UDPPackets received: 17021
+UDPPackets lost:  5
+
+MobileTenSourceDest/General-111.sca
+UDPPackets sent: 17744
+UDPPackets received: 16023
+UDPPackets lost:  10
+MobileTenSourceDest/General-112.sca
+UDPPackets sent: 17744
+UDPPackets received: 16244
+UDPPackets lost:  9
+MobileTenSourceDest/General-113.sca
+UDPPackets sent: 17744
+UDPPackets received: 16837
+UDPPackets lost:  6
+
+MobileTenSourceDest/General-114.sca
+UDPPackets sent: 17744
+UDPPackets received: 16637
+UDPPackets lost:  7
+MobileTenSourceDest/General-115.sca
+UDPPackets sent: 17744
+UDPPackets received: 16039
+UDPPackets lost:  10
+MobileTenSourceDest/General-116.sca
+UDPPackets sent: 17744
+UDPPackets received: 16928
+UDPPackets lost:  5
+
+MobileTenSourceDest/General-117.sca
+UDPPackets sent: 88698
+UDPPackets received: 82712
+UDPPackets lost:  7
+MobileTenSourceDest/General-118.sca
+UDPPackets sent: 88698
+UDPPackets received: 83115
+UDPPackets lost:  7
+MobileTenSourceDest/General-119.sca
+UDPPackets sent: 88698
+UDPPackets received: 85000
+UDPPackets lost:  5
+

@@ -8,7 +8,7 @@ echo "Running Simulations ..."
 
 for ((i = $1; i < $2; i++))
 do
-	./NetworkStructures -r $i -u Cmdenv -n AODVNetwork .:../inet/examples:../inet/src -l ../inet/src/inet omnetpp.ini &
+	./NetworkStructures -r $i -u Cmdenv -c General -n .:../inet/examples:../inet/src -l ../inet/src/inet omnetpp.ini &
 done 
 
 wait
