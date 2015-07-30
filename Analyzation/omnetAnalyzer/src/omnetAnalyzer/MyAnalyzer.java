@@ -9,6 +9,8 @@ import cern.colt.list.DoubleArrayList;
 import cern.jet.stat.Descriptive;
 
 public abstract class MyAnalyzer {
+	public ArrayList<String> EXCEL_OUTPUT = new ArrayList<>();
+	
 	protected ArrayList<Integer> sentPackages = new ArrayList<>();
 	protected ArrayList<Integer> receivedPackages = new ArrayList<>();
 
@@ -102,7 +104,7 @@ public abstract class MyAnalyzer {
 			sSdev = String.format("%.5f", standardDeviation);
 		}
 
-		OmnetAnalyzer.EXCEL_OUTPUT.add(sMean + "\t" + sSdev);
+		EXCEL_OUTPUT.add(sMean + "\t" + sSdev);
 	}
 
 	/**

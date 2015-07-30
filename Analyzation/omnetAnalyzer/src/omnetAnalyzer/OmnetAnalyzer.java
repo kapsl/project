@@ -44,7 +44,6 @@ public class OmnetAnalyzer {
 	public static ArrayList<MyAnalyzer> myAnalyzers = new ArrayList<>();
 
 	public static ArrayList<String> OUTPUT = new ArrayList<>();
-	public static ArrayList<String> EXCEL_OUTPUT = new ArrayList<>();
 
 	public static boolean verboseOutput = true;
 	public static boolean excelOutput = false;
@@ -191,34 +190,42 @@ public class OmnetAnalyzer {
 	private static void printExcelOutput() {
 		System.out.println("Excel-Output");
 		System.out.println("");
+		
+		String[] configs = {"AODV", "D2DRS"};
 
-		// Output data per analyzer
-		int b = 0;
-		for (MyAnalyzer analyzer : myAnalyzers) {
-			System.out.println(analyzer.getAnalyzerName());
-			System.out.println("Sending-Intervals/Repeat-Number (Mean and Stddev)");
+		for (int g = 0, z = 0; g < 2 * NR_OF_REPEATS * sendingIntervals.length; g += NR_OF_REPEATS
+				* sendingIntervals.length, z++) {
+			System.out.println(configs[z]);
+			
+			// Output data per analyzer
+			int b = 0;
+			for (MyAnalyzer analyzer : myAnalyzers) {
+				System.out.println(analyzer.getAnalyzerName());
+				System.out
+						.println("Sending-Intervals/Repeat-Number (Mean and Stddev)");
 
-			// Print Headline
-			System.out.print("\t");
-			for (int i = 0; i < NR_OF_REPEATS; i++) {
-				System.out.print(i + "m\t" + i + "s\t");
-			}
-			System.out.println("");
+				// Print Headline
+				System.out.print("\t");
+				for (int i = 0; i < NR_OF_REPEATS; i++) {
+					System.out.print(i + "m\t" + i + "s\t");
+				}
+				System.out.println("");
 
-			for (int i = 0; i < sendingIntervals.length; i++) {
-				System.out.print(sendingIntervals[i] + "\t");
+				for (int i = 0; i < sendingIntervals.length; i++) {
+					System.out.print(sendingIntervals[i] + "\t");
 
-				for (int x = 0; x < NR_OF_REPEATS; x++) {
-					System.out.print(EXCEL_OUTPUT.get((b * i) + x) + "\t");
+					for (int x = 0; x < NR_OF_REPEATS; x++) {
+						System.out.print(analyzer.EXCEL_OUTPUT
+								.get(g + (i * NR_OF_REPEATS) + x) + "\t");
+					}
+
+					System.out.println("");
 				}
 
 				System.out.println("");
+
+				b++;
 			}
-			
-			System.out.println("");
-
-			b++;
 		}
-
 	}
 }

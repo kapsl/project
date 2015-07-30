@@ -17,7 +17,7 @@ public class PacketLossAnalyzer extends MyAnalyzer {
 				/ this.getSumOfSentPackages();
 
 		OmnetAnalyzer.OUTPUT.add("Mean: " + mean);
-		OmnetAnalyzer.EXCEL_OUTPUT.add(mean + "\t" + "/");
+		EXCEL_OUTPUT.add(mean + "\t" + "/");
 	}
 
 	@Override

@@ -292,6 +292,7 @@ void RoutingServerManagement::handleRouteRequest(AODVRREQ *rreq) {
  */
 void RoutingServerManagement::handleRegistrationRequest() {
     RegistrationRequest* regRequest = createRegistrationRequest();
+
     sendRoutingServerPacket(regRequest, IPv4Address::ALLONES_ADDRESS, 3, 0);
     scheduleAt(simTime() + serverRegRetryInterval, checkServerRegistration);
 }
@@ -306,15 +307,18 @@ RoutingServerManagement::createRegistrationRequest() {
     regRequest->setPacketType(REGISTRATIONREQUESTMSG);
     regRequest->setLifeTime(simTime());
     regRequest->setHopCount(0);
+
     return regRequest;
 }
 
 void RoutingServerManagement::handleRegistrationConfirmation(
         RegistrationConfirmation *packet, IPv4Address& address) {
     IPv4Route *existingRoute = routingTable->findBestMatchingRoute(address);
+
     if (!existingRoute || existingRoute->getSource() != this) {
         createRoute(address, address, 0, true, 0, true, simTime(), true);
     }
+
     existingRoute = 0;
     isRegistrated = true;
     serverInformation.serverAddress = address;

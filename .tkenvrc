@@ -1,7 +1,7 @@
 # Partial OMNeT++/Tkenv config file -- see $HOME/.tkenvrc as well
 config default-configname	{General}
 config default-runnumber	{0}
-inspector UDPBasicAppData-14 IPv4Datagram 1664818 1 464x318+82+183:normal
 inspector UDPBasicAppData-41 IPv4Datagram 43371 1 464x318+942+216:normal
+inspector UDPBasicAppData-14 IPv4Datagram 1664818 1 464x318+82+183:normal
 inspector simulation.scheduled-events.arpREQ ARPPacket 1229339 1 464x318+848+359:normal
 
