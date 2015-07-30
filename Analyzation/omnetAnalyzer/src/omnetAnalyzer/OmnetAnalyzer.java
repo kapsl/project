@@ -101,7 +101,7 @@ public class OmnetAnalyzer {
 					e.printStackTrace();
 				}
 			}
-			
+
 			OmnetAnalyzer.OUTPUT.add("");
 		}
 
@@ -146,13 +146,22 @@ public class OmnetAnalyzer {
 				int val2 = Integer.valueOf(name2.substring(
 						name2.lastIndexOf('-') + 1, name2.lastIndexOf('.')));
 
-				if (val1 > val2)
+				// Compare for the first letter and sort by this to divide AODV
+				// and D2DRS
+				if (name1.charAt(0) > name2.charAt(0)) {
 					return 1;
-				else if (val2 > val1)
+				} else if (name1.charAt(0) < name2.charAt(0)) {
 					return -1;
-				else
-					throw new RuntimeException("Same numbers of files... "
-							+ val1);
+				} else {
+					// Compare by run number
+					if (val1 > val2)
+						return 1;
+					else if (val2 > val1)
+						return -1;
+					else
+						throw new RuntimeException("Same numbers of files... "
+								+ val1);
+				}
 			}
 		});
 
@@ -197,14 +206,14 @@ public class OmnetAnalyzer {
 
 			for (int i = 0; i < sendingIntervals.length; i++) {
 				System.out.print(sendingIntervals[i] + "\t\t\t\t");
-				
+
 				for (int x = 0; x < NR_OF_REPEATS * 2; x++) {
 					System.out.print(EXCEL_OUTPUT.get((b * i) + x) + "\t\t");
 				}
-				
+
 				System.out.println("");
 			}
-			
+
 			b++;
 		}
 

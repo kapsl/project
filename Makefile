@@ -84,6 +84,8 @@ INCLUDE_PATH = \
     -Ihtml \
     -Ihtml/search \
     -Ilatex \
+    -IresultsMobile \
+    -IresultsMobile/plottingThrougputNumHost \
     -Isrc \
     -Isrc/hosts \
     -Isrc/linklayer \
@@ -228,6 +230,8 @@ clean:
 	$(Q)-rm -f html/*_m.cc html/*_m.h
 	$(Q)-rm -f html/search/*_m.cc html/search/*_m.h
 	$(Q)-rm -f latex/*_m.cc latex/*_m.h
+	$(Q)-rm -f resultsMobile/*_m.cc resultsMobile/*_m.h
+	$(Q)-rm -f resultsMobile/plottingThrougputNumHost/*_m.cc resultsMobile/plottingThrougputNumHost/*_m.h
 	$(Q)-rm -f src/*_m.cc src/*_m.h
 	$(Q)-rm -f src/hosts/*_m.cc src/hosts/*_m.h
 	$(Q)-rm -f src/linklayer/*_m.cc src/linklayer/*_m.h
@@ -242,7 +246,7 @@ cleanall: clean
 
 depend:
 	$(qecho) Creating dependencies...
-	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc Analyzation/*.cc Analyzation/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/bin/*.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*.cc Analyzation/omnetAnalyzer/libs/*.cc Analyzation/omnetAnalyzer/src/*.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/analyzer/*.cc Analyzation/plottingEndToEndDelyInterval/*.cc Analyzation/plottingEndToEndDelyNumHost/*.cc Analyzation/plottingPacketDeliveryFraction/*.cc Analyzation/plottingPacketDeliveryFractionNumHost/*.cc Analyzation/plottingRREQRREPInterval/*.cc Analyzation/plottingRREQRREPNumHost/*.cc Analyzation/plottingRoutingLoadInterval/*.cc Analyzation/plottingRoutingLoadNumHost/*.cc Analyzation/plottingThrougputInterval/*.cc Analyzation/plottingThrougputNumHost/*.cc IPv4AddressResolver/*.cc MobileSingleSourceDest/*.cc MobileThirtySourceDest/*.cc MobileTwentySourceDest/*.cc Simulation/*.cc StaticFifteenSourceDest/*.cc StaticThirtySourceDest/*.cc StaticTwentySourceDest/*.cc copy_to_inet/*.cc html/*.cc html/search/*.cc latex/*.cc src/*.cc src/hosts/*.cc src/linklayer/*.cc src/networklayer/*.cc src/networklayer/D2DRS/*.cc src/nodes/*.cc src/routing/*.cc src/routing/messagetypes/*.cc
+	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc Analyzation/*.cc Analyzation/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/bin/*.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*.cc Analyzation/omnetAnalyzer/libs/*.cc Analyzation/omnetAnalyzer/src/*.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/analyzer/*.cc Analyzation/plottingEndToEndDelyInterval/*.cc Analyzation/plottingEndToEndDelyNumHost/*.cc Analyzation/plottingPacketDeliveryFraction/*.cc Analyzation/plottingPacketDeliveryFractionNumHost/*.cc Analyzation/plottingRREQRREPInterval/*.cc Analyzation/plottingRREQRREPNumHost/*.cc Analyzation/plottingRoutingLoadInterval/*.cc Analyzation/plottingRoutingLoadNumHost/*.cc Analyzation/plottingThrougputInterval/*.cc Analyzation/plottingThrougputNumHost/*.cc IPv4AddressResolver/*.cc MobileSingleSourceDest/*.cc MobileThirtySourceDest/*.cc MobileTwentySourceDest/*.cc Simulation/*.cc StaticFifteenSourceDest/*.cc StaticThirtySourceDest/*.cc StaticTwentySourceDest/*.cc copy_to_inet/*.cc html/*.cc html/search/*.cc latex/*.cc resultsMobile/*.cc resultsMobile/plottingThrougputNumHost/*.cc src/*.cc src/hosts/*.cc src/linklayer/*.cc src/networklayer/*.cc src/networklayer/D2DRS/*.cc src/nodes/*.cc src/routing/*.cc src/routing/messagetypes/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/src/hosts/HostCharacteristic.o: src/hosts/HostCharacteristic.cc \
