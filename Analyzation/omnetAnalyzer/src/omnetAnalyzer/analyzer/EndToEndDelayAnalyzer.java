@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import omnetAnalyzer.MyAnalyzer;
+import omnetAnalyzer.OmnetAnalyzer;
 import cern.colt.list.DoubleArrayList;
 
 public class EndToEndDelayAnalyzer extends MyAnalyzer {
@@ -63,15 +64,9 @@ public class EndToEndDelayAnalyzer extends MyAnalyzer {
 		}
 
 		double unweightedMean = sumOfDelays / this.getNrOfReceivingHosts();
-		System.out.println("Unweighted Mean: " + unweightedMean);
+		OmnetAnalyzer.OUTPUT.add("Unweighted Mean: " + unweightedMean);
 
-		double sumOfWeightedMeans = weightedMeanDelay.stream()
-				.mapToDouble(value -> value).sum();
-		double weightedMean = sumOfWeightedMeans / this.getSumOfReceivedPackages();
-		System.out.println("Weighted Mean: " + weightedMean);
-		
-		
-		// Individual count TODO
+		// Individual count
 		DoubleArrayList meanDelay = new DoubleArrayList();
 		
 		for (int i = 0; i < this.meanEndToEndDelay.size(); i++) {

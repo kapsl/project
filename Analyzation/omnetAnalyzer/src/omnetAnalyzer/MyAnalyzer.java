@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import omnetAnalyzer.analyzer.EndToEndDelayAnalyzer;
 import cern.colt.list.DoubleArrayList;
 import cern.jet.stat.Descriptive;
 
@@ -15,13 +16,14 @@ public abstract class MyAnalyzer {
 		this.initializeArrayForHosts(this.sentPackages, 0);
 		this.initializeArrayForHosts(this.receivedPackages, 0);
 	}
-	
-	protected <T> void initializeArrayForHosts(ArrayList<T> list, T initializationValue) {
+
+	protected <T> void initializeArrayForHosts(ArrayList<T> list,
+			T initializationValue) {
 		for (int i = 0; i < OmnetAnalyzer.NR_OF_HOSTS; i++) {
 			list.add(initializationValue);
 		}
 	}
-	
+
 	protected abstract String getAnalyzerName();
 
 	/**
@@ -52,10 +54,10 @@ public abstract class MyAnalyzer {
 	 * Stuff every analyzer wants to do on his own
 	 */
 	protected abstract void parseIndividualLine(String line, BufferedReader br);
-	
+
 	public void getResult() throws Exception {
-		System.out.println(this.getAnalyzerName());
-		
+		OmnetAnalyzer.OUTPUT.add(this.getAnalyzerName());
+
 		this.getIndividualResult();
 	}
 
@@ -81,14 +83,26 @@ public abstract class MyAnalyzer {
 	protected int getSumOfSentPackages() {
 		return this.sentPackages.stream().mapToInt(value -> value).sum();
 	}
-	
+
 	protected void printStatistics(DoubleArrayList values) {
 		double mean = Descriptive.mean(values);
 		double variance = Descriptive.sampleVariance(values, mean);
 		double standardDeviation = Descriptive.standardDeviation(variance);
 
-		System.out.println("Mean: " + mean + "\nVar: " + variance
+		OmnetAnalyzer.OUTPUT.add("Mean: " + mean + "\nVar: " + variance
 				+ "\nStddev: " + standardDeviation);
+
+		String sMean, sSdev;
+		
+		if (!(this instanceof EndToEndDelayAnalyzer)) {
+			sMean = String.format("%.2f", mean);
+			sSdev = String.format("%.2f", standardDeviation);
+		} else {
+			sMean = String.format("%.5f", mean);
+			sSdev = String.format("%.5f", standardDeviation);
+		}
+
+		OmnetAnalyzer.EXCEL_OUTPUT.add(sMean + "\t" + sSdev);
 	}
 
 	/**
@@ -104,6 +118,14 @@ public abstract class MyAnalyzer {
 	}
 
 	protected Double extractDouble(String line) {
-		return Double.valueOf(line.substring(line.lastIndexOf(' ')).trim());
+		Double ret;
+
+		try {
+			ret = Double.valueOf(line.substring(line.lastIndexOf(' ')).trim());
+		} catch (NumberFormatException e) {
+			ret = 0.0;
+		}
+
+		return ret;
 	}
 }

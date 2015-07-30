@@ -13,6 +13,15 @@ import omnetAnalyzer.analyzer.PacketLossAnalyzer;
 import omnetAnalyzer.analyzer.RoutingLoadAnalyzer;
 import omnetAnalyzer.analyzer.ThroughputAnalyzer;
 
+/**
+ * 
+ * This program analyzes the sca files of omnetpp
+ * 
+ * TODO excel output TODO comments
+ * 
+ * @author manuel kaspar
+ *
+ */
 public class OmnetAnalyzer {
 	/**
 	 * How many hosts are in the simulation
@@ -20,20 +29,66 @@ public class OmnetAnalyzer {
 	public static final int NR_OF_HOSTS = 65;
 
 	/**
+	 * How many repeats are set in omnetpp.ini
+	 */
+	public static final int NR_OF_REPEATS = 10;
+
+	public static final double[] sendingIntervals = { 30, 1, 0.5, 0.1, 0.05 };
+
+	/**
 	 * What time interval of the simulation time is recorded to statistics (here
 	 * time was 900)
 	 */
 	public static final int RECORDED_SIMULATION_TIME = 890;
 
-	public static void main(String[] args) {
-		ArrayList<MyAnalyzer> myAnalyzers = getAnalyzers();
+	public static ArrayList<MyAnalyzer> myAnalyzers = new ArrayList<>();
 
-		ArrayList<File> files = readDirectory("./");
+	public static ArrayList<String> OUTPUT = new ArrayList<>();
+	public static ArrayList<String> EXCEL_OUTPUT = new ArrayList<>();
+
+	public static boolean verboseOutput = true;
+	public static boolean excelOutput = false;
+
+	public static void main(String[] args) {
+		String directory = "";
+
+		if (args.length == 0) {
+			System.out
+					.println("This program analyzes the .sca files of omnet "
+							+ "that are in the given path.\nFirst parameter is path to the folder.");
+
+			return;
+		} else if (args.length == 1) {
+			directory = args[0];
+		} else if (args.length == 2) {
+			if (!args[0].contains("v") && !args[0].contains("e")) {
+				System.out
+						.println("When additional arguments to the directory path are given, there are "
+								+ "following options:\n-v for more explaining output\n"
+								+ "-e for output for excel. Can also be combined...");
+
+				return;
+			} else {
+				if (args[0].contains("e")) {
+					excelOutput = true;
+					verboseOutput = false;
+				}
+				if (args[0].contains("v")) {
+					verboseOutput = true;
+				}
+
+				directory = args[1];
+			}
+		}
+
+		myAnalyzers = getAnalyzers();
+
+		ArrayList<File> files = readDirectory(directory);
 
 		// Do for every .sca file in directory
 		for (File file : files) {
-			System.out.println("File " + file.getName());
-			
+			OmnetAnalyzer.OUTPUT.add("File " + file.getName());
+
 			MyFileReader myFileReader = new MyFileReader(file, myAnalyzers);
 			myFileReader.readFile();
 
@@ -41,12 +96,20 @@ public class OmnetAnalyzer {
 				try {
 					analyzer.getResult();
 
-					System.out.println("");
+					OmnetAnalyzer.OUTPUT.add("");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+			
+			OmnetAnalyzer.OUTPUT.add("");
 		}
+
+		if (verboseOutput)
+			OmnetAnalyzer.printOutput(OmnetAnalyzer.OUTPUT);
+
+		if (excelOutput)
+			OmnetAnalyzer.printExcelOutput();
 	}
 
 	/**
@@ -108,5 +171,42 @@ public class OmnetAnalyzer {
 		myAnalyzers.add(new ThroughputAnalyzer());
 
 		return myAnalyzers;
+	}
+
+	private static void printOutput(ArrayList<String> output) {
+		for (String o : output) {
+			System.out.println(o);
+		}
+	}
+
+	private static void printExcelOutput() {
+		System.out.println("Excel-Output");
+		System.out.println("");
+
+		// Output data per analyzer
+		int b = 0;
+		for (MyAnalyzer analyzer : myAnalyzers) {
+			System.out.println(analyzer.getAnalyzerName());
+			System.out.print("Sending-Intervals/Repeat-Number\t");
+
+			// Print Headline
+			for (int i = 0; i < NR_OF_REPEATS; i++) {
+				System.out.print(i + " mean\t" + i + " stddev\t");
+			}
+			System.out.println("");
+
+			for (int i = 0; i < sendingIntervals.length; i++) {
+				System.out.print(sendingIntervals[i] + "\t\t\t\t");
+				
+				for (int x = 0; x < NR_OF_REPEATS * 2; x++) {
+					System.out.print(EXCEL_OUTPUT.get((b * i) + x) + "\t\t");
+				}
+				
+				System.out.println("");
+			}
+			
+			b++;
+		}
+
 	}
 }
