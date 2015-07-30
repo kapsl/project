@@ -196,23 +196,26 @@ public class OmnetAnalyzer {
 		int b = 0;
 		for (MyAnalyzer analyzer : myAnalyzers) {
 			System.out.println(analyzer.getAnalyzerName());
-			System.out.print("Sending-Intervals/Repeat-Number\t");
+			System.out.println("Sending-Intervals/Repeat-Number (Mean and Stddev)");
 
 			// Print Headline
+			System.out.print("\t");
 			for (int i = 0; i < NR_OF_REPEATS; i++) {
-				System.out.print(i + " mean\t" + i + " stddev\t");
+				System.out.print(i + "m\t" + i + "s\t");
 			}
 			System.out.println("");
 
 			for (int i = 0; i < sendingIntervals.length; i++) {
-				System.out.print(sendingIntervals[i] + "\t\t\t\t");
+				System.out.print(sendingIntervals[i] + "\t");
 
-				for (int x = 0; x < NR_OF_REPEATS * 2; x++) {
-					System.out.print(EXCEL_OUTPUT.get((b * i) + x) + "\t\t");
+				for (int x = 0; x < NR_OF_REPEATS; x++) {
+					System.out.print(EXCEL_OUTPUT.get((b * i) + x) + "\t");
 				}
 
 				System.out.println("");
 			}
+			
+			System.out.println("");
 
 			b++;
 		}
