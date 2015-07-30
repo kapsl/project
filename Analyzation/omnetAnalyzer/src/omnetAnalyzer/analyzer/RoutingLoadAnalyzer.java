@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 
 import omnetAnalyzer.MyAnalyzer;
-import omnetAnalyzer.OmnetAnalyzer;
 import cern.colt.list.DoubleArrayList;
 
 public class RoutingLoadAnalyzer extends MyAnalyzer {
@@ -22,9 +21,9 @@ public class RoutingLoadAnalyzer extends MyAnalyzer {
 		// station
 		if (line.contains("scalar")
 				&& (line.contains("RREPSent:count")
-						|| line.contains("RREQSent:count") || line
-							.contains("RERRSentNow"))) {
-			// || line .contains("HelloMsg:count"))) {
+						|| line.contains("RREQSent:count")
+						|| line.contains("RERRSentNow") || line
+							.contains("HelloMsg:count"))) {
 			int pk = this.routingPackages.get(this.extractHostNumber(line));
 			this.routingPackages.set(this.extractHostNumber(line),
 					pk + this.extractInteger(line));
@@ -35,12 +34,8 @@ public class RoutingLoadAnalyzer extends MyAnalyzer {
 		// Calculate Routing load: (Routing Packages / All Packages) * 100
 		DoubleArrayList normalizedRoutingPackageNr = new DoubleArrayList();
 
-		int sumOfRoutingPackages = this.routingPackages.stream()
-				.mapToInt(value -> value).sum();
-
 		for (int i = 0; i < this.routingPackages.size(); i++) {
-			int sum = this.sentPackages.get(i)
-					+ this.routingPackages.get(i);
+			int sum = this.sentPackages.get(i) + this.routingPackages.get(i);
 
 			// Add this value nr. of received packages for this host times, to
 			// get weighted middle
@@ -52,12 +47,6 @@ public class RoutingLoadAnalyzer extends MyAnalyzer {
 											.get(i)) / sum);
 			}
 		}
-
-		double mmean = 100
-				* Double.valueOf(sumOfRoutingPackages)
-				/ (this.getSumOfSentPackages() + Double
-						.valueOf(sumOfRoutingPackages));
-		OmnetAnalyzer.OUTPUT.add("Old Routing Load: " + mmean);
 
 		this.printStatistics(normalizedRoutingPackageNr);
 	}

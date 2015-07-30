@@ -21,7 +21,10 @@ public abstract class MyAnalyzer {
 
 	protected <T> void initializeArrayForHosts(ArrayList<T> list,
 			T initializationValue) {
+		list.clear();
+		
 		for (int i = 0; i < OmnetAnalyzer.NR_OF_HOSTS; i++) {
+			
 			list.add(initializationValue);
 		}
 	}

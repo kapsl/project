@@ -198,7 +198,6 @@ public class OmnetAnalyzer {
 			System.out.println(configs[z]);
 			
 			// Output data per analyzer
-			int b = 0;
 			for (MyAnalyzer analyzer : myAnalyzers) {
 				System.out.println(analyzer.getAnalyzerName());
 				System.out
@@ -223,8 +222,6 @@ public class OmnetAnalyzer {
 				}
 
 				System.out.println("");
-
-				b++;
 			}
 		}
 	}
