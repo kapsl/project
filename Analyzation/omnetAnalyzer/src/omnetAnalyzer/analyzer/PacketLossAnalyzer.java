@@ -16,8 +16,10 @@ public class PacketLossAnalyzer extends MyAnalyzer {
 		double mean = 100 - 100 * this.getSumOfReceivedPackages()
 				/ this.getSumOfSentPackages();
 
-		OmnetAnalyzer.OUTPUT.add("Mean: " + mean);
-		EXCEL_OUTPUT.add(mean + "\t" + "/");
+		String smean = String.format("%.2f", mean);
+		
+		OmnetAnalyzer.OUTPUT.add("Mean: " + smean);
+		EXCEL_OUTPUT.add(smean + "\t" + "/");
 	}
 
 	@Override

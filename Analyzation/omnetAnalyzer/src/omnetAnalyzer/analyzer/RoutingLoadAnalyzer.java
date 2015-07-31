@@ -50,6 +50,13 @@ public class RoutingLoadAnalyzer extends MyAnalyzer {
 
 		this.printStatistics(normalizedRoutingPackageNr);
 	}
+	
+	@Override
+	public void reset() {
+		super.reset();
+		
+		this.initializeArrayForHosts(this.routingPackages, 0);
+	}
 
 	@Override
 	protected String getAnalyzerName() {

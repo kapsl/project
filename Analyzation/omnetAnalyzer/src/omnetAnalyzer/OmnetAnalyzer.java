@@ -87,7 +87,11 @@ public class OmnetAnalyzer {
 		// Do for every .sca file in directory
 		for (File file : files) {
 			OmnetAnalyzer.OUTPUT.add("File " + file.getName());
-
+			
+			for (MyAnalyzer a : myAnalyzers) {
+				a.reset();
+			}
+			
 			MyFileReader myFileReader = new MyFileReader(file, myAnalyzers);
 			myFileReader.readFile();
 

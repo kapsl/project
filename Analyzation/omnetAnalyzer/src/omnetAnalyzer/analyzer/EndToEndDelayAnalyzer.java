@@ -80,6 +80,14 @@ public class EndToEndDelayAnalyzer extends MyAnalyzer {
 		
 		this.printStatistics(meanDelay);
 	}
+	
+	@Override
+	public void reset() {
+		super.reset();
+		
+		this.initializeArrayForHosts(this.meanEndToEndDelay, 0.0);
+		this.initializeArrayForHosts(this.stddevEndToEndDelay, null);
+	}
 
 	@Override
 	protected String getAnalyzerName() {

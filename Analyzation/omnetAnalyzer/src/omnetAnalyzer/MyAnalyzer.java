@@ -30,6 +30,11 @@ public abstract class MyAnalyzer {
 	}
 
 	protected abstract String getAnalyzerName();
+	
+	public void reset() {
+		this.initializeArrayForHosts(this.sentPackages, 0);
+		this.initializeArrayForHosts(this.receivedPackages, 0);
+	}
 
 	/**
 	 * Do parsing, that every analyzer needs
