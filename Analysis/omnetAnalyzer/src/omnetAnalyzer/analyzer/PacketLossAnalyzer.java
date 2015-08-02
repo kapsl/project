@@ -13,7 +13,7 @@ public class PacketLossAnalyzer extends MyAnalyzer {
 	protected void getIndividualResult() throws Exception {
 		// Calculating standard deviation doesn't make sense, because it is a
 		// calculation of overall received / sent packages.
-		double mean = 100 - 100 * this.getSumOfReceivedPackages()
+		double mean = 100 - 100.0 * this.getSumOfReceivedPackages()
 				/ this.getSumOfSentPackages();
 
 		String smean = String.format("%.2f", mean);
