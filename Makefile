@@ -53,26 +53,28 @@ INCLUDE_PATH = \
     -I../inet/src/util/headerserializers/ipv4 \
     -I../inet/src/mobility/common \
     -I. \
-    -IAnalyzation \
-    -IAnalyzation/omnetAnalyzer \
-    -IAnalyzation/omnetAnalyzer/MobileThirtySourceDest \
-    -IAnalyzation/omnetAnalyzer/bin \
-    -IAnalyzation/omnetAnalyzer/bin/omnetAnalyzer \
-    -IAnalyzation/omnetAnalyzer/bin/omnetAnalyzer/analyzer \
-    -IAnalyzation/omnetAnalyzer/libs \
-    -IAnalyzation/omnetAnalyzer/src \
-    -IAnalyzation/omnetAnalyzer/src/omnetAnalyzer \
-    -IAnalyzation/omnetAnalyzer/src/omnetAnalyzer/analyzer \
-    -IAnalyzation/plottingEndToEndDelyInterval \
-    -IAnalyzation/plottingEndToEndDelyNumHost \
-    -IAnalyzation/plottingPacketDeliveryFraction \
-    -IAnalyzation/plottingPacketDeliveryFractionNumHost \
-    -IAnalyzation/plottingRREQRREPInterval \
-    -IAnalyzation/plottingRREQRREPNumHost \
-    -IAnalyzation/plottingRoutingLoadInterval \
-    -IAnalyzation/plottingRoutingLoadNumHost \
-    -IAnalyzation/plottingThrougputInterval \
-    -IAnalyzation/plottingThrougputNumHost \
+    -IAnalysis \
+    -IAnalysis/KlementsAnalysis \
+    -IAnalysis/KlementsAnalysis/plottingEndToEndDelyInterval \
+    -IAnalysis/KlementsAnalysis/plottingEndToEndDelyNumHost \
+    -IAnalysis/KlementsAnalysis/plottingPacketDeliveryFraction \
+    -IAnalysis/KlementsAnalysis/plottingPacketDeliveryFractionNumHost \
+    -IAnalysis/KlementsAnalysis/plottingRREQRREPInterval \
+    -IAnalysis/KlementsAnalysis/plottingRREQRREPNumHost \
+    -IAnalysis/KlementsAnalysis/plottingRoutingLoadInterval \
+    -IAnalysis/KlementsAnalysis/plottingRoutingLoadNumHost \
+    -IAnalysis/KlementsAnalysis/plottingThrougputInterval \
+    -IAnalysis/KlementsAnalysis/plottingThrougputNumHost \
+    -IAnalysis/omnetAnalyzer \
+    -IAnalysis/omnetAnalyzer/MobileThirtySourceDest \
+    -IAnalysis/omnetAnalyzer/bin \
+    -IAnalysis/omnetAnalyzer/bin/omnetAnalyzer \
+    -IAnalysis/omnetAnalyzer/bin/omnetAnalyzer/analyzer \
+    -IAnalysis/omnetAnalyzer/libs \
+    -IAnalysis/omnetAnalyzer/src \
+    -IAnalysis/omnetAnalyzer/src/omnetAnalyzer \
+    -IAnalysis/omnetAnalyzer/src/omnetAnalyzer/analyzer \
+    -IAnalysis/shell_scripts_now_better_use_omnetAnalyzer \
     -IIPv4AddressResolver \
     -IMobileSingleSourceDest \
     -IMobileThirtySourceDest \
@@ -84,9 +86,6 @@ INCLUDE_PATH = \
     -Icopy_to_inet \
     -Ihtml \
     -Ihtml/search \
-    -Ilatex \
-    -IresultsMobile \
-    -IresultsMobile/plottingThrougputNumHost \
     -Isrc \
     -Isrc/hosts \
     -Isrc/linklayer \
@@ -200,26 +199,28 @@ clean:
 	$(Q)-rm -rf $O
 	$(Q)-rm -f NetworkStructures NetworkStructures.exe libNetworkStructures.so libNetworkStructures.a libNetworkStructures.dll libNetworkStructures.dylib
 	$(Q)-rm -f ./*_m.cc ./*_m.h
-	$(Q)-rm -f Analyzation/*_m.cc Analyzation/*_m.h
-	$(Q)-rm -f Analyzation/omnetAnalyzer/*_m.cc Analyzation/omnetAnalyzer/*_m.h
-	$(Q)-rm -f Analyzation/omnetAnalyzer/MobileThirtySourceDest/*_m.cc Analyzation/omnetAnalyzer/MobileThirtySourceDest/*_m.h
-	$(Q)-rm -f Analyzation/omnetAnalyzer/bin/*_m.cc Analyzation/omnetAnalyzer/bin/*_m.h
-	$(Q)-rm -f Analyzation/omnetAnalyzer/bin/omnetAnalyzer/*_m.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/*_m.h
-	$(Q)-rm -f Analyzation/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*_m.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*_m.h
-	$(Q)-rm -f Analyzation/omnetAnalyzer/libs/*_m.cc Analyzation/omnetAnalyzer/libs/*_m.h
-	$(Q)-rm -f Analyzation/omnetAnalyzer/src/*_m.cc Analyzation/omnetAnalyzer/src/*_m.h
-	$(Q)-rm -f Analyzation/omnetAnalyzer/src/omnetAnalyzer/*_m.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/*_m.h
-	$(Q)-rm -f Analyzation/omnetAnalyzer/src/omnetAnalyzer/analyzer/*_m.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/analyzer/*_m.h
-	$(Q)-rm -f Analyzation/plottingEndToEndDelyInterval/*_m.cc Analyzation/plottingEndToEndDelyInterval/*_m.h
-	$(Q)-rm -f Analyzation/plottingEndToEndDelyNumHost/*_m.cc Analyzation/plottingEndToEndDelyNumHost/*_m.h
-	$(Q)-rm -f Analyzation/plottingPacketDeliveryFraction/*_m.cc Analyzation/plottingPacketDeliveryFraction/*_m.h
-	$(Q)-rm -f Analyzation/plottingPacketDeliveryFractionNumHost/*_m.cc Analyzation/plottingPacketDeliveryFractionNumHost/*_m.h
-	$(Q)-rm -f Analyzation/plottingRREQRREPInterval/*_m.cc Analyzation/plottingRREQRREPInterval/*_m.h
-	$(Q)-rm -f Analyzation/plottingRREQRREPNumHost/*_m.cc Analyzation/plottingRREQRREPNumHost/*_m.h
-	$(Q)-rm -f Analyzation/plottingRoutingLoadInterval/*_m.cc Analyzation/plottingRoutingLoadInterval/*_m.h
-	$(Q)-rm -f Analyzation/plottingRoutingLoadNumHost/*_m.cc Analyzation/plottingRoutingLoadNumHost/*_m.h
-	$(Q)-rm -f Analyzation/plottingThrougputInterval/*_m.cc Analyzation/plottingThrougputInterval/*_m.h
-	$(Q)-rm -f Analyzation/plottingThrougputNumHost/*_m.cc Analyzation/plottingThrougputNumHost/*_m.h
+	$(Q)-rm -f Analysis/*_m.cc Analysis/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/*_m.cc Analysis/KlementsAnalysis/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/plottingEndToEndDelyInterval/*_m.cc Analysis/KlementsAnalysis/plottingEndToEndDelyInterval/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/plottingEndToEndDelyNumHost/*_m.cc Analysis/KlementsAnalysis/plottingEndToEndDelyNumHost/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/plottingPacketDeliveryFraction/*_m.cc Analysis/KlementsAnalysis/plottingPacketDeliveryFraction/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/plottingPacketDeliveryFractionNumHost/*_m.cc Analysis/KlementsAnalysis/plottingPacketDeliveryFractionNumHost/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/plottingRREQRREPInterval/*_m.cc Analysis/KlementsAnalysis/plottingRREQRREPInterval/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/plottingRREQRREPNumHost/*_m.cc Analysis/KlementsAnalysis/plottingRREQRREPNumHost/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/plottingRoutingLoadInterval/*_m.cc Analysis/KlementsAnalysis/plottingRoutingLoadInterval/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/plottingRoutingLoadNumHost/*_m.cc Analysis/KlementsAnalysis/plottingRoutingLoadNumHost/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/plottingThrougputInterval/*_m.cc Analysis/KlementsAnalysis/plottingThrougputInterval/*_m.h
+	$(Q)-rm -f Analysis/KlementsAnalysis/plottingThrougputNumHost/*_m.cc Analysis/KlementsAnalysis/plottingThrougputNumHost/*_m.h
+	$(Q)-rm -f Analysis/omnetAnalyzer/*_m.cc Analysis/omnetAnalyzer/*_m.h
+	$(Q)-rm -f Analysis/omnetAnalyzer/MobileThirtySourceDest/*_m.cc Analysis/omnetAnalyzer/MobileThirtySourceDest/*_m.h
+	$(Q)-rm -f Analysis/omnetAnalyzer/bin/*_m.cc Analysis/omnetAnalyzer/bin/*_m.h
+	$(Q)-rm -f Analysis/omnetAnalyzer/bin/omnetAnalyzer/*_m.cc Analysis/omnetAnalyzer/bin/omnetAnalyzer/*_m.h
+	$(Q)-rm -f Analysis/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*_m.cc Analysis/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*_m.h
+	$(Q)-rm -f Analysis/omnetAnalyzer/libs/*_m.cc Analysis/omnetAnalyzer/libs/*_m.h
+	$(Q)-rm -f Analysis/omnetAnalyzer/src/*_m.cc Analysis/omnetAnalyzer/src/*_m.h
+	$(Q)-rm -f Analysis/omnetAnalyzer/src/omnetAnalyzer/*_m.cc Analysis/omnetAnalyzer/src/omnetAnalyzer/*_m.h
+	$(Q)-rm -f Analysis/omnetAnalyzer/src/omnetAnalyzer/analyzer/*_m.cc Analysis/omnetAnalyzer/src/omnetAnalyzer/analyzer/*_m.h
+	$(Q)-rm -f Analysis/shell_scripts_now_better_use_omnetAnalyzer/*_m.cc Analysis/shell_scripts_now_better_use_omnetAnalyzer/*_m.h
 	$(Q)-rm -f IPv4AddressResolver/*_m.cc IPv4AddressResolver/*_m.h
 	$(Q)-rm -f MobileSingleSourceDest/*_m.cc MobileSingleSourceDest/*_m.h
 	$(Q)-rm -f MobileThirtySourceDest/*_m.cc MobileThirtySourceDest/*_m.h
@@ -231,9 +232,6 @@ clean:
 	$(Q)-rm -f copy_to_inet/*_m.cc copy_to_inet/*_m.h
 	$(Q)-rm -f html/*_m.cc html/*_m.h
 	$(Q)-rm -f html/search/*_m.cc html/search/*_m.h
-	$(Q)-rm -f latex/*_m.cc latex/*_m.h
-	$(Q)-rm -f resultsMobile/*_m.cc resultsMobile/*_m.h
-	$(Q)-rm -f resultsMobile/plottingThrougputNumHost/*_m.cc resultsMobile/plottingThrougputNumHost/*_m.h
 	$(Q)-rm -f src/*_m.cc src/*_m.h
 	$(Q)-rm -f src/hosts/*_m.cc src/hosts/*_m.h
 	$(Q)-rm -f src/linklayer/*_m.cc src/linklayer/*_m.h
@@ -248,7 +246,7 @@ cleanall: clean
 
 depend:
 	$(qecho) Creating dependencies...
-	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc Analyzation/*.cc Analyzation/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/MobileThirtySourceDest/*.cc Analyzation/omnetAnalyzer/bin/*.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*.cc Analyzation/omnetAnalyzer/libs/*.cc Analyzation/omnetAnalyzer/src/*.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/*.cc Analyzation/omnetAnalyzer/src/omnetAnalyzer/analyzer/*.cc Analyzation/plottingEndToEndDelyInterval/*.cc Analyzation/plottingEndToEndDelyNumHost/*.cc Analyzation/plottingPacketDeliveryFraction/*.cc Analyzation/plottingPacketDeliveryFractionNumHost/*.cc Analyzation/plottingRREQRREPInterval/*.cc Analyzation/plottingRREQRREPNumHost/*.cc Analyzation/plottingRoutingLoadInterval/*.cc Analyzation/plottingRoutingLoadNumHost/*.cc Analyzation/plottingThrougputInterval/*.cc Analyzation/plottingThrougputNumHost/*.cc IPv4AddressResolver/*.cc MobileSingleSourceDest/*.cc MobileThirtySourceDest/*.cc MobileTwentySourceDest/*.cc Simulation/*.cc StaticFifteenSourceDest/*.cc StaticThirtySourceDest/*.cc StaticTwentySourceDest/*.cc copy_to_inet/*.cc html/*.cc html/search/*.cc latex/*.cc resultsMobile/*.cc resultsMobile/plottingThrougputNumHost/*.cc src/*.cc src/hosts/*.cc src/linklayer/*.cc src/networklayer/*.cc src/networklayer/D2DRS/*.cc src/nodes/*.cc src/routing/*.cc src/routing/messagetypes/*.cc
+	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc Analysis/*.cc Analysis/KlementsAnalysis/*.cc Analysis/KlementsAnalysis/plottingEndToEndDelyInterval/*.cc Analysis/KlementsAnalysis/plottingEndToEndDelyNumHost/*.cc Analysis/KlementsAnalysis/plottingPacketDeliveryFraction/*.cc Analysis/KlementsAnalysis/plottingPacketDeliveryFractionNumHost/*.cc Analysis/KlementsAnalysis/plottingRREQRREPInterval/*.cc Analysis/KlementsAnalysis/plottingRREQRREPNumHost/*.cc Analysis/KlementsAnalysis/plottingRoutingLoadInterval/*.cc Analysis/KlementsAnalysis/plottingRoutingLoadNumHost/*.cc Analysis/KlementsAnalysis/plottingThrougputInterval/*.cc Analysis/KlementsAnalysis/plottingThrougputNumHost/*.cc Analysis/omnetAnalyzer/*.cc Analysis/omnetAnalyzer/MobileThirtySourceDest/*.cc Analysis/omnetAnalyzer/bin/*.cc Analysis/omnetAnalyzer/bin/omnetAnalyzer/*.cc Analysis/omnetAnalyzer/bin/omnetAnalyzer/analyzer/*.cc Analysis/omnetAnalyzer/libs/*.cc Analysis/omnetAnalyzer/src/*.cc Analysis/omnetAnalyzer/src/omnetAnalyzer/*.cc Analysis/omnetAnalyzer/src/omnetAnalyzer/analyzer/*.cc Analysis/shell_scripts_now_better_use_omnetAnalyzer/*.cc IPv4AddressResolver/*.cc MobileSingleSourceDest/*.cc MobileThirtySourceDest/*.cc MobileTwentySourceDest/*.cc Simulation/*.cc StaticFifteenSourceDest/*.cc StaticThirtySourceDest/*.cc StaticTwentySourceDest/*.cc copy_to_inet/*.cc html/*.cc html/search/*.cc src/*.cc src/hosts/*.cc src/linklayer/*.cc src/networklayer/*.cc src/networklayer/D2DRS/*.cc src/nodes/*.cc src/routing/*.cc src/routing/messagetypes/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/src/hosts/HostCharacteristic.o: src/hosts/HostCharacteristic.cc \
