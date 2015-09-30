@@ -9,13 +9,8 @@ import cern.colt.list.DoubleArrayList;
 /**
  * Calculate Routing Load in percent
  * 
- * TODO in aodv sentrouteerror is already collected in routereply signals
- * Hähner: HelloMsgs broadcast
- * 
- * Im receivedRREPSignal sind auch die empfangenen HelloMsgs enthalten
- * 
- * Bei den RouteRequests kann es ohne aktive Route zu einem Broadcast kommen. D.h. eigentlich sollten
- * wir auch hier die RouteRequestsReceived zählen
+ * In AODV RouteRequests it can happen, when a host doesn't have an active route, that he does a broadcast.
+ * Anyway we count that only as one sended routeRequest, because the network doesn't get more congested by that.
  * 
  * @author manuel
  *

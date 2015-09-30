@@ -77,6 +77,25 @@ simple AODVRouting
         double netTraversalTime @unit("s") = default(2 * nodeTraversalTime * netDiameter); // an estimation of the traversal time for the complete network
         double nextHopWait @unit("s") = default(nodeTraversalTime + 0.01s); // timeout for a RREP-ACK
         double pathDiscoveryTime @unit("s") = default(2 * netTraversalTime); // buffer timeout for each broadcasted RREQ message
+        
+        //Statistic 
+        @signal[RREQSent](type=cPacket);
+        @statistic[RREQSent](title="RREQ sent"; source=sentRREQ; record=count; interpolationmode=none);
+        
+        @signal[RREPSent](type=cPacket);
+        @statistic[RREPSent](title="RREP sent"; source=sentRREP; record=count; interpolationmode=none);
+        
+        @signal[RERRSent](type=cPacket);
+        @statistic[RERRSent](title="RRERR sent"; source=sentRERR; record=count; interpolationmode=none);
+        
+        @signal[RREQReceived](type=AODVRREQ);
+        @statistic[RREQReceived](title="RREQ received"; source=receivedRREQ; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
+        
+        @signal[RREPReceived](type=AODVRREP);
+        @statistic[RREPReceived](title="RREP received"; source=receivedRREP; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
+        
+        @signal[RERRReceived](type=AODVRERR);
+        @statistic[RERRReceived](title="RERR received"; source=receivedRERR; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
     gates:
         input ipIn;
         output ipOut;

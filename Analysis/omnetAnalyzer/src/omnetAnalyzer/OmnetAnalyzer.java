@@ -36,7 +36,7 @@ public class OmnetAnalyzer {
 	/**
 	 * How many repeats are set in omnetpp.ini
 	 */
-	public static final int NR_OF_REPEATS = 10;
+	public static final int NR_OF_REPEATS = 1;
 
 	/**
 	 * Which sending intervals did the simulation simulate (in seconds)
@@ -185,7 +185,7 @@ public class OmnetAnalyzer {
 					else if (val2 > val1)
 						return -1;
 					else
-						throw new RuntimeException("Same numbers of files... "
+						throw new RuntimeException("Same runnumbers, that shouln't be... "
 								+ val1);
 				}
 			}
@@ -219,7 +219,7 @@ public class OmnetAnalyzer {
 		System.out.println("");
 		
 		//String[] configs = {"AODV", "D2DRS"};
-		String[] configs = {"D2DRS"};
+		String[] configs = {"Simulation"};
 
 		for (int g = 0, z = 0; g < configs.length * NR_OF_REPEATS * sendingIntervals.length; g += NR_OF_REPEATS
 				* sendingIntervals.length, z++) {

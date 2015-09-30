@@ -150,7 +150,6 @@ protected:
     cStdDev numSentAODVPackets;
     double numberOfLinkBreaks;
     int sentRERR;
-    int numberOfHelloMsg;
 
 protected:
     void handleMessage(cMessage *msg);

@@ -28,6 +28,14 @@
 
 Define_Module(AODVRouting);
 
+/**
+ * These signals were added by Klement Streit and Manuel Kaspar for
+ * adding the possibility to calculate the routing load. Whenever a aodv
+ * packet is sent - the corresponding signal is recorded (at the moment
+ * for analysis only the sent signals were used, probably the receivedSignals
+ * are not complete, so review this, before using it! For emitting a signal,
+ * the emit method is used
+ */
 simsignal_t AODVRouting::sentRREQSignal = registerSignal("sentRREQ");
 simsignal_t AODVRouting::sentRERRSignal = registerSignal("sentRERR");
 simsignal_t AODVRouting::sentRREPSignal = registerSignal("sentRREP");
@@ -35,6 +43,7 @@ simsignal_t AODVRouting::sentRREPSignal = registerSignal("sentRREP");
 simsignal_t AODVRouting::receivedRREQSignal = registerSignal("receivedRREQ");
 simsignal_t AODVRouting::receivedRERRSignal = registerSignal("receivedRERR");
 simsignal_t AODVRouting::receivedRREPSignal = registerSignal("receivedRREP");
+
 void AODVRouting::initialize(int stage) {
     if (stage == 0) {
         lastBroadcastTime = SIMTIME_ZERO;
@@ -80,7 +89,6 @@ void AODVRouting::initialize(int stage) {
         numReceivedAODVPackets.setName("NumSentAODVPackets");
         numSentAODVPackets.setName("NumReceivedAODVPackets");
         numberOfLinkBreaks = 0;
-        numberOfHelloMsg = 0;
     } else if (stage == 4) {
         NodeStatus *nodeStatus = dynamic_cast<NodeStatus *>(host->getSubmodule(
                 "status"));
@@ -729,7 +737,6 @@ void AODVRouting::handleRREP(AODVRREP *rrep, const IPv4Address& sourceAddr) {
                         originatorRoute->getGateway());
 
                 AODVRREP *outgoingRREP = rrep->dup();
-                emit(sentRREPSignal, outgoingRREP);
                 forwardRREP(outgoingRREP, originatorRoute->getGateway(), 100);
             }
         } else
@@ -1028,7 +1035,6 @@ void AODVRouting::handleRREQ(AODVRREQ *rreq, const IPv4Address& sourceAddr,
         rreq->setUnknownSeqNumFlag(false);
 
         AODVRREQ *outgoingRREQ = rreq->dup();
-        emit(sentRREQSignal, outgoingRREQ);
         forwardRREQ(outgoingRREQ, timeToLive);
     } else
         EV_WARN << "Can't forward the RREQ because of its small (<= 1) TTL: "
@@ -1214,6 +1220,7 @@ void AODVRouting::handleLinkBreakSendRERR(const IPv4Address& unreachableAddr) {
     rerrCount++;
 
     // broadcast
+    emit(sentRERRSignal, rerr);
     EV_INFO << "Broadcasting Route Error message with TTL=1" << endl;
     sendAODVPacket(rerr, IPv4Address::ALLONES_ADDRESS, 1,
             jitterPar->doubleValue());
@@ -1234,7 +1241,7 @@ AODVRERR *AODVRouting::createRERR(
         node.seqNum = unreachableNodes[i].seqNum;
         rerr->setUnreachableNodes(i, node);
     }
-    emit(sentRREPSignal, rerr);
+    //emit(sentRREPSignal, rerr);
     return rerr;
 }
 
@@ -1302,6 +1309,8 @@ void AODVRouting::handleRERR(AODVRERR *rerr, const IPv4Address& sourceAddr) {
         EV_INFO << "Sending RERR to inform our neighbors about link breaks."
                        << endl;
         AODVRERR *newRERR = createRERR(unreachableNeighbors);
+
+        emit(sentRERRSignal, newRERR);
         sendAODVPacket(newRERR, IPv4Address::ALLONES_ADDRESS, 1, 0);
         rerrCount++;
     }
@@ -1395,6 +1404,8 @@ void AODVRouting::forwardRREP(AODVRREP *rrep, const IPv4Address& destAddr,
                    << rrep->getOriginatorAddr()
                    << " which originated the Route Request" << endl;
 
+    emit(sentRREPSignal, rrep);
+
     // RFC 5148:
     // When a node forwards a message, it SHOULD be jittered by delaying it
     // by a random duration.  This delay SHOULD be generated uniformly in an
@@ -1405,6 +1416,8 @@ void AODVRouting::forwardRREP(AODVRREP *rrep, const IPv4Address& destAddr,
 void AODVRouting::forwardRREQ(AODVRREQ *rreq, unsigned int timeToLive) {
     EV_INFO << "Forwarding the Route Request message with TTL= " << timeToLive
                    << endl;
+
+    emit(sentRREQSignal, rreq);
     sendAODVPacket(rreq, IPv4Address::ALLONES_ADDRESS, timeToLive,
             jitterPar->doubleValue());
 }
@@ -1448,6 +1461,7 @@ void AODVRouting::sendGRREP(AODVRREP *grrep, const IPv4Address& destAddr,
     IPv4Route *destRoute = routingTable->findBestMatchingRoute(destAddr);
     const IPv4Address& nextHop = destRoute->getGateway();
 
+    emit(sentRREPSignal, grrep);
     sendAODVPacket(grrep, nextHop, timeToLive, 0);
 }
 
@@ -1501,10 +1515,6 @@ void AODVRouting::sendHelloMessagesIfNeeded() {
                     || simTime() - lastBroadcastTime > helloInterval)) {
         EV_INFO << "It is hello time, broadcasting Hello Messages with TTL=1"
                        << endl;
-
-        // By Manuel Kaspar - count Hello Packages
-        // Statistics
-        numberOfHelloMsg++;
 
         AODVRREP *helloMessage = createHelloMessage();
         sendAODVPacket(helloMessage, IPv4Address::ALLONES_ADDRESS, 1, 0);
@@ -1737,6 +1747,7 @@ void AODVRouting::sendRERRWhenNoRouteToForward(
     AODVRERR *rerr = createRERR(unreachableNodes);
 
     rerrCount++;
+    emit(sentRERRSignal, rerr);
     EV_INFO << "Broadcasting Route Error message with TTL=1" << endl;
     sendAODVPacket(rerr, IPv4Address::ALLONES_ADDRESS, 1,
             jitterPar->doubleValue()); // TODO: unicast if there exists a route to the source
@@ -1783,6 +1794,8 @@ AODVRREPACK *AODVRouting::createRREPACK() {
 void AODVRouting::sendRREPACK(AODVRREPACK *rrepACK,
         const IPv4Address& destAddr) {
     EV_INFO << "Sending Route Reply ACK to " << destAddr << endl;
+
+    emit(sentRREPSignal, rrepACK);
     sendAODVPacket(rrepACK, destAddr, 100, 0);
 }
 
@@ -1843,10 +1856,8 @@ void AODVRouting::finish() {
     numSentAODVPackets.record();
     recordScalar("Number of LinkBreaks", numberOfLinkBreaks);
     recordScalar("RERRSentNow",sentRERR);
-
-    // By Manuel Kaspar
-    recordScalar("HelloMsg:count", numberOfHelloMsg);
 }
+
 AODVRouting::~AODVRouting() {
     clearState();
     delete helloMsgTimer;
