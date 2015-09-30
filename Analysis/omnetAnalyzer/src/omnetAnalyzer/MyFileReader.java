@@ -7,6 +7,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * 
+ * Read an .sca file and forward to Analyzers
+ * 
+ * @author manuel
+ *
+ */
 public class MyFileReader {
 	private File file;
 	private ArrayList<MyAnalyzer> myAnalyzers;

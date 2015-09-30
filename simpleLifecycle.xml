@@ -1,3 +1,5 @@
+<!-- I think this does not do anything at the moment -->
+
 <scenario>
     <at t="7.0">
 <!--       <tell module="lifecycleController" target="host[6]" operation="NodeShutdownOperation"/>-->

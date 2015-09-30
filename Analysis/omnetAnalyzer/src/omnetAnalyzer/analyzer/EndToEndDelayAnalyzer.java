@@ -5,9 +5,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import omnetAnalyzer.MyAnalyzer;
-import omnetAnalyzer.OmnetAnalyzer;
 import cern.colt.list.DoubleArrayList;
 
+/**
+ * 
+ * Get End to End Delay of the simulation in seconds
+ * 
+ * @author manuel
+ *
+ */
 public class EndToEndDelayAnalyzer extends MyAnalyzer {
 	/**
 	 * The mean end to end delay per host
@@ -21,14 +27,13 @@ public class EndToEndDelayAnalyzer extends MyAnalyzer {
 
 	public EndToEndDelayAnalyzer() {
 		super();
-		
+
 		this.initializeArrayForHosts(this.meanEndToEndDelay, 0.0);
 		this.initializeArrayForHosts(this.stddevEndToEndDelay, null);
 	}
 
 	@Override
 	protected void parseIndividualLine(String line, BufferedReader br) {
-		// End to end delay
 		if (line.contains("statistic") && line.contains("udpApp")
 				&& line.contains("endToEndDelay:histogram")) {
 			int hostNumber = this.extractHostNumber(line);
@@ -53,38 +58,33 @@ public class EndToEndDelayAnalyzer extends MyAnalyzer {
 	}
 
 	protected void getIndividualResult() throws Exception {
-		double sumOfDelays = this.meanEndToEndDelay.stream()
-				.mapToDouble(value -> value).sum();
-
 		ArrayList<Double> weightedMeanDelay = new ArrayList<>();
 
 		// We have to weight the mean by the package count
 		for (int i = 0; i < this.meanEndToEndDelay.size(); i++) {
-			weightedMeanDelay.add(this.receivedPackages.get(i) * this.meanEndToEndDelay.get(i));
+			weightedMeanDelay.add(this.receivedPackages.get(i)
+					* this.meanEndToEndDelay.get(i));
 		}
 
-		double unweightedMean = sumOfDelays / this.getNrOfReceivingHosts();
-		OmnetAnalyzer.OUTPUT.add("Unweighted Mean: " + unweightedMean);
-
-		// Individual count
 		DoubleArrayList meanDelay = new DoubleArrayList();
-		
+
 		for (int i = 0; i < this.meanEndToEndDelay.size(); i++) {
 			if (this.meanEndToEndDelay.get(i) != 0.0) {
-				// Add this value nr. of received packages for this host times, to get weighted middle
+				// Add this value nr. of received packages for this host times,
+				// to get weighted mean
 				for (int x = 0; x < this.receivedPackages.get(i); x++) {
 					meanDelay.add(this.meanEndToEndDelay.get(i));
 				}
 			}
 		}
-		
+
 		this.printStatistics(meanDelay);
 	}
-	
+
 	@Override
 	public void reset() {
 		super.reset();
-		
+
 		this.initializeArrayForHosts(this.meanEndToEndDelay, 0.0);
 		this.initializeArrayForHosts(this.stddevEndToEndDelay, null);
 	}

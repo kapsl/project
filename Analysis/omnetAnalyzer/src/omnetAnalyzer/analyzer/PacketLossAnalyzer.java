@@ -5,6 +5,13 @@ import java.io.BufferedReader;
 import omnetAnalyzer.MyAnalyzer;
 import omnetAnalyzer.OmnetAnalyzer;
 
+/**
+ * 
+ * Calculate Packet Loss in percent
+ * 
+ * @author manuel
+ *
+ */
 public class PacketLossAnalyzer extends MyAnalyzer {
 	@Override
 	protected void parseIndividualLine(String line, BufferedReader br) {
@@ -17,7 +24,7 @@ public class PacketLossAnalyzer extends MyAnalyzer {
 				/ this.getSumOfSentPackages();
 
 		String smean = String.format("%.2f", mean);
-		
+
 		OmnetAnalyzer.OUTPUT.add("Mean: " + smean);
 		EXCEL_OUTPUT.add(smean + "\t" + "/");
 	}

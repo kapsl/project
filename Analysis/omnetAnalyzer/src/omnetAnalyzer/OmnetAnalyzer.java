@@ -17,9 +17,14 @@ import omnetAnalyzer.analyzer.ThroughputAnalyzer;
  * 
  * This program analyzes the sca files of omnetpp
  * 
- * TODO excel output TODO comments
+ * Call with java -jar OmnetAnalyzer.jar -ve FilePath/
+ * -v more log output
+ * -e excel optimized
  * 
- * @author manuel kaspar
+ * For statistics the cern colt statistics library is used
+ * Java 8 functions are used for processing collections
+ * 
+ * @author Manuel Kaspar
  *
  */
 public class OmnetAnalyzer {
@@ -33,6 +38,9 @@ public class OmnetAnalyzer {
 	 */
 	public static final int NR_OF_REPEATS = 10;
 
+	/**
+	 * Which sending intervals did the simulation simulate (in seconds)
+	 */
 	public static final double[] sendingIntervals = { 30, 1, 0.5, 0.1, 0.05 };
 
 	/**
@@ -49,36 +57,11 @@ public class OmnetAnalyzer {
 	public static boolean excelOutput = false;
 
 	public static void main(String[] args) {
-		String directory = "";
-
-		if (args.length == 0) {
-			System.out
-					.println("This program analyzes the .sca files of omnet "
-							+ "that are in the given path.\nFirst parameter is path to the folder.");
-
+		String directory = checkArguments(args);
+		
+		// Bad arguments
+		if (directory == null)
 			return;
-		} else if (args.length == 1) {
-			directory = args[0];
-		} else if (args.length == 2) {
-			if (!args[0].contains("v") && !args[0].contains("e")) {
-				System.out
-						.println("When additional arguments to the directory path are given, there are "
-								+ "following options:\n-v for more explaining output\n"
-								+ "-e for output for excel. Can also be combined...");
-
-				return;
-			} else {
-				if (args[0].contains("e")) {
-					excelOutput = true;
-					verboseOutput = false;
-				}
-				if (args[0].contains("v")) {
-					verboseOutput = true;
-				}
-
-				directory = args[1];
-			}
-		}
 
 		myAnalyzers = getAnalyzers();
 
@@ -88,13 +71,16 @@ public class OmnetAnalyzer {
 		for (File file : files) {
 			OmnetAnalyzer.OUTPUT.add("File " + file.getName());
 			
+			// Reset data in every analyzer, so we don't get wrong results!
 			for (MyAnalyzer a : myAnalyzers) {
 				a.reset();
 			}
 			
+			// Read an analyze file
 			MyFileReader myFileReader = new MyFileReader(file, myAnalyzers);
 			myFileReader.readFile();
 
+			// Get results from analyzers
 			for (MyAnalyzer analyzer : myAnalyzers) {
 				try {
 					analyzer.getResult();
@@ -108,11 +94,47 @@ public class OmnetAnalyzer {
 			OmnetAnalyzer.OUTPUT.add("");
 		}
 
+		// Output results
 		if (verboseOutput)
 			OmnetAnalyzer.printOutput(OmnetAnalyzer.OUTPUT);
 
 		if (excelOutput)
 			OmnetAnalyzer.printExcelOutput();
+	}
+
+	private static String checkArguments(String[] args) {
+		String directory = null;
+		
+		if (args.length == 0) {
+			System.out
+					.println("This program analyzes the .sca files of omnet "
+							+ "that are in the given path.\nFirst parameter is path to the folder.");
+
+			return null;
+		} else if (args.length == 1) {
+			directory = args[0];
+		} else if (args.length == 2) {
+			if (!args[0].contains("v") && !args[0].contains("e")) {
+				System.out
+						.println("When additional arguments to the directory path are given, there are "
+								+ "following options:\n-v for more explaining output\n"
+								+ "-e for output for excel. Can also be combined...");
+
+				return null;
+			} else {
+				if (args[0].contains("e")) {
+					excelOutput = true;
+					verboseOutput = false;
+				}
+				if (args[0].contains("v")) {
+					verboseOutput = true;
+				}
+
+				directory = args[1];
+			}
+		}
+		
+		return directory;
 	}
 
 	/**
@@ -128,6 +150,7 @@ public class OmnetAnalyzer {
 								String filename = String.valueOf(filePath
 										.getFileName());
 
+								// Only read .sca files
 								if (Files.isRegularFile(filePath)
 										&& filename.contains(".sca")) {
 									filesToAnalyze.add(filePath.toFile());
@@ -137,7 +160,7 @@ public class OmnetAnalyzer {
 			e1.printStackTrace();
 		}
 
-		// Sorting
+		// Sort files in directory, so we get the right simulation parameters
 		Collections.sort(filesToAnalyze, new Comparator<File>() {
 			@Override
 			public int compare(File file1, File file2) {

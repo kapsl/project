@@ -9,9 +9,18 @@ import omnetAnalyzer.analyzer.ThroughputAnalyzer;
 import cern.colt.list.DoubleArrayList;
 import cern.jet.stat.Descriptive;
 
+/**
+ * Abstract class for all Analyzers
+ * 
+ * @author manuel
+ *
+ */
 public abstract class MyAnalyzer {
 	public ArrayList<String> EXCEL_OUTPUT = new ArrayList<>();
-	
+
+	/**
+	 * Sent and received udp packages (= the payload packages)
+	 */
 	protected ArrayList<Integer> sentPackages = new ArrayList<>();
 	protected ArrayList<Integer> receivedPackages = new ArrayList<>();
 
@@ -20,18 +29,24 @@ public abstract class MyAnalyzer {
 		this.initializeArrayForHosts(this.receivedPackages, 0);
 	}
 
+	/**
+	 * Initialize a "bucket" for every host
+	 */
 	protected <T> void initializeArrayForHosts(ArrayList<T> list,
 			T initializationValue) {
 		list.clear();
-		
+
 		for (int i = 0; i < OmnetAnalyzer.NR_OF_HOSTS; i++) {
-			
+
 			list.add(initializationValue);
 		}
 	}
 
 	protected abstract String getAnalyzerName();
-	
+
+	/**
+	 * Reset all values, so that we can perform a new analysis
+	 */
 	public void reset() {
 		this.initializeArrayForHosts(this.sentPackages, 0);
 		this.initializeArrayForHosts(this.receivedPackages, 0);
@@ -58,6 +73,7 @@ public abstract class MyAnalyzer {
 					this.extractInteger(line));
 		}
 
+		// Let every analyzer do his specific stuff
 		this.parseIndividualLine(line, br);
 	}
 
@@ -66,14 +82,31 @@ public abstract class MyAnalyzer {
 	 */
 	protected abstract void parseIndividualLine(String line, BufferedReader br);
 
+	/**
+	 * Get result from analysis
+	 * 
+	 * @throws Exception
+	 */
 	public void getResult() throws Exception {
 		OmnetAnalyzer.OUTPUT.add(this.getAnalyzerName());
 
 		this.getIndividualResult();
 	}
 
+	/**
+	 * Get analyzer specific result
+	 * 
+	 * @throws Exception
+	 */
 	protected abstract void getIndividualResult() throws Exception;
 
+	/**
+	 * Extract the host number from the line in the .sca file written like
+	 * ...host[53]...
+	 * 
+	 * @param line
+	 * @return
+	 */
 	protected Integer extractHostNumber(String line) {
 		int hostVal = Integer.valueOf(line.substring(
 				line.lastIndexOf("host[") + 5, line.lastIndexOf("].")));
@@ -95,6 +128,12 @@ public abstract class MyAnalyzer {
 		return this.sentPackages.stream().mapToInt(value -> value).sum();
 	}
 
+	/**
+	 * Get mean, variance, standard deviation
+	 * 
+	 * @param values
+	 *            in DoubleArrayList from cern colt library
+	 */
 	protected void printStatistics(DoubleArrayList values) {
 		double mean = Descriptive.mean(values);
 		double variance = Descriptive.sampleVariance(values, mean);
@@ -104,8 +143,9 @@ public abstract class MyAnalyzer {
 				+ "\nStddev: " + standardDeviation);
 
 		String sMean, sSdev;
-		
-		if (!(this instanceof EndToEndDelayAnalyzer) && !(this instanceof ThroughputAnalyzer)) {
+
+		if (!(this instanceof EndToEndDelayAnalyzer)
+				&& !(this instanceof ThroughputAnalyzer)) {
 			sMean = String.format("%.2f", mean);
 			sSdev = String.format("%.2f", standardDeviation);
 		} else {
@@ -124,10 +164,16 @@ public abstract class MyAnalyzer {
 				.collect(Collectors.toList()).size();
 	}
 
+	/**
+	 * Extract a integer value from the .sca file of a line
+	 */
 	protected Integer extractInteger(String line) {
 		return Integer.valueOf(line.substring(line.lastIndexOf(' ')).trim());
 	}
 
+	/**
+	 * Extract a double value from the .sca file of a line
+	 */
 	protected Double extractDouble(String line) {
 		Double ret;
 
