@@ -218,8 +218,9 @@ public class OmnetAnalyzer {
 		System.out.println("Excel-Output");
 		System.out.println("");
 		
+		// You can specify here, what type the data is from (if both aodv and d2drs are analysed or only once
 		//String[] configs = {"AODV", "D2DRS"};
-		String[] configs = {"Simulation"};
+		String[] configs = {"Simulation Type"};
 
 		for (int g = 0, z = 0; g < configs.length * NR_OF_REPEATS * sendingIntervals.length; g += NR_OF_REPEATS
 				* sendingIntervals.length, z++) {
